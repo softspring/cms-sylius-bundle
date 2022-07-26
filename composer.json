@@ -1,0 +1,11 @@
+{
+    "name": "softspring/sylius-cms-bundle",
+    "description": "Softspring CMS bundle Sylius integration",
+    "type": "bundle",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "softspring/cms-bundle": "^5.0"
+    }
+}
