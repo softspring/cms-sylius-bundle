@@ -15,6 +15,10 @@ final class CmsMenuBuilder
             ->setLabel('sfs_sylius_cms_plugin.ui.cms')
         ;
 
+        $order = ['catalog', 'sfs_cms', 'sales', 'customers', 'marketing'];
+        $order = array_merge($order, array_diff(array_keys($menu->getChildren()), $order));
+        $menu->reorderChildren($order);
+
         $cmsRootMenuItem
             ->addChild('pages', [
                 'route' => 'sfs_cms_admin_content_page_list',
