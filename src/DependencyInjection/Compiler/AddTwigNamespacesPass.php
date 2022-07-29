@@ -12,6 +12,7 @@ class AddTwigNamespacesPass implements CompilerPassInterface
         $twigFilesystemLoaderDefinition = $container->getDefinition('twig.loader.native_filesystem');
 
         // register project namespaces before collections to allow overriding
-        $twigFilesystemLoaderDefinition->addMethodCall('prependPath', ['%kernel.project_dir%/vendor/softspring/cms-sylius-bundle/theme/', 'SfsCms']);
+        $twigFilesystemLoaderDefinition->addMethodCall('prependPath', ['%kernel.project_dir%/vendor/softspring/cms-sylius-bundle/theme/SfsCmsBundle/', 'SfsCms']);
+        $twigFilesystemLoaderDefinition->addMethodCall('prependPath', ['%kernel.project_dir%/vendor/softspring/cms-sylius-bundle/theme/SfsMediaBundle/', 'SfsMedia']);
     }
 }

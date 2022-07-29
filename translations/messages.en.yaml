@@ -2,3 +2,7 @@ sfs_sylius_cms_plugin:
     ui:
         cms: "CMS"
         pages: "Pages"
+        routes: "Routes"
+        blocks: "Blocks"
+        menus: "Menus"
+        medias: "Medias"

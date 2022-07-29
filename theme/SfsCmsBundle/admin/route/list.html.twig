@@ -1,0 +1,43 @@
+{% trans_default_domain 'sfs_cms_admin' %}
+{% extends '@SfsCms/admin_layout.html.twig' %}
+{% block title %}{{ 'admin_routes.list.meta.title'|trans }}{% endblock %}
+
+{% block breadcrums_content %}
+    {{ parent() }}
+    <li class="breadcrumb-item active" aria-current="content">{{ 'admin_routes.list.breadcrumb'|trans }}</li>
+{% endblock breadcrums_content %}
+
+{% block content %}
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3">{{ 'admin_routes.list.title'|trans }}</h1>
+
+{#        #}{# TODO restrict by permission #}
+        <div class="float-end">
+            <a class="btn btn-outline-primary" href="{{ url('sfs_cms_admin_routes_create') }}">{{ 'admin_routes.list.actions.create.link'|trans }}</a>
+        </div>
+    </div>
+
+{#    #}{#    {% form_theme filterForm 'form/form_app_horizontal.html.twig' %}#}
+{#    {{ form_start(filterForm) }}#}
+{#    {{ form_widget(filterForm) }}#}
+{#    {{ form_rest(filterForm) }}#}
+{#    {{ form_end(filterForm) }}#}
+
+    <div class="container-fluid bg-white p-4">
+        {% embed '@SfsAdmin/components/table.html.twig' with {'collection':entities, 'pagination_route': 'sfs_cms_admin_routes_list'} %}
+            {% trans_default_domain 'sfs_cms_admin' %}
+            {% block ths %}
+                <th class="p-3" scope="col">{{ 'admin_routes.list.fields.id.header'|trans }}</th>
+                <th class="p-3" scope="col">{{ 'admin_routes.list.fields.site.header'|trans }}</th>
+                <th class="p-3" scope="col">{{ 'admin_routes.list.fields.path.header'|trans }}</th>
+                <th class="p-3" scope="col">{{ 'admin_routes.list.fields.type.header'|trans }}</th>
+                <th class="p-3" scope="col">{{ 'admin_routes.list.fields.page.header'|trans }}</th>
+                <th class="p-3">&nbsp;</th>
+            {% endblock ths %}
+
+            {% block tbody %}
+                {% include '@SfsCms/admin/route/list-page.html.twig' %}
+            {% endblock tbody %}
+        {% endembed %}
+    </div>
+{% endblock content %}
