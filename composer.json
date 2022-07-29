@@ -1,5 +1,5 @@
 {
-    "name": "softspring/sylius-cms-bundle",
+    "name": "softspring/cms-sylius-bundle",
     "description": "Softspring CMS bundle Sylius integration",
     "type": "bundle",
     "license": "MIT",
@@ -10,7 +10,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Softspring\\CmsBundle\\Sylius\\": "src"
+            "Softspring\\CmsSyliusBundle\\": "src"
         }
     }
 }
