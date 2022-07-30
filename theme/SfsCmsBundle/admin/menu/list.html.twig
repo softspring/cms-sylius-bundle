@@ -4,32 +4,27 @@
 {% form_theme filterForm 'bootstrap_5_horizontal_layout.html.twig' %}
 
 {% block title %}{{ 'admin_menus.list.meta.title'|trans }}{% endblock %}
-
+{% block header_title %}{{ 'admin_menus.list.title'|trans }}{% endblock %}
+{% block header_subtitle %}Manage content menus{% endblock %}
 {% block breadcrums_content %}
-    {{ parent() }}
-    <li class="breadcrumb-item active" aria-current="content">{{ 'admin_menus.list.breadcrumb'|trans }}</li>
+    <a class="active section">{{ ('admin_menus.list.breadcrumb')|trans }}</a>
 {% endblock breadcrums_content %}
 
-{% block content %}
-    <div class="d-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3">{{ 'admin_menus.list.title'|trans }}</h1>
-
-{#        #}{# TODO restrict by permission #}
-        <div class="float-end">
-            <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    {{ 'admin_menus.list.actions.create.link'|trans }}
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    {% for menuKey, menuConfig in menus_config %}
-                        <li><a class="dropdown-item" href="{{ url('sfs_cms_admin_menus_create', {'menuType':menuKey}) }}">{{ menuKey }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
+{% block header_buttons %}
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ 'admin_menus.list.actions.create.link'|trans }}
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            {% for menuKey, menuConfig in menus_config %}
+                <li><a class="dropdown-item" href="{{ url('sfs_cms_admin_menus_create', {'menuType':menuKey}) }}">{{ menuKey }}</a></li>
+            {% endfor %}
+        </ul>
     </div>
+{% endblock %}
 
-    <div class="container-fluid bg-white p-4">
+{% block content %}
+    <div class="ui segment spaceless sylius-grid-table-wrapper">
         {% if entities|length %}
             <div class="mb-4">
                 {{ form_start(filterForm) }}
@@ -45,7 +40,7 @@
             </div>
         {% endif %}
 
-        {% embed '@SfsAdmin/components/table.html.twig' with {'collection':entities, 'pagination_menu': 'sfs_cms_admin_menus_list'} %}
+        {% embed '@SfsAdmin/components/table.html.twig' with {'collection':entities, 'pagination_menu': 'sfs_cms_admin_menus_list', 'classes':'ui stackable very basic celled'} %}
             {% trans_default_domain 'sfs_cms_admin' %}
             {% block ths %}
                 <th scope="col">

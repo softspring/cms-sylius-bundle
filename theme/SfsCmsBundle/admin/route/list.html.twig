@@ -1,30 +1,30 @@
 {% trans_default_domain 'sfs_cms_admin' %}
 {% extends '@SfsCms/admin_layout.html.twig' %}
-{% block title %}{{ 'admin_routes.list.meta.title'|trans }}{% endblock %}
 
+
+{% block title %}{{ 'admin_routes.list.meta.title'|trans }}{% endblock %}
+{% block header_title %}{{ 'admin_routes.list.title'|trans }}{% endblock %}
+{% block header_subtitle %}Manage content routes{% endblock %}
 {% block breadcrums_content %}
-    {{ parent() }}
-    <li class="breadcrumb-item active" aria-current="content">{{ 'admin_routes.list.breadcrumb'|trans }}</li>
+    <a class="active section">{{ ('admin_routes.list.breadcrumb')|trans }}</a>
 {% endblock breadcrums_content %}
 
+{% block header_buttons %}
+    <a class="ui labeled icon button  primary " href="{{ url('sfs_cms_admin_routes_create') }}">
+        <i class="icon plus"></i>
+        {{ ('admin_routes.list.actions.create.link')|trans }}
+    </a>
+{% endblock %}
+
 {% block content %}
-    <div class="d-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3">{{ 'admin_routes.list.title'|trans }}</h1>
-
-{#        #}{# TODO restrict by permission #}
-        <div class="float-end">
-            <a class="btn btn-outline-primary" href="{{ url('sfs_cms_admin_routes_create') }}">{{ 'admin_routes.list.actions.create.link'|trans }}</a>
-        </div>
-    </div>
-
 {#    #}{#    {% form_theme filterForm 'form/form_app_horizontal.html.twig' %}#}
 {#    {{ form_start(filterForm) }}#}
 {#    {{ form_widget(filterForm) }}#}
 {#    {{ form_rest(filterForm) }}#}
 {#    {{ form_end(filterForm) }}#}
 
-    <div class="container-fluid bg-white p-4">
-        {% embed '@SfsAdmin/components/table.html.twig' with {'collection':entities, 'pagination_route': 'sfs_cms_admin_routes_list'} %}
+    <div class="ui segment spaceless sylius-grid-table-wrapper">
+        {% embed '@SfsAdmin/components/table.html.twig' with {'collection':entities, 'pagination_route': 'sfs_cms_admin_routes_list', 'classes':'ui stackable very basic celled'} %}
             {% trans_default_domain 'sfs_cms_admin' %}
             {% block ths %}
                 <th class="p-3" scope="col">{{ 'admin_routes.list.fields.id.header'|trans }}</th>

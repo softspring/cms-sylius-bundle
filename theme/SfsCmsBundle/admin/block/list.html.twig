@@ -4,35 +4,31 @@
 {% form_theme filterForm 'bootstrap_5_horizontal_layout.html.twig' %}
 
 {% block title %}{{ 'admin_blocks.list.meta.title'|trans }}{% endblock %}
-
+{% block header_title %}{{ 'admin_blocks.list.title'|trans }}{% endblock %}
+{% block header_subtitle %}Manage content blocks{% endblock %}
 {% block breadcrums_content %}
-    {{ parent() }}
-    <li class="breadcrumb-item active" aria-current="content">{{ 'admin_blocks.list.breadcrumb'|trans }}</li>
+    <a class="active section">{{ ('admin_blocks.list.breadcrumb')|trans }}</a>
 {% endblock breadcrums_content %}
 
-{% block content %}
-    <div class="d-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3">{{ 'admin_blocks.list.title'|trans }}</h1>
-
-        <div class="float-end">
-            {% if is_granted('ROLE_SFS_CMS_ADMIN_BLOCKS_CREATE') %}
-            <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownBlockButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    {{ 'admin_blocks.list.actions.create.link'|trans }}
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownBlockButton1">
-                    {% for blockKey, blockConfig in config|filter((blockConfig) => not blockConfig.static) %}
-                        <li><a class="dropdown-item" href="{{ url('sfs_cms_admin_blocks_create', {'blockType':blockKey}) }}">
+{% block header_buttons %}
+    {% if is_granted('ROLE_SFS_CMS_ADMIN_BLOCKS_CREATE') %}
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownBlockButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ 'admin_blocks.list.actions.create.link'|trans }}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownBlockButton1">
+                {% for blockKey, blockConfig in config|filter((blockConfig) => not blockConfig.static) %}
+                    <li><a class="dropdown-item" href="{{ url('sfs_cms_admin_blocks_create', {'blockType':blockKey}) }}">
                             {{ ('admin_'~blockKey~'.name')|trans({}, 'sfs_cms_blocks') }}
                         </a></li>
-                    {% endfor %}
-                </ul>
-            </div>
-            {% endif %}
+                {% endfor %}
+            </ul>
         </div>
-    </div>
+    {% endif %}
+{% endblock %}
 
-    <div class="container-fluid bg-white p-4">
+{% block content %}
+    <div class="ui segment spaceless sylius-grid-table-wrapper">
         {% if entities|length %}
             <div class="mb-4">
                 {{ form_start(filterForm) }}
@@ -48,7 +44,7 @@
             </div>
         {% endif %}
 
-        {% embed '@SfsAdmin/components/table.html.twig' with {'collection':entities, 'pagination_menu': 'sfs_cms_admin_menus_list'} %}
+        {% embed '@SfsAdmin/components/table.html.twig' with {'collection':entities, 'pagination_menu': 'sfs_cms_admin_menus_list', 'classes':'ui stackable very basic celled'} %}
             {% trans_default_domain 'sfs_cms_admin' %}
             {% block ths %}
                 <th scope="col">
