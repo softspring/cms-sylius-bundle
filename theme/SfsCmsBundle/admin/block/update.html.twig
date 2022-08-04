@@ -9,8 +9,8 @@
 
 {% block breadcrums_content %}
     {{ parent() }}
-    <li class="breadcrumb-item"><a href="{{ url('sfs_cms_admin_blocks_list') }}">{{ 'admin_blocks.list.breadcrumb'|trans }}</a></li>
-    <li class="breadcrumb-item active" aria-current="content">{{ 'admin_blocks.update.breadcrumb'|trans }}</li>
+    <a class="section" href="{{ url('sfs_cms_admin_blocks_list') }}">{{ 'admin_blocks.list.breadcrumb'|trans }}</a><<i class="right chevron icon divider"></i>
+    <span class="active section" aria-current="content">{{ 'admin_blocks.update.breadcrumb'|trans }}</span>
 {% endblock breadcrums_content %}
 
 {% block content %}

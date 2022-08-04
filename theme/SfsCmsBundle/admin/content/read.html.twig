@@ -17,71 +17,66 @@
 {% block content %}
     {% include '@SfsCms/admin/content/_content_tabs.html.twig' with {'current':'read', 'content':content, 'entity':entity} %}
 
-    <div class="container-fluid p-3 bg-white">
-        <div class="row align-items-center border-bottom border-dark">
-            <div class="col-12 col-md-3 col-lg-2 text-md-end mb-md-2">Name</div>
-            <div class="col-12 col-md-9 col-lg-10 mb-2 h4"><strong>{{ entity.name }}</strong></div>
-            <div class="col-12 col-md-3 col-lg-2 text-md-end mb-md-2">Sitio</div>
-            <div class="col-12 col-md-9 col-lg-10 mb-2">{{ entity.site|sfs_cms_site_name }}</div>
-            <div class="col-12 col-md-3 col-lg-2 text-md-end mb-md-2">Published</div>
-            <div class="col-12 col-md-9 col-lg-10 mb-2">{{ entity.publishedVersion ? entity.publishedVersion.createdAt|date('H:i d-m-Y') : 'no' }}</div>
-
-        </div>
-        <div class="row mt-4 border-bottom border-dark">
-{#            <div class="col-12 col-md-4">#}
-{#                <h2 class="h5">Translations</h2>#}
-{#                    {% set stats = sfs_trans_stats(content, entity.site.languages) %}#}
-{#                    {% for locale,localeStats in stats %}#}
-{#                        <p class="d-flex">#}
-{#                            <strong>{{ locale }}</strong>#}
-{#                            <span class="col-10">#}
-{#                                {% if localeStats.total %}#}
-{#                                    {{ (localeStats.translated/localeStats.total*100)|round }}%#}
-{#                                   <span class="text-tertiary">({{ localeStats.translated }}/{{ localeStats.total }})</span>#}
-{#                                {% endif %}#}
-{#                            </span>#}
-{#                         </p>#}
-{#                    {% endfor %}#}
-{#            </div>#}
-            <div class="col-12 col-md-4">
-                <h2 class="h5">SEO</h2>
-                    <p class="d-flex mb-2">
-                        <span class="pe-2">Index</span>
-                        <strong>{{ entity.seo.noIndex|default(false)?'noindex':'index' }}</strong>
-                    </p>
-                    <p class="d-flex mb-2">
-                        <span class="pe-2">Links</span>
-                        <strong>{{ entity.seo.noFollow|default(false)?'nofollow':'follow' }}</strong>
-                    </p>
-                    <p class="d-flex mb-2">
-                        <span class="pe-2">Sitemap</span>
-                        <strong>{{ entity.seo.sitemap|default(false)?'yes':'no' }}</strong>
-                    </p>
+    <div class="ui bottom attached active tab segment">
+        <div class="ui list">
+            <div class="item">
+                <div class="header">Name </div>
+                <span>{{ entity.name }}</span>
             </div>
-            <div class="col-12 col-md-4">
-
+            <div class="item">
+                <div class="header">Sitio</div>
+                <span>{{ entity.site|sfs_cms_site_name }}</span>
+            </div>
+            <div class="item">
+                <div class="header">Published</div>
+                <span>{{ entity.publishedVersion ? entity.publishedVersion.createdAt|date('H:i d-m-Y') : 'no' }}</span>
+            </div>
+        </div>
+        <div class="ui divider"></div>
+        <div class="ui grid">
+            <div class="four wide column">
+                <h2 class="h5">SEO</h2>
+                <div class="ui list">
+                    <div class="item">
+                        <div class="header">Index </div>
+                        <span>{{ entity.seo.noIndex|default(false)?'noindex':'index' }}</span>
+                    </div>
+                    <div class="item">
+                        <div class="header">Links</div>
+                        <span>{{ entity.seo.noFollow|default(false)?'nofollow':'follow' }}</span>
+                    </div>
+                    <div class="item">
+                        <div class="header">Sitemap</div>
+                        <span>{{ entity.seo.sitemap|default(false)?'yes':'no' }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="six wide column">
                 <h2 class="h5">Routes</h2>
-                <ul class="list-unstyled">
-                {% for route in entity.routes %}
-                {% for path in route.paths %}
-                    <li>
+                <div class="ui list">
+                    {% for route in entity.routes %}
+                    {% for path in route.paths %}
+                    <div class="item">
                         <a href="{{ sfs_cms_url_fixed(path) }}" target="_blank">{{ sfs_cms_path_fixed(path) }} <span class="mdi mdi-18px mdi-open-in-new"></span></a>
                         {% if path.cacheTtl %}(cache {{ path.cacheTtl }} seconds){% endif %}
-                    </li>
-                {% endfor %}
-                {% endfor %}
-                </ul>
+                    </div>
+                    {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
         </div>
+        <div class="ui divider"></div>
 
         <div class="row mt-4">
             <div class="col">
                 <h2 class="h5">Latest versions</h2>
-                <table class="table">
+                <table class="ui celled table">
                     <thead>
                     <tr>
                         <th>Version</th>
                         <th>Created</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -92,12 +87,22 @@
 {#                            <td>{{ loop.index0 == 0 ? 'publicada' : '' }}</td>#}
                             <td>{{ version.published ? 'publicada' : '' }}</td>
                             <td>
-                                <a href="{{ url('sfs_cms_admin_content_'~content~'_content_from_version', {'content':entity, 'prevVersion':version}) }}">edit</a>
-                                <a href="{{ url('sfs_cms_admin_content_'~content~'_preview_version', {'content':entity, 'version':version}) }}">preview</a>
-
+                                <div class="ui buttons">
+                                <a class="ui labeled icon button" href="{{ url('sfs_cms_admin_content_'~content~'_content_from_version', {'content':entity, 'prevVersion':version}) }}">
+                                    <i class="icon pencil"></i>
+                                    Edit
+                                </a>
+                                <a class="ui labeled icon button" href="{{ url('sfs_cms_admin_content_'~content~'_preview_version', {'content':entity, 'version':version}) }}">
+                                    <i class="icon eye"></i>
+                                    Preview
+                                </a>
                                 {% if not version.published %}
-                                    <a href="{{ url('sfs_cms_admin_content_'~content~'_publish_version', {'content':entity, 'version':version}) }}">publish version</a>
+                                    <a class="ui labeled icon button" href="{{ url('sfs_cms_admin_content_'~content~'_publish_version', {'content':entity, 'version':version}) }}">
+                                        <i class="icon play"></i>
+                                        Publish version
+                                    </a>
                                 {% endif %}
+                                </div>
                             </td>
                         </tr>
                     {% endfor %}

@@ -1,30 +1,30 @@
 {% trans_default_domain 'sfs_cms_contents' %}
-<ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
-    <li class="nav-item" role="presentation">
-        <a class="nav-link {{ current == 'read' ? 'active' : '' }}" id="edit-tab" href="{{ url('sfs_cms_admin_content_'~content~'_details', {'content':entity}) }}" role="tab" aria-controls="edit" aria-selected="true">{{ ('admin_'~content~'.tabs_menu.details')|trans }}</a>
+<ul class="ui top attached tabular menu" id="myTab" role="tablist">
+    <li class="{{ current == 'read' ? 'active ' : '' }}item" role="presentation">
+        <a class="nav-link" id="edit-tab" href="{{ url('sfs_cms_admin_content_'~content~'_details', {'content':entity}) }}" role="tab" aria-controls="edit" aria-selected="true">{{ ('admin_'~content~'.tabs_menu.details')|trans }}</a>
     </li>
-    <li class="nav-item" role="presentation">
-        <a class="nav-link {{ current == 'update' ? 'active' : '' }}" id="edit-tab" href="{{ url('sfs_cms_admin_content_'~content~'_update', {'content':entity}) }}" role="tab" aria-controls="edit" aria-selected="true">{{ ('admin_'~content~'.tabs_menu.update')|trans }}</a>
+    <li class="{{ current == 'update' ? 'active ' : '' }}item" role="presentation">
+        <a class="nav-link" id="edit-tab" href="{{ url('sfs_cms_admin_content_'~content~'_update', {'content':entity}) }}" role="tab" aria-controls="edit" aria-selected="true">{{ ('admin_'~content~'.tabs_menu.update')|trans }}</a>
     </li>
-    <li class="nav-item" role="presentation">
-        <a class="nav-link {{ current == 'seo' ? 'active' : '' }}" id="edit-tab" href="{{ url('sfs_cms_admin_content_'~content~'_seo', {'content':entity}) }}" role="tab" aria-controls="edit" aria-selected="true">{{ ('admin_'~content~'.tabs_menu.seo')|trans }}</a>
+    <li class="{{ current == 'seo' ? 'active ' : '' }}item" role="presentation">
+        <a class="nav-link" id="edit-tab" href="{{ url('sfs_cms_admin_content_'~content~'_seo', {'content':entity}) }}" role="tab" aria-controls="edit" aria-selected="true">{{ ('admin_'~content~'.tabs_menu.seo')|trans }}</a>
     </li>
-    <li class="nav-item" role="presentation">
-        <a class="nav-link {{ current == 'content' ? 'active' : '' }}" id="edit-tab" href="{{ url('sfs_cms_admin_content_'~content~'_content', {'content':entity}) }}" role="tab" aria-controls="edit" aria-selected="true">{{ ('admin_'~content~'.tabs_menu.content')|trans }}</a>
+    <li class="{{ current == 'content' ? 'active ' : '' }}item" role="presentation">
+        <a class="nav-link" id="edit-tab" href="{{ url('sfs_cms_admin_content_'~content~'_content', {'content':entity}) }}" role="tab" aria-controls="edit" aria-selected="true">{{ ('admin_'~content~'.tabs_menu.content')|trans }}</a>
     </li>
-{#    <li class="nav-item">#}
+{#    <li class="{{ current == 'read' ? 'active ' : '' }}item">#}
 {#        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Traducciones</a>#}
 {#    </li>#}
-    <li class="nav-item" role="presentation">
-        <a class="nav-link {{ current == 'preview' ? 'active' : '' }}" id="edit-tab" href="{{ url('sfs_cms_admin_content_'~content~'_preview', {'content':entity}) }}" role="tab" aria-controls="edit" aria-selected="true">{{ ('admin_'~content~'.tabs_menu.preview')|trans }}</a>
+    <li class="{{ current == 'preview' ? 'active ' : '' }}item" role="presentation">
+        <a class="nav-link" id="edit-tab" href="{{ url('sfs_cms_admin_content_'~content~'_preview', {'content':entity}) }}" role="tab" aria-controls="edit" aria-selected="true">{{ ('admin_'~content~'.tabs_menu.preview')|trans }}</a>
     </li>
-{#    <li class="nav-item">#}
+{#    <li class="{{ current == 'read' ? 'active ' : '' }}item">#}
 {#        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Rutas</a>#}
 {#    </li>#}
-    <li class="nav-item" role="presentation">
-        <a class="nav-link {{ current == 'versions' ? 'active' : '' }}" id="edit-tab" href="{{ url('sfs_cms_admin_content_'~content~'_versions', {'content':entity}) }}" role="tab" aria-controls="edit" aria-selected="true">{{ ('admin_'~content~'.tabs_menu.versions')|trans }}</a>
+    <li class="{{ current == 'versions' ? 'active ' : '' }}item" role="presentation">
+        <a class="nav-link" id="edit-tab" href="{{ url('sfs_cms_admin_content_'~content~'_versions', {'content':entity}) }}" role="tab" aria-controls="edit" aria-selected="true">{{ ('admin_'~content~'.tabs_menu.versions')|trans }}</a>
     </li>
-{#    <li class="nav-item">#}
+{#    <li class="{{ current == 'read' ? 'active ' : '' }}item">#}
 {#        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Permisos</a>#}
 {#    </li>#}
 </ul>

@@ -6,8 +6,8 @@
 
 {% block breadcrums_content %}
     {{ parent() }}
-    <li class="breadcrumb-item"><a href="{{ url('sfs_media_admin_medias_list') }}">{{ 'admin_medias.list.breadcrumb'|trans }}</a></li>
-    <li class="breadcrumb-item active" aria-current="content">{{ 'admin_medias.create.breadcrumb'|trans({'%type%':type_config.name}) }}</li>
+    <a class="section" href="{{ url('sfs_media_admin_medias_list') }}">{{ 'admin_medias.list.breadcrumb'|trans }}</a><i class="right chevron icon divider"></i>
+    <span class="section active" aria-current="content">{{ 'admin_medias.create.breadcrumb'|trans({'%type%':type_config.name}) }}</span>
 {% endblock breadcrums_content %}
 
 {% block content %}

@@ -6,8 +6,8 @@
 
 {% block breadcrums_content %}
     {{ parent() }}
-    <li class="breadcrumb-item"><a href="{{ url('sfs_cms_admin_routes_list') }}">{{ 'admin_routes.list.breadcrumb'|trans }}</a></li>
-    <li class="breadcrumb-item active" aria-current="content">{{ 'admin_routes.create.breadcrumb'|trans }}</li>
+    <a class="section" href="{{ url('sfs_cms_admin_routes_list') }}">{{ 'admin_routes.list.breadcrumb'|trans }}</a><i class="right chevron icon divider"></i>
+    <span class="section active" aria-current="content">{{ 'admin_routes.create.breadcrumb'|trans }}</span>
 {% endblock breadcrums_content %}
 
 {% block content %}
