@@ -36,7 +36,7 @@
 
     <div class="ui segment spaceless sylius-grid-table-wrapper">
         {% block table %}
-            {% embed '@SfsAdmin/components/table.html.twig' with {'collection':entities, 'pagination_route': 'sfs_cms_admin_content_'~content~'_list', 'classes':'ui stackable very basic celled'} %}
+            {% embed '@SfsAdmin/components/table.html.twig' with {'collection':entities, 'pagination_route': 'sfs_cms_admin_content_'~content~'_list', 'classes':'table ui celled'} %}
                 {% trans_default_domain 'sfs_cms_contents' %}
                 {% block ths %}
                     <th scope="col">

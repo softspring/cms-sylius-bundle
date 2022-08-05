@@ -12,7 +12,7 @@
 {% block body %}
     {{ form_start(form) }}
     <div class="d-flex flex-col align-items-stretch min-vh-100 pt-5">
-        <header class="flex-fill p-3 bg-dark fixed-top border-bottom">
+        <header class="cms-content-header flex-fill p-3 bg-dark fixed-top border-bottom">
             <div class="container-fluid">
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                     <a href="#" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
@@ -22,7 +22,7 @@
                     <div class="col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"></div>
 
                     <div class="text-end me-3">
-                        {{ form_widget(form.layout, {'attr':{'onchange':'confirm("Si continuas se pueden eliminar datos ¿quieres continuar?") && (document.getElementById("content_content_form__ok").value = 1) && submit()'}}) }}
+                        {{ form_widget(form.layout, {'attr':{'class':'form-select','onchange':'confirm("Si continuas se pueden eliminar datos ¿quieres continuar?") && (document.getElementById("content_content_form__ok").value = 1) && submit()'}}) }}
                     </div>
 
                     <div class="text-end me-3">
