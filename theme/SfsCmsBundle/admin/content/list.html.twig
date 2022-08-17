@@ -18,10 +18,11 @@
 {% endblock %}
 
 {% block content %}
+    <div class="ui hidden divider"></div>
         {% if entities|length %}
-            <div class="mb-4">
+            <div>
                 {{ form_start(filterForm) }}
-                <div class="row">
+                <div class="ui grid">
                     {#                    {% if filterForm.name is defined %}<div class="col">{{ form_row(filterForm.name, {'row_class':'form-floating'}) }}</div>{% endif %}#}
                     {#                    {% if filterForm.surname is defined %}<div class="col">{{ form_row(filterForm.surname, {'row_class':'form-floating'}) }}</div>{% endif %}#}
                     {#                    {% if filterForm.email is defined %}<div class="col">{{ form_row(filterForm.email, {'row_class':'form-floating'}) }}</div>{% endif %}#}

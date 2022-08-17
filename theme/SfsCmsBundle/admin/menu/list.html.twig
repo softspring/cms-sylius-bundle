@@ -11,24 +11,24 @@
 {% endblock breadcrums_content %}
 
 {% block header_buttons %}
-    <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-            {{ 'admin_menus.list.actions.create.link'|trans }}
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <div class="ui floating labeled icon dropdown button teal">
+        <i class="plus icon"></i>
+        <span class="text">{{ 'admin_menus.list.actions.create.link'|trans }}</span>
+        <div class="menu">
             {% for menuKey, menuConfig in menus_config %}
-                <li><a class="dropdown-item" href="{{ url('sfs_cms_admin_menus_create', {'menuType':menuKey}) }}">{{ menuKey }}</a></li>
+            <div class="item"><a href="{{ url('sfs_cms_admin_menus_create', {'menuType':menuKey}) }}">{{ menuKey }}</a></div>
             {% endfor %}
-        </ul>
+        </div>
     </div>
 {% endblock %}
 
 {% block content %}
+    <div class="ui hidden divider"></div>
     <div class="ui segment spaceless sylius-grid-table-wrapper">
         {% if entities|length %}
-            <div class="mb-4">
+            <div>
                 {{ form_start(filterForm) }}
-                <div class="row">
+                <div class="ui grid">
 {#                    {% if filterForm.name is defined %}<div class="col">{{ form_row(filterForm.name, {'row_class':'form-floating'}) }}</div>{% endif %}#}
 {#                    {% if filterForm.surname is defined %}<div class="col">{{ form_row(filterForm.surname, {'row_class':'form-floating'}) }}</div>{% endif %}#}
 {#                    {% if filterForm.email is defined %}<div class="col">{{ form_row(filterForm.email, {'row_class':'form-floating'}) }}</div>{% endif %}#}
@@ -40,7 +40,7 @@
             </div>
         {% endif %}
 
-        {% embed '@SfsAdmin/components/table.html.twig' with {'collection':entities, 'pagination_menu': 'sfs_cms_admin_menus_list', 'classes':'ui stackable very basic celled'} %}
+        {% embed '@SfsAdmin/components/table.html.twig' with {'collection':entities, 'pagination_menu': 'sfs_cms_admin_menus_list', 'classes':'table ui celled'} %}
             {% trans_default_domain 'sfs_cms_admin' %}
             {% block ths %}
                 <th scope="col">
