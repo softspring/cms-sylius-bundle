@@ -3,15 +3,18 @@
 {% extends '@SfsCms/admin_layout.html.twig' %}
 
 {% block title %}{{ ('admin_'~content~'.versions.meta.title')|trans({'%name%':entity.name}) }}{% endblock %}
-
+{% block header_title %}{{ ('admin_'~content~'.versions.title')|trans({'%name%':entity.name}) }}{% endblock %}
+{% block header_subtitle %}Manage your page{% endblock %}
 {% block breadcrums_content %}
     {{ parent() }}
-    <a class="section" href="{{ url('sfs_cms_admin_content_'~content~'_list') }}">{{ ('admin_'~content~'.list.breadcrumb')|trans }}</a><i class="right chevron icon divider"></i>
-    <span class="active section" aria-current="content">{{ ('admin_'~content~'.versions.breadcrumb')|trans({'%name%':entity.name}) }}</span>
+    <a class="section" href="{{ url('sfs_cms_admin_content_'~content~'_list') }}">{{ ('admin_'~content~'.list.breadcrumb')|trans }}</a>
+    <i class="right chevron icon divider"></i>
+    <a class="section" href="{{ url('sfs_cms_admin_content_'~content~'_list') }}">{{ ('admin_'~content~'.list.breadcrumb')|trans }}</a>
+    <i class="right chevron icon divider"></i>
+    <a class="section active">{{ ('admin_'~content~'.versions.breadcrumb')|trans({'%name%':entity.name}) }}</a>
 {% endblock breadcrums_content %}
 
 {% block content %}
-    <h1 class="h2">{{ ('admin_'~content~'.versions.title')|trans({'%name%':entity.name}) }}</h1>
 
     {% include '@SfsCms/admin/content/_content_tabs.html.twig' with {'current':'versions', 'content':content, 'entity':entity} %}
 
