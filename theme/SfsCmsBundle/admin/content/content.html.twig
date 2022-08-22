@@ -5,6 +5,7 @@
 {% block title %}{{ ('admin_'~content~'.content.meta.title')|trans({'%name%':entity.name}) }}{% endblock %}
 
 {% form_theme form
+    'bootstrap_5_layout.html.twig'
     '@SfsPolymorphicFormType/polymorphic-form-theme.html.twig'
     '@SfsCms/cms_form_theme.html.twig'
     '@SfsMedia/media_form_theme.html.twig'
