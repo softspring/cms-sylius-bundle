@@ -3,16 +3,18 @@
 {% block title %}{{ 'admin_medias.update.meta.title'|trans }}{% endblock %}
 
 {% block content %}
-    <div class="d-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3">Update media</h1>
-    </div>
-    {{ form_start(form) }}
+    <h1 class="h3">Update media</h1>
+
+    <div class="ui hidden divider"></div>
+    <div class="ui segment">
+    {{ form_start(form,{'attr':{'class':'ui form'}}) }}
         {{ form_widget(form) }}
         {{ form_rest(form) }}
-        <div class="d-flex justify-content-end align-items-center">
-            <a href="{{ url('sfs_media_admin_medias_list') }}" class="btn btn-outline-secondary ms-3">{{ 'admin_medias.update.actions.cancel.button'|trans }}</a>
-            <a href="{{ url('sfs_media_admin_medias_delete', {'media':media.id}) }}" class="btn btn-danger ms-3">{{ 'admin_medias.update.actions.delete.button'|trans }}</a>
-            <input type="submit" value="{{ 'admin_medias.update.actions.update.button'|trans }}" class="btn btn-primary ms-3" />
-        </div>
+    <div class="ui hidden divider"></div>
+    <div class="ui buttons">
+        <button type="submit" class="ui labeled icon primary button"><i class="plus icon"></i>{{ 'admin_medias.update.actions.update.button'|trans }}</button>
+        <a href="{{ url('sfs_media_admin_medias_list') }}" class="ui button">{{ 'admin_medias.update.actions.cancel.button'|trans }}</a>
+        <a href="{{ url('sfs_media_admin_medias_delete', {'media':media.id}) }}" class="ui red button">{{ 'admin_medias.update.actions.delete.button'|trans }}</a>
+    </div>
     {{ form_end(form) }}
 {% endblock content %}

@@ -1,8 +1,11 @@
 {% trans_default_domain 'sfs_media_admin' %}
 {% extends '@SfsMedia/admin_layout.html.twig' %}
 
+{% form_theme filterForm 'bootstrap_5_horizontal_layout.html.twig' %}
+
+
 {% block title %}{{ 'admin_medias.list.meta.title'|trans }}{% endblock %}
-{% block header_title %}{{ 'admin_menus.list.title'|trans }}{% endblock %}
+{% block header_title %}{{ 'admin_medias.list.title'|trans }}{% endblock %}
 {% block header_subtitle %}Manage content media{% endblock %}
 {% block breadcrums_content %}
     <a class="active section">{{ 'admin_medias.list.breadcrumb'|trans }}</a>
