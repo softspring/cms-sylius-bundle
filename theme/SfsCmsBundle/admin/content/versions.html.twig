@@ -42,9 +42,9 @@
                     <td>{{ version.published ? ('admin_'~content~'.versions.publish_status.published')|trans : ('admin_'~content~'.versions.publish_status.unpublished')|trans }}</td>
                     <td>
                         {% if version.keep %}
-                            <a class="" href="{{ url('sfs_cms_admin_content_'~content~'_unkeep_version', {'content':entity, 'version':version, 'back': 'versions'}) }}" title="{{ ('admin_'~content~'.versions.actions.keep.link')|trans }}"><i class="bi bi-pin-angle-fill"></i></a>
+                            <a class="" href="{{ url('sfs_cms_admin_content_'~content~'_unkeep_version', {'content':entity, 'version':version, 'back': 'versions'}) }}" title="{{ ('admin_'~content~'.versions.actions.keep.link')|trans }}"><i class="icon save"></i></a>
                         {% else %}
-                            <a class="" href="{{ url('sfs_cms_admin_content_'~content~'_keep_version', {'content':entity, 'version':version, 'back': 'versions'}) }}" title="{{ ('admin_'~content~'.versions.actions.nokeep.link')|trans }}"><i class="bi bi-pin-angle"></i></a>
+                            <a class="" href="{{ url('sfs_cms_admin_content_'~content~'_keep_version', {'content':entity, 'version':version, 'back': 'versions'}) }}" title="{{ ('admin_'~content~'.versions.actions.nokeep.link')|trans }}"><i class="icon save outline"></i></a>
                         {% endif %}
                     </td>
                     <td>
