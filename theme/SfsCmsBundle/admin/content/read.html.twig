@@ -9,8 +9,6 @@
     {{ parent() }}
     <a class="section" href="{{ url('sfs_cms_admin_content_'~content~'_list') }}">{{ ('admin_'~content~'.list.breadcrumb')|trans }}</a>
     <i class="right chevron icon divider"></i>
-    <a class="section" href="{{ url('sfs_cms_admin_content_'~content~'_list') }}">{{ ('admin_'~content~'.list.breadcrumb')|trans }}</a>
-    <i class="right chevron icon divider"></i>
     <a class="section active">{{ ('admin_'~content~'.read.breadcrumb')|trans({'%name%':entity.name}) }}</a>
 {% endblock breadcrums_content %}
 
