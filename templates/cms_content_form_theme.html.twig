@@ -1,0 +1,17 @@
+{% block translatable_text_widget %}
+    {% if form|length > 1 %}
+            {% for field in form %}
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            {{ field.vars.label|upper }}
+                            {#                        <img alt="{{ field.vars.label|upper }}" title="{{ field.vars.label|upper }}" src="https://unpkg.com/language-icons/icons/{{ field.vars.label|lower }}.svg" height="15" class="border"/>&nbsp;#}
+                        </span>
+                    </div>
+                {{ form_widget(field) }}
+                </div>
+            {% endfor %}
+    {% else %}
+        {{ form_widget(form|first) }}
+    {% endif %}
+{% endblock translatable_text_widget %}
