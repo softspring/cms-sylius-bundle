@@ -6,6 +6,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
+        "php": ">=7.4",
         "softspring/cms-bundle": "^5.0"
     },
     "autoload": {
