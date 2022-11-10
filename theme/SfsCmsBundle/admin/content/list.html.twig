@@ -15,6 +15,10 @@
         <i class="icon plus"></i>
         {{ ('admin_'~content~'.list.actions.create.link')|trans }}
     </a>
+    <a class="ui labeled icon button  primary " href="{{ url('sfs_cms_admin_content_'~content~'_import') }}">
+        <i class="icon upload"></i>
+        {{ ('admin_'~content~'.list.actions.import.link')|trans }}
+    </a>
 {% endblock %}
 
 {% block content %}
