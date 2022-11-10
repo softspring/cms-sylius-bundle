@@ -13,6 +13,7 @@
                         {% if media.isVideo %}
                             <div style="height:200px" class="bg-light text-center row">
                                 <div class="bi bi-play-btn h1 my-auto"></div>
+                                {{ media|sfs_media_render_video('_original', {'class':'card-img-top img-fluid', 'style':' max-height: 200px;'}) }}
                             </div>
                         {% elseif media.isImage %}
                             <div style="min-height:200px; max-height: 200px; width: auto; display: flex; align-items: center;" class="bg-light  overflow-hidden">
