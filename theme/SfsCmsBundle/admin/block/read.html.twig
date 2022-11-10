@@ -1,6 +1,7 @@
 {% trans_default_domain 'sfs_cms_admin' %}
 {% extends '@SfsCms/admin_layout.html.twig' %}
 {% block title %}{{ 'admin_blocks.read.meta.title'|trans }}{% endblock %}
+{% block header_icon %}th{% endblock %}
 
 {% block content %}
     <h1 class="h3 mb-4">{{ block.name|default('') }}</h1>

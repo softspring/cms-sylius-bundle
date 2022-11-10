@@ -1,8 +1,7 @@
 {% trans_default_domain 'sfs_cms_admin' %}
 {% extends '@SfsCms/admin_layout.html.twig' %}
-
-
 {% block title %}{{ 'admin_routes.list.meta.title'|trans }}{% endblock %}
+{% block header_icon %}vertically linkify{% endblock %}
 {% block header_title %}{{ 'admin_routes.list.title'|trans }}{% endblock %}
 {% block header_subtitle %}Manage content routes{% endblock %}
 {% block breadcrums_content %}
