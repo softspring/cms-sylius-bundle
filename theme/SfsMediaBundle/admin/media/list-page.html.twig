@@ -1,27 +1,18 @@
 {% trans_default_domain 'sfs_media_admin' %}
 
-<div class="ui segment">
-    <div class="ui grid">
-        <div class="three column row">
+<div class="ui four cards">
         {% for media in entities %}
-            <div class="column">
-                <div class="card">
                     {% if is_granted('ROLE_SFS_MEDIA_ADMIN_MEDIAS_DETAILS', media) %}
-                    <a href="{{ url('sfs_media_admin_medias_read', {'media':media.id}) }}" class="ml-2 text-nowrap text-dark">
-                    {% endif %}
-                    <div class="image">
-                        {% if media.isVideo %}
-                            <div style="height:200px" class="bg-light text-center row">
-                                <div class="bi bi-play-btn h1 my-auto"></div>
-                                {{ media|sfs_media_render_video('_original', {'class':'card-img-top img-fluid', 'style':' max-height: 200px;'}) }}
-                            </div>
-                        {% elseif media.isImage %}
-                            <div style="min-height:200px; max-height: 200px; width: auto; display: flex; align-items: center;" class="bg-light  overflow-hidden">
-                                {{ media|sfs_media_render_image(['_thumbnail'], {'class':'card-img-top img-fluid', 'style':' max-height: 200px;'}) }}
-                            </div>
+                    <a href="{{ url('sfs_media_admin_medias_read', {'media':media.id}) }}" class="card">
                         {% endif %}
-                    </div>
-                    {% if is_granted('ROLE_SFS_MEDIA_ADMIN_MEDIAS_DETAILS', media) %}
+                        <div class="image" style="min-height: 200px; display: flex; align-items: center;">
+                            {% if media.isVideo %}
+                               {{ media|sfs_media_render_video('_original', {'class':'img-fluid', 'style':' max-height: 200px;'}) }}
+                            {% elseif media.isImage %}
+                                {{ media|sfs_media_render_image(['_thumbnail'], {'class':'img-fluid', 'style':' max-height: 200px;'}) }}
+                            {% endif %}
+                        </div>
+                        {% if is_granted('ROLE_SFS_MEDIA_ADMIN_MEDIAS_DETAILS', media) %}
                         <div class="content">
                             <p class="header"><small><strong>{{ media.name }}</strong></small></p>
                         </div>
@@ -33,9 +24,5 @@
                         </div>
                     </a>
                     {% endif %}
-                </div>
-            </div>
         {% endfor %}
-        </div>
     </div>
-</div>

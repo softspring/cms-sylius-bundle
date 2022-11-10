@@ -24,7 +24,7 @@ final class CmsMenuBuilder
                 'route' => 'sfs_cms_admin_content_page_list',
             ])
             ->setLabel('sfs_sylius_cms_plugin.ui.pages')
-            ->setLabelAttribute('icon', 'page')
+            ->setLabelAttribute( 'icon', 'vertically file alternate' )
         ;
 
         $cmsRootMenuItem
@@ -32,7 +32,7 @@ final class CmsMenuBuilder
                 'route' => 'sfs_cms_admin_routes_list',
             ])
             ->setLabel('sfs_sylius_cms_plugin.ui.routes')
-            ->setLabelAttribute('icon', 'route')
+            ->setLabelAttribute('icon', 'vertically linkify')
         ;
 
         $cmsRootMenuItem
@@ -40,7 +40,7 @@ final class CmsMenuBuilder
                 'route' => 'sfs_cms_admin_blocks_list',
             ])
             ->setLabel('sfs_sylius_cms_plugin.ui.blocks')
-            ->setLabelAttribute('icon', 'block')
+            ->setLabelAttribute('icon', 'th')
         ;
 
         $cmsRootMenuItem
@@ -48,7 +48,7 @@ final class CmsMenuBuilder
                 'route' => 'sfs_cms_admin_menus_list',
             ])
             ->setLabel('sfs_sylius_cms_plugin.ui.menus')
-            ->setLabelAttribute('icon', 'menu')
+            ->setLabelAttribute('icon', 'bars')
         ;
 
         $cmsRootMenuItem
@@ -56,7 +56,7 @@ final class CmsMenuBuilder
                 'route' => 'sfs_media_admin_medias_list',
             ])
             ->setLabel('sfs_sylius_cms_plugin.ui.medias')
-            ->setLabelAttribute('icon', 'media')
+            ->setLabelAttribute('icon', 'image outline')
         ;
     }
 }

@@ -6,3 +6,4 @@ sfs_sylius_cms_plugin:
         blocks: "Blocks"
         menus: "Menus"
         medias: "Medias"
+        
