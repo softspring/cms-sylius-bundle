@@ -58,50 +58,57 @@
     {% endfor %}
 
     <div class="ui segment">
-        <div>
-            <h2>Original</h2>
-            <div>
-                {% if media.isVideo %}
-                    {{ media|sfs_media_render_video('_original', {'class':'img-thumbnail', 'alt': 'Original media', 'title': 'Original media'}) }}
-                {% elseif media.isImage %}
-                    {{ media|sfs_media_render_image('_original', {'class':'img-thumbnail', 'alt': 'Original media', 'title': 'Original media'}) }}
-                {% endif %}
+        <div class="ui one cards">
+            <div class="ui card">
+                <div class="content">
+                    <h2 class="header">Original</h2>
+                </div>
+                <div class="image_">
+                    {% if media.isVideo %}
+                        {{ media|sfs_media_render_video('_original', {'class':'img-thumbnail', 'alt': 'Original media', 'title': 'Original media'}) }}
+                    {% elseif media.isImage %}
+                        {{ media|sfs_media_render_image('_original', {'class':'img-thumbnail', 'alt': 'Original media', 'title': 'Original media'}) }}
+                    {% endif %}
+                </div>
+                <div class="extra content">
+                    <p>{{ media.version('_original').width }}x{{ media.version('_original').height }} |
+                    {{ media.version('_original').fileMimeType }} |
+                        {{ _self.bytesToSize(media.version('_original').fileSize) }}</p>
+                    <em>Uploaded at: {{ media.version('_original').uploadedAt|date_span('H:i:s d-m-Y') }}</em>
+                </div>
             </div>
-            {{ media.version('_original').width }}x{{ media.version('_original').height }}
-            {{ media.version('_original').fileMimeType }}
-            {{ _self.bytesToSize(media.version('_original').fileSize) }}
-            <br/>
-            <em>Uploaded at: {{ media.version('_original').uploadedAt|date_span('H:i:s d-m-Y') }}</em>
-        </div>
 
-        {% for version in media.versions|filter((version) => version.version not in ['_original'])|sort((a, b) => (a.width+a.height) <=> (b.width+b.height))|reverse %}
-            <div class="ui equal width grid">
-                <div class="column">
-                    <h2>{{ version.version }}</h2>
-                    <div>
+            {% for version in media.versions|filter((version) => version.version not in ['_original'])|sort((a, b) => (a.width+a.height) <=> (b.width+b.height))|reverse %}
+                <div class="ui card">
+                    <div class="content">
+                        <h2 class="header">{{ version.version }}</h2>
+                    </div>
+                    <div class="image_">
                         {% if media.isVideo %}
                             {{ media|sfs_media_render_video(version.version, {'class':'img-'~version.version}) }}
                         {% elseif media.isImage %}
                             {{ media|sfs_media_render_image(version.version, {'class':'img-'~version.version}) }}
                         {% endif %}
                     </div>
-                    {{ version.width }}x{{ version.height }}
-                    {{ version.fileMimeType }}
-                    {{ _self.bytesToSize(version.fileSize) }}
-                    {% for option,value in version.options %}
-                        {{ option }}: {{ value }}
-                    {% endfor %}
-                    <br/>
-                    <em>
-                        {% if version.uploadedAt %}
-                            Uploaded at: {{ version.uploadedAt|date_span('H:i:s d-m-Y') }}
-                        {% elseif version.generatedAt %}
-                            Automatically generated at: {{ version.generatedAt|date_span('H:i:s d-m-Y') }}
-                        {% endif %}
-                    </em>
+                    <div class="extra content">
+                        <p>
+                        {{ version.width }}x{{ version.height }} |
+                        {{ version.fileMimeType }} |
+                        {{ _self.bytesToSize(version.fileSize) }}
+                        {% for option,value in version.options %}
+                            | {{ option }}: {{ value }}
+                        {% endfor %}
+                        <em>
+                            {% if version.uploadedAt %}
+                                Uploaded at: {{ version.uploadedAt|date_span('H:i:s d-m-Y') }}
+                            {% elseif version.generatedAt %}
+                                Automatically generated at: {{ version.generatedAt|date_span('H:i:s d-m-Y') }}
+                            {% endif %}
+                        </em>
+                    </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 
     {% if type_config.pictures|length %}

@@ -17,15 +17,31 @@
     <div class="ui hidden divider"></div>
     <div class="ui segment">
         {{ form_start(form,{'attr':{'class':'ui form'}}) }}
-            {{ form_row(form.id) }}
-            {{ form_row(form.type) }}
-
-            {{ form_row(form.content) }}
-            {{ form_row(form.redirectUrl) }}
-            {{ form_row(form.symfonyRoute) }}
-            {{ form_row(form.redirectType) }}
+            <div class="fields">
+                <div class="eight wide field">
+                    {{ form_row(form.id) }}
+                </div>
+                <div class="eight wide field">
+                    {{ form_row(form.type) }}
+                </div>
+            </div>
+            <div class="fields">
+                <div class="eight wide field">
+                    {{ form_row(form.content) }}
+                </div>
+                <div class="eight wide field">
+                    {{ form_row(form.symfonyRoute) }}
+                </div>
+            </div>
+            <div class="fields">
+                <div class="eight wide field">
+                    {{ form_row(form.redirectUrl) }}
+                </div>
+                <div class="eight wide field">
+                    {{ form_row(form.redirectType) }}
+                </div>
+            </div>
             {{ form_rest(form) }}
-
             <div class="ui hidden divider"></div>
             <div class="ui buttons">
                 <button class="ui labeled icon primary button" type="submit"><i class="plus icon"></i>{{ 'admin_routes.create.actions.create.button'|trans }}</button>
