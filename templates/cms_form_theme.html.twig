@@ -163,7 +163,7 @@
             <div class="collection-box{% if form|length == 1 %} unique-field{% endif %}">
                 <div class="ui grid">
                     <div class="fourteen wide column">
-                        <div style="display: inline-flex; gap: 12px;">
+                        <div class="fields">
                             {% if not form.children|length %}
                                 {{ form_widget(form) }}
                             {% else %}
