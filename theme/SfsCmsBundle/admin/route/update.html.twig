@@ -19,21 +19,17 @@
     <div class="ui segment">
         {{ form_start(form,{'attr':{'class':'ui form'}}) }}
         <div class="fields">
-            <div class="eight wide field">
+            <div class="six wide field">
                 {{ form_row(form.id) }}
             </div>
-            <div class="eight wide field">
+            <div class="six wide field">
                 {{ form_row(form.type) }}
             </div>
-        </div>
-        <div class="fields">
-            <div class="eight wide field">
-            {{ form_row(form.content) }}
-            </div>
-            <div class="eight wide field">
-            {{ form_row(form.symfonyRoute) }}
+            <div class="six wide field">
+                {{ form_row(form.content) }}
             </div>
         </div>
+        {{ form_row(form.symfonyRoute) }}
         <div class="fields">
             <div class="eight wide field">
                 {{ form_row(form.redirectUrl) }}
