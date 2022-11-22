@@ -2,6 +2,7 @@
 
 namespace Softspring\CmsSyliusBundle;
 
+use Softspring\CmsSyliusBundle\DependencyInjection\Compiler\AddTranslationsPathsPass;
 use Softspring\CmsSyliusBundle\DependencyInjection\Compiler\AddTwigNamespacesPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -16,5 +17,6 @@ class SfsCmsSyliusBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $container->addCompilerPass(new AddTwigNamespacesPass());
+        $container->addCompilerPass(new AddTranslationsPathsPass());
     }
 }
