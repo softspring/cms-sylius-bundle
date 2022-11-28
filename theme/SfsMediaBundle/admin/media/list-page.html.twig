@@ -5,11 +5,11 @@
                     {% if is_granted('ROLE_SFS_MEDIA_ADMIN_MEDIAS_DETAILS', media) %}
                     <a href="{{ url('sfs_media_admin_medias_read', {'media':media.id}) }}" class="card">
                         {% endif %}
-                        <div class="image" style="min-height: 200px; display: flex; align-items: center;">
+                        <div class="image" style="min-height: 200px; display: flex; align-items: center; justify-content: center;">
                             {% if media.isVideo %}
-                               {{ media|sfs_media_render_video('_original', {'class':'img-fluid', 'style':' max-height: 200px;'}) }}
+                               {{ media|sfs_media_render_video('_original', {'class':'img-fluid', 'style':' max-height: 200px; max-width: 100%;'}) }}
                             {% elseif media.isImage %}
-                                {{ media|sfs_media_render_image(['_thumbnail'], {'class':'img-fluid', 'style':' max-height: 200px;'}) }}
+                                {{ media|sfs_media_render_image(['_thumbnail'], {'class':'img-fluid', 'style':' max-height: 200px; max-width: 100%; width: auto;'}) }}
                             {% endif %}
                         </div>
                         {% if is_granted('ROLE_SFS_MEDIA_ADMIN_MEDIAS_DETAILS', media) %}
