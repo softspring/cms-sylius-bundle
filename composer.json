@@ -7,11 +7,19 @@
     "prefer-stable": true,
     "require": {
         "php": ">=8.0",
-        "softspring/cms-bundle": "^5.0"
+        "softspring/cms-bundle": "^5.0",
+        "sylius/theme-bundle": "^2.1.1 || ^2.3",
+        "sylius/ui-bundle": "^1.12"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.9"
     },
     "autoload": {
         "psr-4": {
             "Softspring\\CmsSyliusBundle\\": "src"
         }
+    },
+    "config": {
+        "sort-packages": true
     }
 }
