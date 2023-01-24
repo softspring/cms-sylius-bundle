@@ -8,11 +8,7 @@
 [![Total Downloads](https://poser.pugx.org/softspring/cms-sylius-bundle/downloads)](https://packagist.org/packages/softspring/cms-sylius-bundle)
 [![Build status](https://github.com/softspring/cms-sylius-bundle/actions/workflows/php.yml/badge.svg?branch=5.0)](https://github.com/softspring/cms-sylius-bundle/actions/workflows/php.yml)
 
-# Installation
+# Documentation
 
-Open a command console, enter your project directory and execute:
-
-```console
-$ composer require softspring/cms-sylius-bundle
-```
-
+- [1. Pre-requisites](docs/1_pre_requisites.md)
+- [2. Installation](docs/2_installation.md)

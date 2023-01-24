@@ -12,7 +12,7 @@
     <a class="section active">{{ ('admin_'~content~'.create.breadcrumb')|trans }}</a>
 {% endblock breadcrums_content %}
 
-{% form_theme form '@SfsPolymorphicFormType/polymorphic-form-theme.html.twig' '@SyliusUi/Form/theme.html.twig' '@SfsCms/cms_form_theme.html.twig' '@SfsCmsSylius/cms_form_theme.html.twig' %}
+{% form_theme form '@SfsPolymorphicFormType/polymorphic-form-theme.html.twig' '@SyliusUi/Form/theme.html.twig' '@SfsCmsSylius/cms_form_theme.html.twig' '@SfsCmsSylius/cms_form_theme.html.twig' %}
 
 {% block content %}
     <h1 class="h3">{{ ('admin_'~content~'.create.title')|trans }}</h1>
@@ -20,7 +20,7 @@
     {{ form_start(form,{'attr':{'class':'ui form'}}) }}
         {{ form_row(form.name) }}
         {{ form_row(form.site) }}
-        {{ form_row(form.routes) }}
+        {{ form_widget(form.routes.0) }}
         {{ form_rest(form) }}
         <div class="ui hidden divider"></div>
         <div class="ui buttons">
