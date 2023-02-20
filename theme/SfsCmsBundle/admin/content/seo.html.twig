@@ -14,7 +14,11 @@
     <a class="section active">{{ ('admin_'~content~'.seo.breadcrumb')|trans({'%name%':entity.name}) }}</a>
 {% endblock breadcrums_content %}
 
-{% form_theme form '@SfsPolymorphicFormType/polymorphic-form-theme.html.twig' '@SyliusUi/Form/theme.html.twig' '@SfsCmsSylius/cms_form_theme.html.twig' %}
+{% form_theme form
+    '@SyliusUi/Form/theme.html.twig'
+    '@SfsCms/forms/routes-theme.html.twig'
+    '@SfsCms/forms/types-theme.html.twig'
+%}
 
 {% block content %}
 

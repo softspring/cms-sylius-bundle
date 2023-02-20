@@ -3,7 +3,12 @@
 {% block title %}{{ 'admin_menus.create.meta.title'|trans }}{% endblock %}
 {% block header_icon %}bars{% endblock %}
 
-{% form_theme form '@SfsPolymorphicFormType/polymorphic-form-theme.html.twig' '@SyliusUi/Form/theme.html.twig' '@SfsCms/cms_form_theme.html.twig' '@SfsCmsSylius/cms_form_theme.html.twig' %}
+{% form_theme form
+    '@SfsPolymorphicFormType/polymorphic-form-theme.html.twig'
+    '@SyliusUi/Form/theme.html.twig'
+    '@SfsCms/forms/menus-theme.html.twig'
+    '@SfsCms/forms/types-theme.html.twig'
+%}
 
 {% block breadcrums_content %}
     {{ parent() }}

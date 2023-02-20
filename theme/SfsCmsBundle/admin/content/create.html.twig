@@ -12,7 +12,7 @@
     <a class="section active">{{ ('admin_'~content~'.create.breadcrumb')|trans }}</a>
 {% endblock breadcrums_content %}
 
-{% form_theme form '@SfsPolymorphicFormType/polymorphic-form-theme.html.twig' '@SyliusUi/Form/theme.html.twig' '@SfsCms/cms_form_theme.html.twig' '@SfsCmsSylius/cms_form_theme.html.twig' %}
+{% form_theme form '@SfsCms/forms/routes-theme.html.twig' %}
 
 {% block content %}
     <h1 class="h3">{{ ('admin_'~content~'.create.title')|trans }}</h1>
