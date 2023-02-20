@@ -1,0 +1,32 @@
+{% macro collectionItem(form, allow_delete, button_delete_label, index) %}
+    {% spaceless %}
+        <div data-form-collection="item"
+             data-form-collection-index="{{ index }}"
+             class="collection-item">
+            <div class="collection-box{% if form|length == 1 %} unique-field{% endif %}">
+                <div class="ui grid">
+                    <div class="fourteen wide column">
+                        <div class="fields">
+                            {% if not form.children|length %}
+                                {{ form_widget(form) }}
+                            {% else %}
+                                {{ form_rest(form) }}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="one wide column middle aligned">
+                        {% if allow_delete %}
+                            <div class="text-right">
+                                <a href="#" data-form-collection="delete" class="negative ui circular icon button remove_route_path">
+                                    <i class="icon times"></i>
+                                    {#                                {{ button_delete_label|trans }}#}
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endspaceless %}
+{% endmacro %}
+
