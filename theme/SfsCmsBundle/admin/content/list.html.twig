@@ -1,5 +1,6 @@
 {% trans_default_domain 'sfs_cms_contents' %}
 {% extends '@SfsCms/admin_layout.html.twig' %}
+{% set sfs_components_theme = 'semantic-ui' %}
 
 {#{% form_theme filterForm 'bootstrap_5_horizontal_layout.html.twig' %}#}
 
@@ -39,6 +40,8 @@
         {% endif %}
 
 
+    {% include '@SfsComponents/paginator/pager.html.twig' with {'collection':entities, 'pagination_route': pagination_route|default(false), 'pagination_route_attributes': pagination_route_attributes|default([])} %}
+
     <div class="ui segment spaceless sylius-grid-table-wrapper">
         {% block table %}
             {% embed '@SfsComponents/paginator/table.html.twig' with {'collection':entities, 'pagination_route': 'sfs_cms_admin_content_'~content~'_list', 'classes':'table ui celled'} %}
@@ -61,4 +64,6 @@
             {% endembed %}
         {% endblock table %}
     </div>
+
+    {% include '@SfsComponents/paginator/pager.html.twig' with {'collection':entities, 'pagination_route': pagination_route|default(false), 'pagination_route_attributes': pagination_route_attributes|default([])} %}
 {% endblock content %}

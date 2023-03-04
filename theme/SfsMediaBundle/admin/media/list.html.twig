@@ -1,7 +1,8 @@
 {% trans_default_domain 'sfs_media_admin' %}
 {% extends '@SfsMedia/admin_layout.html.twig' %}
+{% set sfs_components_theme = 'semantic-ui' %}
 
-{% form_theme filterForm 'bootstrap_5_horizontal_layout.html.twig' %}
+{% form_theme filterForm 'form_table_layout.html.twig' %}
 
 
 {% block title %}{{ 'admin_medias.list.meta.title'|trans }}{% endblock %}
@@ -29,12 +30,31 @@
 
 {% block content %}
     <div class="ui hidden divider"></div>
-    <div class="ui segment sylius-grid-table-wrapper">
-        {{ form_start(filterForm) }}
-        {{ form_widget(filterForm) }}
-        {{ form_rest(filterForm) }}
-        {{ form_end(filterForm) }}
 
+    <div class="ui styled fluid accordion">
+        <div class="title">
+            <i class="dropdown icon"></i>
+            <i class="filter icon"></i>
+            Filters
+        </div>
+        <div class="content">
+            {{ form_start(filterForm) }}
+            {% if filterForm.name is defined %}<div class="col">{{ form_row(filterForm.name, {'row_class':'form-floating'}) }}</div>{% endif %}
+            {% if filterForm.type is defined %}<div class="col">{{ form_row(filterForm.type, {'row_class':'form-floating'}) }}</div>{% endif %}
+            <button type="submit" class="btn btn-primary">Filter </button>
+            {{ form_widget(filterForm) }}
+            {{ form_rest(filterForm) }}
+            {{ form_end(filterForm) }}
+        </div>
+    </div>
+
+    <div class="ui hidden divider"></div>
+
+    {% include '@SfsComponents/paginator/pager.html.twig' with {'collection': entities} %}
+
+    <div class="ui segment sylius-grid-table-wrapper">
         {% include '@SfsMedia/admin/media/list-page.html.twig' %}
     </div>
+
+    {% include '@SfsComponents/paginator/pager.html.twig' with {'collection': entities} %}
 {% endblock content %}
