@@ -31,6 +31,21 @@ final class CmsMenuBuilder
             $cmsRootMenuItem
                 ->addChild($contentId, [
                     'route' => "sfs_cms_admin_content_{$contentId}_list",
+                    'extras' => ['routes' => [
+                        ['route' => "sfs_cms_admin_content_{$contentId}_list"],
+                        ['route' => "sfs_cms_admin_content_{$contentId}_create"],
+                        ['route' => "sfs_cms_admin_content_{$contentId}_import"],
+                        ['route' => "sfs_cms_admin_content_{$contentId}_details"],
+                        ['route' => "sfs_cms_admin_content_{$contentId}_preview"],
+                        ['route' => "sfs_cms_admin_content_{$contentId}_preview_version"],
+                        ['route' => "sfs_cms_admin_content_{$contentId}_update"],
+                        ['route' => "sfs_cms_admin_content_{$contentId}_delete"],
+                        ['route' => "sfs_cms_admin_content_{$contentId}_seo"],
+                        ['route' => "sfs_cms_admin_content_{$contentId}_content_from_version"],
+                        ['route' => "sfs_cms_admin_content_{$contentId}_preview_content"],
+                        ['route' => "sfs_cms_admin_content_{$contentId}_preview_content_version"],
+                        ['route' => "sfs_cms_admin_content_{$contentId}_versions"],
+                    ]],
                 ])
                 ->setLabel("sfs_sylius_cms_plugin.ui.contents.{$contentId}")
                 ->setLabelAttribute( 'icon', $contentConfig['meta']['sylius']['icon'] ?? 'vertically file alternate')
@@ -40,6 +55,13 @@ final class CmsMenuBuilder
         $cmsRootMenuItem
             ->addChild('routes', [
                 'route' => 'sfs_cms_admin_routes_list',
+                'extras' => ['routes' => [
+                    ['route' => "sfs_cms_admin_routes_list"],
+                    ['route' => "sfs_cms_admin_routes_create"],
+                    ['route' => "sfs_cms_admin_routes_update"],
+                    ['route' => "sfs_cms_admin_routes_delete"],
+                    ['route' => "sfs_cms_admin_routes_read"],
+                ]],
             ])
             ->setLabel('sfs_sylius_cms_plugin.ui.routes')
             ->setLabelAttribute('icon', 'vertically linkify')
@@ -48,6 +70,13 @@ final class CmsMenuBuilder
         $cmsRootMenuItem
             ->addChild('blocks', [
                 'route' => 'sfs_cms_admin_blocks_list',
+                'extras' => ['routes' => [
+                    ['route' => "sfs_cms_admin_blocks_list"],
+                    ['route' => "sfs_cms_admin_blocks_create"],
+                    ['route' => "sfs_cms_admin_blocks_update"],
+                    ['route' => "sfs_cms_admin_blocks_delete"],
+                    ['route' => "sfs_cms_admin_blocks_read"],
+                ]],
             ])
             ->setLabel('sfs_sylius_cms_plugin.ui.blocks')
             ->setLabelAttribute('icon', 'th')
@@ -56,6 +85,13 @@ final class CmsMenuBuilder
         $cmsRootMenuItem
             ->addChild('menus', [
                 'route' => 'sfs_cms_admin_menus_list',
+                'extras' => ['routes' => [
+                    ['route' => "sfs_cms_admin_menus_list"],
+                    ['route' => "sfs_cms_admin_menus_create"],
+                    ['route' => "sfs_cms_admin_menus_update"],
+                    ['route' => "sfs_cms_admin_menus_delete"],
+                    ['route' => "sfs_cms_admin_menus_read"],
+                ]],
             ])
             ->setLabel('sfs_sylius_cms_plugin.ui.menus')
             ->setLabelAttribute('icon', 'bars')
@@ -64,6 +100,13 @@ final class CmsMenuBuilder
         $cmsRootMenuItem
             ->addChild('medias', [
                 'route' => 'sfs_media_admin_medias_list',
+                'extras' => ['routes' => [
+                    ['route' => "sfs_media_admin_medias_list"],
+                    ['route' => "sfs_media_admin_medias_create"],
+                    ['route' => "sfs_media_admin_medias_update"],
+                    ['route' => "sfs_media_admin_medias_delete"],
+                    ['route' => "sfs_media_admin_medias_read"],
+                ]],
             ])
             ->setLabel('sfs_sylius_cms_plugin.ui.medias')
             ->setLabelAttribute('icon', 'image outline')
