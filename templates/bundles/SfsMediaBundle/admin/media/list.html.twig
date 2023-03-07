@@ -29,24 +29,26 @@
 {% endblock %}
 
 {% block content %}
-    <div class="ui hidden divider"></div>
+    {% if entities|length %}
+        <div class="ui hidden divider"></div>
 
-    <div class="ui styled fluid accordion">
-        <div class="title">
-            <i class="dropdown icon"></i>
-            <i class="filter icon"></i>
-            Filters
+        <div class="ui styled fluid accordion">
+            <div class="title">
+                <i class="dropdown icon"></i>
+                <i class="filter icon"></i>
+                Filters
+            </div>
+            <div class="content">
+                {{ form_start(filterForm) }}
+                {% if filterForm.name is defined %}<div class="col">{{ form_row(filterForm.name, {'row_class':'form-floating'}) }}</div>{% endif %}
+                {% if filterForm.type is defined %}<div class="col">{{ form_row(filterForm.type, {'row_class':'form-floating'}) }}</div>{% endif %}
+                <button type="submit" class="btn btn-primary">Filter </button>
+                {{ form_widget(filterForm) }}
+                {{ form_rest(filterForm) }}
+                {{ form_end(filterForm) }}
+            </div>
         </div>
-        <div class="content">
-            {{ form_start(filterForm) }}
-            {% if filterForm.name is defined %}<div class="col">{{ form_row(filterForm.name, {'row_class':'form-floating'}) }}</div>{% endif %}
-            {% if filterForm.type is defined %}<div class="col">{{ form_row(filterForm.type, {'row_class':'form-floating'}) }}</div>{% endif %}
-            <button type="submit" class="btn btn-primary">Filter </button>
-            {{ form_widget(filterForm) }}
-            {{ form_rest(filterForm) }}
-            {{ form_end(filterForm) }}
-        </div>
-    </div>
+    {% endif %}
 
     <div class="ui hidden divider"></div>
 
