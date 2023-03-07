@@ -17,16 +17,16 @@
 {% block content %}
     <h1 class="h3">{{ ('admin_'~content~'.create.title')|trans }}</h1>
     <div class="ui bottom attached active tab segment">
-    {{ form_start(form,{'attr':{'class':'ui form'}}) }}
-        {{ form_row(form.name) }}
-        {{ form_row(form.site) }}
-        {{ form_row(form.routes) }}
-        {{ form_rest(form) }}
-        <div class="ui hidden divider"></div>
-        <div class="ui buttons">
-            <button class="ui labeled icon primary button" type="submit"><i class="save icon"></i> {{ ('admin_'~content~'.create.actions.create.button')|trans }}</button>
-            <a href="{{ url('sfs_cms_admin_content_'~content~'_list') }}" class="ui button">{{ ('admin_'~content~'.create.actions.cancel.button')|trans }}</a>
-        </div>
-    {{ form_end(form) }}
+        {{ form_start(form,{'attr':{'class':'ui form'}}) }}
+            {{ form_row(form.name) }}
+            {{ form_row(form.site) }}
+            {{ form_row(form.routes) }}
+            {{ form_rest(form) }}
+            <div class="ui hidden divider"></div>
+            <div class="ui buttons">
+                <button class="ui labeled icon primary button" type="submit"><i class="save icon"></i> {{ ('admin_'~content~'.create.actions.create.button')|trans }}</button>
+                <a href="{{ url('sfs_cms_admin_content_'~content~'_list') }}" class="ui button">{{ ('admin_'~content~'.create.actions.cancel.button')|trans }}</a>
+            </div>
+        {{ form_end(form) }}
     </div>
 {% endblock content %}

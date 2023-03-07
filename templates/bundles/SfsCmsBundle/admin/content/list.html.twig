@@ -47,6 +47,15 @@
             {% block tbody %}
                 {% include list_page_view %}
             {% endblock tbody %}
+
+            {% block empty_message %}
+                <p>{{ empty_message|default('The list is empty') }}</p>
+
+                <a class="ui labeled icon button  primary " href="{{ url('sfs_cms_admin_content_'~content~'_create') }}">
+                    <i class="icon plus"></i>
+                    {{ ('admin_'~content~'.list.actions.create.link')|trans }}
+                </a>
+            {% endblock empty_message %}
         {% endembed %}
     {% endblock table %}
 {% endblock content %}
