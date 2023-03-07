@@ -4,16 +4,8 @@
 
 {% block title %}{{ ('admin_'~content~'.content.meta.title')|trans({'%name%':entity.name}) }}{% endblock %}
 
-{#{% form_theme form#}
-{#    'bootstrap_5_layout.html.twig'#}
-{#    '@SfsPolymorphicFormType/polymorphic-form-theme.html.twig'#}
-{#    '@SfsCms/cms_form_theme.html.twig'#}
-{#    '@SfsMedia/media_form_theme.html.twig'#}
-{#    '@SfsCmsSylius/cms_form_theme.html.twig'#}
-{#    '@SfsCmsSylius/cms_content_form_theme.html.twig'#}
-{#%}#}
-
-{% form_theme form '@SfsPolymorphicFormType/polymorphic-form-theme.html.twig'
+{% form_theme form
+    '@SfsPolymorphicFormType/polymorphic-form-theme.html.twig'
     '@SfsCms/forms/modules-theme.html.twig'
     '@SfsCms/forms/types-theme.html.twig'
     '@SfsMedia/media_form_theme.html.twig'
@@ -53,11 +45,12 @@
                         {% endif %}
 
                         <div class="btn-group" role="group">
-                            <button type="submit" class="btn btn-primary ms-3">{{ ('admin_'~content~'.content.actions.save.button')|trans }}</button>
+                            <button name="goto" value="content" type="submit" class="btn btn-primary ms-3">{{ ('admin_'~content~'.content.actions.save.button')|trans }}</button>
                             <button name="goto" id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                                 <li>
+                                    <button class="btn btn-primary dropdown-item" name="goto" value="general">{{ ('admin_'~content~'.content.actions.save_and_exit.button')|trans }}</button>
                                     <button class="btn btn-primary dropdown-item" name="goto" value="preview">{{ ('admin_'~content~'.content.actions.save_and_preview.button')|trans }}</button>
                                     <button class="btn btn-primary dropdown-item" name="goto" value="publish">{{ ('admin_'~content~'.content.actions.save_and_publish.button')|trans }}</button>
                                 </li>
@@ -69,7 +62,10 @@
         </header>
         <main class="cms-content-main flex-fill d-flex flex-row align-items-stretch bg-light h-100">
             <div class="row h-100 w-100 mx-0">
-                <div class="col px-0">{% include layout.edit_template %}</div>
+                <div class="col px-0">
+                    {{ form_errors(form) }}
+                    {% include layout.edit_template %}
+                </div>
                 <div class="col-2 h-100 bg-white d-none" id="content-form"></div>
             </div>
         </main>
@@ -78,6 +74,7 @@
     {#        <button onclick="document.getElementById('previewFrame').contentWindow.document.getElementsByTagName('body')[0].innerHTML = 'Otra cosa'; return false;">Change</button>#}
 
 
+    {{ form_widget(form.module_prototypes_collection) }}
     {{ form_rest(form) }}
     {{ form_end(form) }}
 
@@ -92,3 +89,4 @@
     {{ parent() }}
     <script src="https://cdn.tiny.cloud/1/0zxo7hhr52tjj8ir7zp8ujyxq2xrwy561vrc8oqr6oozfjbi/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 {% endblock javascripts %}
+
