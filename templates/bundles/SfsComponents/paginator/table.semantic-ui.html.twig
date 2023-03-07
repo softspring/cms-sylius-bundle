@@ -1,0 +1,80 @@
+{% if filter_form|default(false) and (collection|length or filter_form.vars.submitted) %}
+    {% block filters_form %}
+    <div class="ui hidden divider"></div>
+
+    <div class="ui styled fluid accordion">
+        <div class="title">
+            <i class="dropdown icon"></i>
+            <i class="filter icon"></i>
+            Filters
+        </div>
+        <div class="content">
+            {{ form_start(filter_form) }}
+            {% block filters %}
+                {{ form_widget(filter_form) }}
+            {% endblock filters %}
+            {{ form_rest(filter_form) }}
+            {{ form_end(filter_form) }}
+        </div>
+    </div>
+    {% endblock filters_form %}
+{% endif %}
+
+{% if collection|length %}
+    <div class="ui hidden divider"></div>
+
+    {% include '@SfsComponents/paginator/pager.html.twig' with {'collection':entities, 'pagination_route': pagination_route|default(false), 'pagination_route_attributes': pagination_route_attributes|default([])} %}
+
+    <div class="ui hidden divider"></div>
+
+    <div class="ui segment spaceless sylius-grid-table-wrapper">
+        <table
+            class="ui celled table {{ classes is not defined ? 'table-borderless table-striped table-hover ' ~ (append_classes|default(''))  : classes }}">
+            {% block thead %}
+                <thead>
+                <tr>
+                    {% block ths %}
+                    {% endblock ths %}
+                </tr>
+                </thead>
+            {% endblock thead %}
+
+            {% block tbody %}
+                <tbody>
+                {% for element in collection %}
+                    {# TODO: make row clickable url configurable #}
+                    <tr>
+                        {% block tds %}
+                            {# use element variable to show row data #}
+                        {% endblock tds %}
+
+                        {% block actions %}
+                        {% endblock actions %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            {% endblock tbody %}
+        </table>
+    </div>
+
+    {% include '@SfsComponents/paginator/pager.html.twig' with {'collection':entities, 'pagination_route': pagination_route|default(false), 'pagination_route_attributes': pagination_route_attributes|default([])} %}
+{% else %}
+    {% block empty %}
+        <div class="ui icon info message">
+            <i class="info circle icon"></i>
+            <div class="content">
+                <div class="header">
+                    Info
+                </div>
+                <p>
+                    {% if filter_form|default(false) and filter_form.vars.submitted %}
+                        {{ no_matches_message|default('No elements found, try to be less restrictive.') }}
+                    {% else %}
+                        {{ empty_message|default('The list is empty') }}
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+    {% endblock empty %}
+{% endif %}
+

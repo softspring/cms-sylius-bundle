@@ -1,0 +1,57 @@
+{% trans_default_domain 'sfs_cms_admin' %}
+{% extends '@SfsCms/admin_layout.html.twig' %}
+{% set sfs_components_theme = 'semantic-ui' %}
+
+{% block header_icon %}bars{% endblock %}
+
+{% form_theme filterForm 'bootstrap_5_horizontal_layout.html.twig' %}
+
+{% block title %}{{ 'admin_menus.list.meta.title'|trans }}{% endblock %}
+{% block header_title %}{{ 'admin_menus.list.title'|trans }}{% endblock %}
+{% block header_subtitle %}Manage content menus{% endblock %}
+{% block breadcrums_content %}
+    <a class="active section">{{ ('admin_menus.list.breadcrumb')|trans }}</a>
+{% endblock breadcrums_content %}
+
+{% block header_buttons %}
+    <div class="ui floating labeled icon dropdown button teal">
+        <i class="plus icon"></i>
+        <span class="text">{{ 'admin_menus.list.actions.create.link'|trans }}</span>
+        <div class="menu">
+            {% for menuKey, menuConfig in menus_config %}
+            <div class="item"><a href="{{ url('sfs_cms_admin_menus_create', {'menuType':menuKey}) }}">{{ menuKey }}</a></div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    {% embed '@SfsComponents/paginator/table.html.twig' with {'collection':entities, 'filter_form':filterForm, 'pagination_menu': 'sfs_cms_admin_menus_list', 'classes':'table ui celled'} %}
+        {% trans_default_domain 'sfs_cms_admin' %}
+
+        {% block filters %}
+            {{ form_row(filter_form.name ) }}
+            <input type="button" value="search" />
+        {% endblock filters %}
+
+        {% block ths %}
+            <th scope="col">
+                <a href="{{ entities.sortToggleUrl(app.request, 'name') }}" class="text-dark">
+                    {{ 'admin_menus.list.fields.name.header'|trans }}
+                    {% if entities.sortedBy('name', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif entities.sortedBy('name', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
+                </a>
+            </th>
+            <th scope="col">
+                <a href="{{ entities.sortToggleUrl(app.request, 'type') }}" class="text-dark">
+                    {{ 'admin_menus.list.fields.type.header'|trans }}
+                    {% if entities.sortedBy('type', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif entities.sortedBy('type', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
+                </a>
+            </th>
+            <th class="">&nbsp;</th>
+        {% endblock ths %}
+
+        {% block tbody %}
+            {% include '@SfsCms/admin/menu/list-page.html.twig' %}
+        {% endblock tbody %}
+    {% endembed %}
+{% endblock content %}
