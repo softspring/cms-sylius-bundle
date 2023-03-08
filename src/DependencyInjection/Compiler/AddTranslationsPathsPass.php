@@ -19,6 +19,13 @@ class AddTranslationsPathsPass implements CompilerPassInterface
         $collection = $definition->getArgument(0);
 
         foreach ($container->getParameter('sfs_cms.collections') as $collectionPath) {
+            $transDirectory = $container->getParameter('kernel.project_dir').'/'.trim($collectionPath, '/').'/translations';
+            if (is_dir($transDirectory)) {
+                foreach ((new Finder())->in($transDirectory)->files() as $file) {
+                    $collection[] = $file->getRealPath();
+                }
+            }
+
             foreach (['module', 'block', 'content', 'layout', 'menu', 'site'] as $item) {
                 $path = $container->getParameter('kernel.project_dir').'/'.trim($collectionPath, '/')."/{$item}s";
                 if (is_dir($path)) {
