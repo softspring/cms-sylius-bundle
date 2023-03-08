@@ -1,0 +1,21 @@
+{% block translatable_text_widget %}
+    {% if form|length > 1 %}
+        <div class="ui equal width grid">
+            <div class="equal width row">
+                {% for field in form %}
+                    <div class="column" style="display: flex; align-items: center;">
+                        <div class="inline fields">
+                            <div class="field">
+                                {{ field.vars.label|upper }}
+                                {#                        <img alt="{{ field.vars.label|upper }}" title="{{ field.vars.label|upper }}" src="https://unpkg.com/language-icons/icons/{{ field.vars.label|lower }}.svg" height="15" class="border"/>&nbsp;#}
+                            </div>
+                        </div>
+                        {{ form_widget(field) }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        {{ form_widget(form|first) }}
+    {% endif %}
+{% endblock translatable_text_widget %}
