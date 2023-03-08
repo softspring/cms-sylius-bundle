@@ -14,7 +14,7 @@
 {% endblock breadcrums_content %}
 
 {% block header_buttons %}
-    {% if is_granted('ROLE_SFS_CMS_ADMIN_BLOCKS_CREATE') %}
+{#    {% if is_granted('ROLE_SFS_CMS_ADMIN_BLOCKS_CREATE') %}#}
         <div class="ui floating labeled icon dropdown button teal">
             <i class="plus icon"></i>
             <span class="text">{{ 'admin_blocks.list.actions.create.link'|trans }}</span>
@@ -26,7 +26,7 @@
                 {% endfor %}
             </div>
         </div>
-    {% endif %}
+{#    {% endif %}#}
 {% endblock %}
 
 {% block content %}
