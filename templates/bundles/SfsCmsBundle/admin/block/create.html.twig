@@ -3,10 +3,8 @@
 {% block title %}{{ 'admin_blocks.create.meta.title'|trans }}{% endblock %}
 {% block header_icon %}th{% endblock %}
 
-{% form_theme form '@SfsPolymorphicFormType/polymorphic-form-theme.html.twig'
-    '@SfsCms/cms_form_theme.html.twig'
-    '@SfsMedia/media_form_theme.html.twig'
-    '@SfsCmsSylius/cms_form_theme.html.twig'
+{% form_theme form
+    '@SyliusUi/Form/theme.html.twig'
 %}
 
 {% block breadcrums_content %}
@@ -18,16 +16,39 @@
 {% block content %}
     <h1 class="h3">{{ 'admin_blocks.create.title'|trans }}</h1>
 
-    <div class="container-fluid bg-white p-4">
-        {{ form_start(form) }}
-            {{ form_rest(form) }}
-
-            <div class="d-flex justify-content-end align-items-center">
-                <a href="{{ url('sfs_cms_admin_blocks_list') }}" class="btn btn-outline-secondary">{{ 'admin_blocks.create.actions.cancel.button'|trans }}</a>
-                <button type="submit" class="btn btn-primary ms-3">{{ 'admin_blocks.create.actions.create.button'|trans }}</button>
+    <div class="ui hidden divider"></div>
+    <div class="ui segment">
+        {{ form_start(form,{'attr':{'class':'ui form'}}) }}
+        <div class="fields">
+            <div class="six wide field">
+                {{ form_row(form.name) }}
             </div>
+        </div>
+
+        <div class="fields">
+            <div class="six wide field">
+                {{ form_row(form.publishStartDate) }}
+            </div>
+            <div class="six wide field">
+                {{ form_row(form.publishEndDate) }}
+            </div>
+        </div>
+
+        <div class="fields">
+            <div class="six wide field">
+                {{ form_widget(form.data) }}
+            </div>
+        </div>
+
+        {{ form_rest(form) }}
+
+        <div class="ui hidden divider"></div>
+        <div class="ui buttons">
+            <button class="ui labeled icon primary button" type="submit"><i class="plus icon"></i>{{ 'admin_blocks.create.actions.create.button'|trans }}</button>
+            <a href="{{ url('sfs_cms_admin_blocks_list') }}" class="ui button">{{ 'admin_blocks.create.actions.cancel.button'|trans }}</a>
+        </div>
         {{ form_end(form) }}
     </div>
 
-    {% include '@SfsMedia/media_type_modal.html.twig' %}
+{#    {% include '@SfsMedia/media_type_modal.html.twig' %}#}
 {% endblock content %}
