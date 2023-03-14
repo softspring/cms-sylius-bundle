@@ -1,5 +1,5 @@
 {% trans_default_domain 'sfs_media_admin' %}
-{% extends '@SfsMedia/admin_layout.html.twig' %}
+{% extends '@SfsMedia/admin_layout_semantic.html.twig' %}
 {% block title %}{{ 'admin_medias.read.meta.title'|trans({'%name%': media.name }) }}{% endblock %}
 
 {% block breadcrums_content %}
@@ -28,9 +28,9 @@
     {% endif %}
 {%- endmacro -%}
 
+{% block header_title %}{{ 'admin_medias.read.title'|trans({'%name%': media.name }) }}{% endblock %}
 
 {% block content %}
-    <h1>{{ 'admin_medias.read.title'|trans({'%name%': media.name }) }}</h1>
 
     {% if media.description %}
         <p>{{ media.description|nl2br }}</p>

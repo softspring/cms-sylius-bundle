@@ -1,8 +1,11 @@
 {% trans_default_domain 'sfs_media_admin' %}
-{% extends '@SfsMedia/admin_layout.html.twig' %}
+{% extends '@SfsMedia/admin_layout_semantic.html.twig' %}
 {% block title %}{{ 'admin_medias.create.meta.title'|trans({'%type%':type_config.name}) }}{% endblock %}
 
-{% form_theme form '@SfsPolymorphicFormType/polymorphic-form-theme.html.twig' '@SyliusUi/Form/theme.html.twig'  %}
+{% form_theme form
+    '@SyliusUi/Form/theme.html.twig'
+    '@SfsMedia/forms/media_type_theme_semantic.html.twig'
+%}
 
 {% block breadcrums_content %}
     {{ parent() }}

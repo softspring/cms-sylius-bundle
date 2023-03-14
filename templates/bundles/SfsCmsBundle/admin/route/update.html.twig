@@ -1,14 +1,13 @@
 {% trans_default_domain 'sfs_cms_admin' %}
-{% extends '@SfsCms/admin_layout.html.twig' %}
+{% extends '@SfsCms/admin_layout_semantic.html.twig' %}
 {% block title %}{{ 'admin_routes.update.meta.title'|trans }}{% endblock %}
 {% block header_icon %}vertically linkify{% endblock %}
 {% block header_title %}{{ 'admin_routes.update.title'|trans }}{% endblock %}
 {% block header_subtitle %}Manage content route{% endblock %}
 
 {% form_theme form
-    '@SfsPolymorphicFormType/polymorphic-form-theme.html.twig'
     '@SyliusUi/Form/theme.html.twig'
-    '@SfsCms/forms/routes-theme.html.twig'
+    '@SfsCms/forms/routes_theme_semantic.html.twig'
 %}
 
 {% block breadcrums_content %}
