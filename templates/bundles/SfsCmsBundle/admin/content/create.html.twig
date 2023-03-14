@@ -19,7 +19,6 @@
 %}
 
 {% block content %}
-    <h1 class="h3">{{ ('admin_'~content~'.create.title')|trans }}</h1>
     <div class="ui bottom attached active tab segment">
         {{ form_start(form,{'attr':{'class':'ui form'}}) }}
             {{ form_row(form.name) }}
