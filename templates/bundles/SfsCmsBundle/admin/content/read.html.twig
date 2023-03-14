@@ -1,6 +1,6 @@
 {% trans_default_domain 'sfs_cms_contents' %}
 
-{% extends '@SfsCms/admin_layout.html.twig' %}
+{% extends '@SfsCms/admin_layout_semantic.html.twig' %}
 
 {% block title %}{{ ('admin_'~content~'.read.meta.title')|trans({'%name%':entity.name}) }}{% endblock %}
 {% block header_title %}{{ ('admin_'~content~'.read.title')|trans({'%name%':entity.name}) }}{% endblock %}

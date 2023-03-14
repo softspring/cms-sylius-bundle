@@ -1,20 +1,36 @@
 {% trans_default_domain 'sfs_media_admin' %}
-{% extends '@SfsMedia/admin_layout.html.twig' %}
-{% block title %}{{ 'admin_medias.update.meta.title'|trans }}{% endblock %}
+{% extends '@SfsMedia/admin_layout_semantic.html.twig' %}
+{% block title %}{{ 'admin_medias.update.meta.title'|trans({'%type%':type_config.name}) }}{% endblock %}
+
+{% form_theme form
+    '@SyliusUi/Form/theme.html.twig'
+    '@SfsMedia/forms/media_type_theme_semantic.html.twig'
+%}
+
+{% block breadcrums_content %}
+    {{ parent() }}
+    <a class="section" href="{{ url('sfs_media_admin_medias_list') }}">{{ 'admin_medias.list.breadcrumb'|trans }}</a><i class="right chevron icon divider"></i>
+    <span class="section active" aria-current="content">{{ 'admin_medias.update.breadcrumb'|trans({'%type%':type_config.name}) }}</span>
+{% endblock breadcrums_content %}
 
 {% block content %}
-    <h1 class="h3">Update media</h1>
+    <h1 class="h3">{{ 'admin_medias.update.title'|trans({'%type%':type_config.name}) }}</h1>
 
     <div class="ui hidden divider"></div>
     <div class="ui segment">
-    {{ form_start(form,{'attr':{'class':'ui form'}}) }}
-        {{ form_widget(form) }}
+        {{ form_start(form,{'attr':{'class':'ui form'}}) }}
+
+        {{ form_row(form.name) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form._original) }}
         {{ form_rest(form) }}
-    <div class="ui hidden divider"></div>
-    <div class="ui buttons">
-        <button type="submit" class="ui labeled icon primary button"><i class="plus icon"></i>{{ 'admin_medias.update.actions.update.button'|trans }}</button>
-        <a href="{{ url('sfs_media_admin_medias_list') }}" class="ui button">{{ 'admin_medias.update.actions.cancel.button'|trans }}</a>
-        <a href="{{ url('sfs_media_admin_medias_delete', {'media':media.id}) }}" class="ui red button">{{ 'admin_medias.update.actions.delete.button'|trans }}</a>
+
+        <div class="ui hidden divider"></div>
+        <div class="ui buttons">
+            <button class="ui labeled icon primary button" type="submit"><i class="plus icon"></i>{{ 'admin_medias.update.actions.update.button'|trans }}</button>
+            <a href="{{ url('sfs_media_admin_medias_delete', {'media':media.id}) }}" class="ui red button">{{ 'admin_medias.update.actions.delete.button'|trans }}</a>
+            <a href="{{ url('sfs_media_admin_medias_list') }}" class="ui button">{{ 'admin_medias.update.actions.cancel.button'|trans }}</a>
+        </div>
+        {{ form_end(form) }}
     </div>
-    {{ form_end(form) }}
 {% endblock content %}

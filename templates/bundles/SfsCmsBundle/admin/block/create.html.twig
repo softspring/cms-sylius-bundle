@@ -1,10 +1,12 @@
 {% trans_default_domain 'sfs_cms_admin' %}
-{% extends '@SfsCms/admin_layout.html.twig' %}
+{% extends '@SfsCms/admin_layout_semantic.html.twig' %}
 {% block title %}{{ 'admin_blocks.create.meta.title'|trans }}{% endblock %}
 {% block header_icon %}th{% endblock %}
 
 {% form_theme form
     '@SyliusUi/Form/theme.html.twig'
+    '@SfsCms/forms/types_theme_semantic.html.twig'
+    '@SfsMedia/forms/media_type_theme_semantic.html.twig'
 %}
 
 {% block breadcrums_content %}
@@ -25,6 +27,7 @@
             </div>
         </div>
 
+        {% if form.publishStartDate is defined and form.publishEndDate is defined %}
         <div class="fields">
             <div class="six wide field">
                 {{ form_row(form.publishStartDate) }}
@@ -33,6 +36,7 @@
                 {{ form_row(form.publishEndDate) }}
             </div>
         </div>
+        {% endif %}
 
         <div class="fields">
             <div class="six wide field">
@@ -50,5 +54,5 @@
         {{ form_end(form) }}
     </div>
 
-{#    {% include '@SfsMedia/media_type_modal.html.twig' %}#}
+{#    {% include '@SfsMedia/forms/media_type_modal.html.twig' %}#}
 {% endblock content %}
