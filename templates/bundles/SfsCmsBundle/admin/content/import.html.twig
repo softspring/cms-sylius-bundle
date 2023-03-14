@@ -1,0 +1,32 @@
+{% trans_default_domain 'sfs_cms_contents' %}
+
+{% extends '@SfsCms/admin_layout_semantic.html.twig' %}
+
+{% block title %}{{ ('admin_'~content~'.import.meta.title')|trans }}{% endblock %}
+{% block header_title %}{{ ('admin_'~content~'.import.title')|trans }}{% endblock %}
+{% block header_subtitle %}Manage your content pages{% endblock %}
+{% block breadcrums_content %}
+    {{ parent() }}
+    <a class="section" href="{{ url('sfs_cms_admin_content_'~content~'_list') }}">{{ ('admin_'~content~'.list.breadcrumb')|trans }}</a>
+    <i class="right chevron icon divider"></i>
+    <a class="section active">{{ ('admin_'~content~'.import.breadcrumb')|trans }}</a>
+{% endblock breadcrums_content %}
+
+{% form_theme form
+    '@SyliusUi/Form/theme.html.twig'
+    '@SfsCms/forms/routes_theme_semantic.html.twig'
+    '@SfsCms/forms/types_theme_semantic.html.twig'
+%}
+
+{% block content %}
+    <div class="ui bottom attached active tab segment">
+        {{ form_start(form,{'attr':{'class':'ui form'}}) }}
+        {{ form_rest(form) }}
+        <div class="ui hidden divider"></div>
+        <div class="ui buttons">
+            <button class="ui labeled icon primary button" type="submit"><i class="save icon"></i> {{ ('admin_'~content~'.import.actions.import.button')|trans }}</button>
+            <a href="{{ url('sfs_cms_admin_content_'~content~'_list') }}" class="ui button">{{ ('admin_'~content~'.import.actions.cancel.button')|trans }}</a>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock content %}
