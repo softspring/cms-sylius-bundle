@@ -32,6 +32,7 @@
             <div class="ui buttons">
                 <button class="ui labeled icon primary button" type="submit"><i class="save icon"></i> {{ ('admin_'~content~'.update.actions.update.button')|trans }}</button>
                 <a href="{{ url('sfs_cms_admin_content_'~content~'_list') }}" class="ui button">{{ ('admin_'~content~'.update.actions.cancel.button')|trans }}</a>
+                <a href="{{ url('sfs_cms_admin_content_'~content~'_delete', {'content':entity}) }}" class="ui red button">{{ ('admin_'~content~'.update.actions.delete.button')|trans }}</a>
             </div>
         {{ form_end(form) }}
     </div>
