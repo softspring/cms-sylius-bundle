@@ -2,6 +2,7 @@
 
 namespace Softspring\CmsSyliusBundle\DependencyInjection;
 
+use Composer\InstalledVersions;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -34,7 +35,17 @@ class SfsCmsSyliusExtension extends Extension implements PrependExtensionInterfa
 //
 //        $container->prependExtensionConfig('doctrine', $doctrineConfig);
 
-//        $container->prependExtensionConfig('twig', [
+        $version = InstalledVersions::getVersion('softspring/cms-sylius-bundle');
+        if (str_ends_with($version, '-dev')) {
+            $version = InstalledVersions::getPrettyVersion('softspring/cms-sylius-bundle');
+        }
+        $container->prependExtensionConfig('twig', [
+            'globals' => [
+                'sfs_cms_sylius_bundle' => [
+                    'version' => $version,
+                    'version_branch' => str_ends_with($version, '-dev') ? str_replace('.x-dev', '', $version) : false,
+                ]
+            ],
 //            'paths' => [
 //                '%kernel.project_dir%/cms'=> 'cms',
 //                '%kernel.project_dir%/cms/modules'=> 'module', // use @module/html/render.html.twig
@@ -44,6 +55,6 @@ class SfsCmsSyliusExtension extends Extension implements PrependExtensionInterfa
 //                '%kernel.project_dir%/cms/layouts'=> 'layout', // use @layout/default/render.html.twig
 //                '%kernel.project_dir%/cms/menus'=> 'menu', // use @menu/main/render.html.twig
 //            ],
-//        ]);
+        ]);
     }
 }

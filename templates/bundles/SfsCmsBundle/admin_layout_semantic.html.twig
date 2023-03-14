@@ -3,6 +3,18 @@
 {#{% extends ['@SfsAdmin/layout.html.twig', 'admin/layout.html.twig', 'base.html.twig'] %}#}
 {% extends '@SyliusAdmin/layout.html.twig' %}
 
+{% block footer %}
+    {% trans_default_domain 'messages' %}
+    Contents managed by Softspring's
+    <a href="https://softspring.es" target="_blank">CMS Sylius bundle</a>.
+    {% if sfs_cms_sylius_bundle.version_branch|default(false) %}
+        <a href="https://github.com/softspring/cms-sylius-bundle/tree/{{ sfs_cms_sylius_bundle.version_branch }}" target="_blank">{{ sfs_cms_sylius_bundle.version_branch }}@dev</a>.
+    {% else %}
+        <a href="https://github.com/softspring/cms-sylius-bundle/releases/tag/{{ sfs_cms_sylius_bundle.version }}" target="_blank">{{ sfs_cms_sylius_bundle.version }}</a>.
+    {% endif %}
+    {{ 'sylius.ui.see_issue'|trans }}? <a href="https://github.com/softspring/cms-sylius-bundle/issues" target="_blank">{{ 'sylius.ui.report_it'|trans }}!</a>
+{% endblock %}
+
 {% block pre_content %}
     <div class="ui stackable two column grid">
         <div class="column">
