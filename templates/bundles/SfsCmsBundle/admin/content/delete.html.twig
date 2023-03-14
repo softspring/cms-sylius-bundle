@@ -1,0 +1,50 @@
+{% trans_default_domain 'sfs_cms_contents' %}
+
+{% extends '@SfsCms/admin_layout_semantic.html.twig' %}
+
+{% block title %}{{ ('admin_'~content~'.delete.meta.title')|trans({'%name%':entity.name}) }}{% endblock %}
+{% block header_title %}{{ ('admin_'~content~'.delete.title')|trans({'%name%':entity.name}) }}{% endblock %}
+{% block header_subtitle %}Manage your page{% endblock %}
+{% block breadcrums_content %}
+    {{ parent() }}
+    <a class="section" href="{{ url('sfs_cms_admin_content_'~content~'_list') }}">{{ ('admin_'~content~'.list.breadcrumb')|trans }}</a>
+    <i class="right chevron icon divider"></i>
+    <a class="section" href="{{ url('sfs_cms_admin_content_'~content~'_list') }}">{{ ('admin_'~content~'.list.breadcrumb')|trans }}</a>
+    <i class="right chevron icon divider"></i>
+    <a class="section active">{{ ('admin_'~content~'.delete.breadcrumb')|trans({'%name%':entity.name}) }}</a>
+{% endblock breadcrums_content %}
+
+{% form_theme form
+    '@SyliusUi/Form/theme.html.twig'
+    '@SfsCms/forms/routes_theme_semantic.html.twig'
+    '@SfsCms/forms/types_theme_semantic.html.twig'
+%}
+
+{% block content %}
+    {% include '@SfsCms/admin/content/_content_tabs.html.twig' with {'current':'delete', 'content':content, 'entity':entity} %}
+
+    <div class="ui bottom attached active tab segment">
+        {{ form_start(form,{'attr':{'class':'ui form'}}) }}
+
+        {{ ('admin_'~content~'.delete.main_warnings_raw')|trans|raw }}
+
+        {% if entity.publishedVersion %}
+            <p>{{ ('admin_'~content~'.delete.offer_backup')|trans }}</p>
+
+            <div class="ui buttons">
+                <a href="{{ url('sfs_cms_admin_content_'~content~'_export_version', {'content':entity, 'version':entity.publishedVersion}) }}" class="ui primary button">
+                    {{ ('admin_'~content~'.delete.actions.export.button')|trans }}</a>
+            </div>
+        {% endif %}
+
+        {{ ('admin_'~content~'.delete.index_warnings_raw')|trans|raw }}
+
+        {{ form_rest(form) }}
+        <div class="ui hidden divider"></div>
+        <div class="ui buttons">
+            <a href="{{ url('sfs_cms_admin_content_'~content~'_update', {'content': entity}) }}" class="ui button">{{ ('admin_'~content~'.delete.actions.cancel.button')|trans }}</a>
+            <input type="submit" value="{{ ('admin_'~content~'.delete.actions.delete.button')|trans }}" class="ui red button" />
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock content %}
