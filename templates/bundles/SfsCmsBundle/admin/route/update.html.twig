@@ -35,7 +35,10 @@
         {{ form_row(form.symfonyRoute) }}
         <div class="fields">
             <div class="eight wide field">
-                {{ form_row(form.redirectUrl) }}
+                {# Separate element so that it does not paint the row with a div. Improves visualization.  #}
+                {{ form_label(form.redirectUrl) }}
+                {{ form_widget(form.redirectUrl) }}
+                {{ form_errors(form.redirectUrl) }}
             </div>
             <div class="eight wide field">
                 {{ form_row(form.redirectType) }}
