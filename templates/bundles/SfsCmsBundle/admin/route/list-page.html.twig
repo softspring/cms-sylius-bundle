@@ -3,10 +3,12 @@
 {% for route in entities %}
     <tr>
         <td class="p-3">{{ route.id }}</td>
-        <td class="p-3">{{ route.site|sfs_cms_site_name }}</td>
+        <td class="p-3">{{ route.sites|map((site) => site|sfs_cms_site_name)|join(', ') }}</td>
         <td class="p-3">
-            {% for path in route.paths %}
-                <a href="{{ sfs_cms_route_path_url(path) }}" target="_blank">{{ sfs_cms_route_path_path(path) }}</a><br/>
+            {% for site in route.sites %}
+                {% for path in route.paths %}
+                    <a href="{{ sfs_cms_route_path_url(path, site) }}" target="_blank">{{ sfs_cms_route_path_path(path, site) }}</a><br/>
+                {% endfor %}
             {% endfor %}
         </td>
         <td class="p-3">{{ ('admin_routes.types.'~route.type~'.name')|trans }}</td>

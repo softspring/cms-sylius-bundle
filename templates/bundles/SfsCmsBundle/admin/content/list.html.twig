@@ -28,7 +28,8 @@
             {% trans_default_domain 'sfs_cms_contents' %}
 
             {% block filters %}
-                {{ form_row(filter_form.name) }}
+                {% if filterForm.name is defined %}{{ form_row(filter_form.name) }}{% endif %}
+                {% if filterForm.sites is defined %}{{ form_row(filter_form.sites) }}{% endif %}
                 <input type="button" value="search" />
             {% endblock filters %}
 
@@ -39,7 +40,7 @@
                         {% if entities.sortedBy('name', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif entities.sortedBy('name', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
                     </a>
                 </th>
-                <th class="">Site</th>
+                <th class="">Sites</th>
                 <th class="">Publicado</th>
                 <th class="">&nbsp;</th>
             {% endblock ths %}
