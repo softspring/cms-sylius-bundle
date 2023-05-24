@@ -22,8 +22,8 @@
                 <span>{{ entity.name }}</span>
             </div>
             <div class="item">
-                <div class="header">Sitio</div>
-                <span>{{ entity.site|sfs_cms_site_name }}</span>
+                <div class="header">Sitios</div>
+                <span>{{ entity.sites|map((site) => site|sfs_cms_site_name)|join(', ') }}</span>
             </div>
             <div class="item">
                 <div class="header">Published</div>
@@ -53,12 +53,14 @@
                 <h2 class="h5">Routes</h2>
                 <div class="ui list">
                     {% for route in entity.routes %}
-                    {% for path in route.paths %}
-                    <div class="item">
-                        <a href="{{ sfs_cms_route_path_url(path) }}" target="_blank">{{ sfs_cms_route_path_path(path) }} <span class="mdi mdi-18px mdi-open-in-new"></span></a>
-                        {% if path.cacheTtl %}(cache {{ path.cacheTtl }} seconds){% endif %}
-                    </div>
-                    {% endfor %}
+                        {% for site in route.sites %}
+                            {% for path in route.paths %}
+                            <div class="item">
+                                {{ site|sfs_cms_site_name }}: <a href="{{ sfs_cms_route_path_url(path, site) }}" target="_blank">{{ sfs_cms_route_path_path(path, site) }} <span class="mdi mdi-18px mdi-open-in-new"></span></a>
+                                {% if path.cacheTtl %}(cache {{ path.cacheTtl }} seconds){% endif %}
+                            </div>
+                            {% endfor %}
+                        {% endfor %}
                     {% endfor %}
                 </div>
             </div>
