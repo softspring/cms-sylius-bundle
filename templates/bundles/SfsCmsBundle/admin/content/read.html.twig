@@ -27,7 +27,13 @@
             </div>
             <div class="item">
                 <div class="header">Published</div>
-                <span>{{ entity.publishedVersion ? entity.publishedVersion.createdAt|date('H:i d-m-Y') : 'no' }}</span>
+                <span>
+                    {{ entity.publishedVersion ? entity.publishedVersion.createdAt|date('H:i d-m-Y') : 'no' }}
+                    {% if entity.publishedVersion %}
+                        <a href="{{ url('sfs_cms_admin_content_'~content~'_unpublish', {'content':entity}) }}"
+                           onclick="return confirm('{{ ('admin_'~content~'.read.actions.unpublish.confirm')|trans({'%name%':entity.name}) }}')">{{ ('admin_'~content~'.read.actions.unpublish.link')|trans({'%name%':entity.name})|lower }}</a>
+                    {% endif %}
+                </span>
             </div>
         </div>
         <div class="ui divider"></div>
