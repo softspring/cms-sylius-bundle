@@ -2,8 +2,8 @@
 
 {% extends '@SfsCms/admin_layout_semantic.html.twig' %}
 
-{% block title %}{{ ('admin_'~content~'.import_version.meta.title')|trans({'%name%':entity.name}) }}{% endblock %}
-{% block header_title %}{{ ('admin_'~content~'.import_version.meta.title')|trans({'%name%':entity.name}) }}{% endblock %}
+{% block title %}{{ ('admin_'~content~'.versions.meta.title')|trans({'%name%':entity.name}) }} {{ ('admin_'~content~'.import_version.meta.title')|trans({'%name%':entity.name}) }}{% endblock %}
+{% block header_title %}{{ ('admin_'~content~'.versions.title')|trans({'%name%':entity.name}) }}{% endblock %}
 {% block header_subtitle %}Manage your version{% endblock %}
 
 {% block breadcrums_content %}
@@ -20,7 +20,7 @@
 
     <div class="container-fluid p-3 bg-white">
         <div class="row mt-4">
-            <h1>{{ ('admin_'~content~'.versions.title')|trans({'%name%':entity.name}) }}</h1>
+            <h1>{{ ('admin_'~content~'.import_version.meta.title')|trans({'%name%':entity.name}) }}</h1>
 
             {{ form_start(form,{'attr':{'class':'ui form'}}) }}
             {{ form_errors(form) }}
