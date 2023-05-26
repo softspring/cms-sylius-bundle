@@ -1,8 +1,18 @@
 {% trans_default_domain 'sfs_cms_admin' %}
 {% extends '@SfsCms/admin_layout_semantic.html.twig' %}
-{% block title %}{{ 'admin_blocks.read.meta.title'|trans }}{% endblock %}
+{% block title %}{{ block.name|default('') }}{% endblock %}
+
+{% block header_title %}{{ block.name|default('') }}{% endblock %}
 {% block header_icon %}th{% endblock %}
 
 {% block content %}
-    <h1 class="h3 mb-4">{{ block.name|default('') }}</h1>
+<div class="ui hidden divider"></div>
+<div class="ui segment">
+    <div class="ui list">
+        <div class="item">
+            <div class="header">Name </div>
+            <span>{{ block.name|default('') }}</span>
+        </div>
+    </div>
+</div>
 {% endblock content %}

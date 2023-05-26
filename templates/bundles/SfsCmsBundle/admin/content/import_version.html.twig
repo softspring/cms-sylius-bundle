@@ -2,32 +2,33 @@
 
 {% extends '@SfsCms/admin_layout_semantic.html.twig' %}
 
-{% block title %}{{ ('admin_'~content~'.import_version.meta.title')|trans({'%name%':entity.name}) }}{% endblock %}
+{% block title %}{{ ('admin_'~content~'.versions.meta.title')|trans({'%name%':entity.name}) }} {{ ('admin_'~content~'.import_version.meta.title')|trans({'%name%':entity.name}) }}{% endblock %}
+{% block header_title %}{{ ('admin_'~content~'.versions.title')|trans({'%name%':entity.name}) }}{% endblock %}
+{% block header_subtitle %}Manage your version{% endblock %}
 
 {% block breadcrums_content %}
     {{ parent() }}
-    <li class="breadcrumb-item"><a href="{{ url('sfs_cms_admin_content_'~content~'_list') }}">{{ ('admin_'~content~'.list.breadcrumb')|trans }}</a></li>
-    <li class="breadcrumb-item"><a href="{{ url('sfs_cms_admin_content_'~content~'_versions', {'content':entity}) }}">{{ ('admin_'~content~'.versions.breadcrumb')|trans({'%name%':entity.name}) }}</a></li>
-    <li class="breadcrumb-item active" aria-current="content">{{ ('admin_'~content~'.import_version.breadcrumb')|trans({'%name%':entity.name}) }}</li>
+    <a class="section" href="{{ url('sfs_cms_admin_content_'~content~'_list') }}">{{ ('admin_'~content~'.list.breadcrumb')|trans }}</a>
+    <i class="right chevron icon divider"></i>
+    <a class="section" href="{{ url('sfs_cms_admin_content_'~content~'_versions', {'content':entity}) }}">{{ ('admin_'~content~'.versions.breadcrumb')|trans({'%name%':entity.name}) }}</a>
+    <i class="right chevron icon divider"></i>
+    <span class="section active">{{ ('admin_'~content~'.import_version.breadcrumb')|trans({'%name%':entity.name}) }}</span>
 {% endblock breadcrums_content %}
 
 {% block content %}
-    <h1 class="h2">{{ ('admin_'~content~'.versions.title')|trans({'%name%':entity.name}) }}</h1>
-
-    {% include '@SfsCms/admin/content/_content_tabs.html.twig' with {'current':'versions', 'content':content, 'entity':entity} %}
+   {% include '@SfsCms/admin/content/_content_tabs.html.twig' with {'current':'versions', 'content':content, 'entity':entity} %}
 
     <div class="container-fluid p-3 bg-white">
         <div class="row mt-4">
-            <h2 class="h3">{{ ('admin_'~content~'.import_version.title')|trans({'%name%':entity.name}) }}</h2>
+            <h1>{{ ('admin_'~content~'.import_version.meta.title')|trans({'%name%':entity.name}) }}</h1>
 
-            {{ form_start(form) }}
+            {{ form_start(form,{'attr':{'class':'ui form'}}) }}
             {{ form_errors(form) }}
-
-
             {{ form_rest(form) }}
-            <div class="d-flex justify-content-end align-items-center">
-                <a href="{{ url('sfs_cms_admin_content_'~content~'_versions', {'content':entity}) }}" class="btn btn-outline-secondary">{{ ('admin_'~content~'.import_version.actions.cancel.button')|trans }}</a>
-                <input type="submit" value="{{ ('admin_'~content~'.import_version.actions.import.button')|trans }}" class="btn btn-primary ms-3" />
+            <div class="ui hidden divider"></div>
+            <div class="ui buttons">
+                <button class="ui labeled icon primary button" type="submit"><i class="upload icon"></i> {{ ('admin_'~content~'.import_version.actions.import.button')|trans }}</button>
+                <a href="{{ url('sfs_cms_admin_content_'~content~'_versions', {'content':entity}) }}" class="ui button">{{ ('admin_'~content~'.import_version.actions.cancel.button')|trans }}</a>
             </div>
 
             {{ form_end(form) }}

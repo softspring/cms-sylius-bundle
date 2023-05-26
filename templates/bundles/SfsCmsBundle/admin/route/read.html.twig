@@ -1,26 +1,48 @@
 {% trans_default_domain 'sfs_cms_admin' %}
 {% extends '@SfsCms/admin_layout_semantic.html.twig' %}
 {% block title %}{{ 'admin_routes.read.meta.title'|trans }}{% endblock %}
+
 {% block header_icon %}vertically linkify{% endblock %}
-{% block header_title %}{{ 'admin_routes.read.title'|trans }}{% endblock %}
+{% block header_title %}{{ route.id }}{% endblock %}
 {% block header_subtitle %}Manage content route{% endblock %}
 
 {% block breadcrums_content %}
     {{ parent() }}
     <a class="section" href="{{ url('sfs_cms_admin_routes_list') }}">{{ 'admin_routes.list.breadcrumb'|trans }}</a><i class="right chevron icon divider"></i>
-    <span class="section active" aria-current="content">{{ 'admin_routes.read.breadcrumb'|trans({'%name%': route.name|default(route.id) }) }}</span>
+    <span class="section active" aria-current="content">{{ route.id }}</span>
 {% endblock breadcrums_content %}
 
 {% block content %}
 
     <div class="ui hidden divider"></div>
     <div class="ui segment">
-
-        {% for site in route.sites %}
-            {% for path in route.paths %}
-                <a href="{{ sfs_cms_route_path_url(path, site) }}" target="_blank">{{ sfs_cms_route_path_path(path, site) }}</a><br/>
+        <div class="ui list">
+            <div class="item">
+                <div class="header">Route </div>
+                <span>{{ route.id }}</span>
+            </div>
+            <div class="item">
+                <div class="header">Sites </div>
+                <span>{{ route.sites|map((site) => site|sfs_cms_site_name)|join(', ') }}</span>
+            </div>
+            <div class="item">
+                <div class="header">Type</div>
+                <span>{{ ('admin_routes.types.'~route.type~'.name')|trans }}</span>
+            </div>
+            <div class="item">
+                <div class="header">Page</div>
+                <span>{{ route.content.name|default('') }}</span>
+            </div>
+        <div class="item">
+            <div class="header">Routes by sites</div>
+            <ul class="ui bulleted list">
+            {% for site in route.sites %}
+                {% for path in route.paths %}
+                    <li class="item"><a href="{{ sfs_cms_route_path_url(path, site) }}" target="_blank">{{ sfs_cms_route_path_path(path, site) }}</a></li>
+                {% endfor %}
             {% endfor %}
-        {% endfor %}
+            </ul>
+        </div>
 
     </div>
 {% endblock content %}

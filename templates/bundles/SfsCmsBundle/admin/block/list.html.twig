@@ -4,7 +4,7 @@
 
 {% block header_icon %}th{% endblock %}
 
-{% form_theme filterForm 'bootstrap_5_horizontal_layout.html.twig' %}
+{#{% form_theme filterForm 'bootstrap_5_horizontal_layout.html.twig' %}#}
 
 {% block title %}{{ 'admin_blocks.list.meta.title'|trans }}{% endblock %}
 {% block header_title %}{{ 'admin_blocks.list.title'|trans }}{% endblock %}
@@ -34,8 +34,18 @@
         {% trans_default_domain 'sfs_cms_admin' %}
 
         {% block filters %}
-            {{ form_row(filter_form) }}
-            <input type="button" value="search" />
+            <div class="ui form">
+                <div class="inline fields">
+                    <div class="field">
+                        {{ form_row(filter_form) }}
+                    </div>
+                    <div class="field">
+                        <button class="ui blue labeled icon button" type="submit">
+                            <i class="icon search"></i> Filter
+                        </button>
+                    </div>
+                </div>
+            </div>
         {% endblock filters %}
 
         {% block ths %}

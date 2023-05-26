@@ -28,9 +28,26 @@
             {% trans_default_domain 'sfs_cms_contents' %}
 
             {% block filters %}
-                {% if filterForm.name is defined %}{{ form_row(filter_form.name) }}{% endif %}
-                {% if filterForm.sites is defined %}{{ form_row(filter_form.sites) }}{% endif %}
-                <input type="button" value="search" />
+
+                <div class="ui form">
+                    <div class="inline fields">
+                        {% if filterForm.name is defined %}
+                        <div class="field">
+                            {{ form_row(filter_form.name) }}
+                        </div>
+                        {% endif %}
+                        {% if filterForm.sites is defined %}
+                        <div class="field">
+                            {{ form_row(filter_form.sites) }}
+                        </div>
+                        {% endif %}
+                        <div class="field">
+                            <button class="ui blue labeled icon button" type="submit">
+                                <i class="icon search"></i> Filter
+                            </button>
+                        </div>
+                    </div>
+                </div>
             {% endblock filters %}
 
             {% block ths %}

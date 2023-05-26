@@ -1,6 +1,8 @@
 {% trans_default_domain 'sfs_cms_admin' %}
 {% extends '@SfsCms/admin_layout_semantic.html.twig' %}
 {% block title %}{{ 'admin_blocks.create.meta.title'|trans }}{% endblock %}
+
+{% block header_title %}{{ 'admin_blocks.create.meta.title'|trans }}{% endblock %}
 {% block header_icon %}th{% endblock %}
 
 {% form_theme form
@@ -16,7 +18,6 @@
 {% endblock breadcrums_content %}
 
 {% block content %}
-    <h1 class="h3">{{ 'admin_blocks.create.title'|trans }}</h1>
 
     <div class="ui hidden divider"></div>
     <div class="ui segment">
