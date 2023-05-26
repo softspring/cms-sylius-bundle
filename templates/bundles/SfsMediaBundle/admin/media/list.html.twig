@@ -39,12 +39,26 @@
                 Filters
             </div>
             <div class="content">
-                {{ form_start(filterForm) }}
-                {% if filterForm.name is defined %}<div class="col">{{ form_row(filterForm.name, {'row_class':'form-floating'}) }}</div>{% endif %}
-                {% if filterForm.type is defined %}<div class="col">{{ form_row(filterForm.type, {'row_class':'form-floating'}) }}</div>{% endif %}
-                <button type="submit" class="btn btn-primary">Filter </button>
-                {{ form_widget(filterForm) }}
-                {{ form_rest(filterForm) }}
+                {{ form_start(filterForm, {'attr':{'class':'ui form'}}) }}
+                    <div class="inline fields">
+                        {% if filterForm.name is defined %}
+                            <div class="field">
+                                {{ form_row(filterForm.name, {'row_class':'form-floating'}) }}
+                            </div>
+                        {% endif %}
+                        {% if filterForm.type is defined %}
+                            <div class="field">
+                                {{ form_row(filterForm.type, {'row_class':'form-floating'}) }}
+                            </div>
+                        {% endif %}
+                        {{ form_widget(filterForm) }}
+                        {{ form_rest(filterForm) }}
+                        <div class="field">
+                            <button class="ui blue labeled icon button" type="submit">
+                                <i class="icon search"></i> Filter
+                            </button>
+                        </div>
+                    </div>
                 {{ form_end(filterForm) }}
             </div>
         </div>

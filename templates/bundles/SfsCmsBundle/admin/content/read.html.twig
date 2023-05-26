@@ -27,13 +27,21 @@
             </div>
             <div class="item">
                 <div class="header">Published</div>
-                <span>
-                    {{ entity.publishedVersion ? entity.publishedVersion.createdAt|date('H:i d-m-Y') : 'no' }}
-                    {% if entity.publishedVersion %}
-                        <a href="{{ url('sfs_cms_admin_content_'~content~'_unpublish', {'content':entity}) }}"
-                           onclick="return confirm('{{ ('admin_'~content~'.read.actions.unpublish.confirm')|trans({'%name%':entity.name}) }}')">{{ ('admin_'~content~'.read.actions.unpublish.link')|trans({'%name%':entity.name})|lower }}</a>
-                    {% endif %}
+                {% if entity.publishedVersion %}
+                <span class="ui green basic label">
+                    Yes, {{ entity.publishedVersion.createdAt|date('H:i d-m-Y') }}
                 </span>
+                {% else %}
+                    <span class="ui red basic label">
+                    No published
+                    </span>
+                {% endif %}
+                {% if entity.publishedVersion %}
+                    <a href="{{ url('sfs_cms_admin_content_'~content~'_unpublish', {'content':entity}) }}"
+                       class="ui mini negative button"
+                       onclick="return confirm('{{ ('admin_'~content~'.read.actions.unpublish.confirm')|trans({'%name%':entity.name}) }}')">
+                        <i class="eye slash icon"></i>{{ ('admin_'~content~'.read.actions.unpublish.link')|trans({'%name%':entity.name})|lower }}</a>
+                {% endif %}
             </div>
         </div>
         <div class="ui divider"></div>

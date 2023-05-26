@@ -20,9 +20,16 @@
 
     <div class="ui bottom attached active tab segment">
         {# TODO restrict by permission #}
-        <div class="float-end">
-            <a class="btn btn-outline-secondary" href="{{ url('sfs_cms_admin_content_'~content~'_import_version', {'content':entity, 'back':'versions'}) }}">{{ ('admin_'~content~'.versions.actions.import_version.link')|trans }}</a>
-            <a class="btn btn-outline-secondary" href="{{ url('sfs_cms_admin_content_'~content~'_cleanup_versions', {'content':entity, 'back':'versions'}) }}">{{ ('admin_'~content~'.versions.actions.cleanup_versions.link')|trans }}</a>
+        <div class="ui buttons">
+            <a class="ui blue labeled icon button" href="{{ url('sfs_cms_admin_content_'~content~'_import_version', {'content':entity, 'back':'versions'}) }}">
+                <i class="icon upload"></i>
+                {{ ('admin_'~content~'.versions.actions.import_version.link')|trans }}
+            </a>
+            <a class="ui red labeled icon button" href="{{ url('sfs_cms_admin_content_'~content~'_cleanup_versions', {'content':entity, 'back':'versions'}) }}">
+                <i class="icon eraser"></i>
+                {{ ('admin_'~content~'.versions.actions.cleanup_versions.link')|trans }}
+            </a>
+
         </div>
 
         <table class="ui celled table">
