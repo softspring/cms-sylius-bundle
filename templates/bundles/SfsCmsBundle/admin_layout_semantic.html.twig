@@ -43,4 +43,7 @@
     </div>
 {% endblock %}
 
-
+{% block javascripts %}
+    {{ sylius_template_event('sylius.admin.layout.javascripts') }}
+    {{ encore_entry_script_tags('admin-entry-cms', null, 'admin') }}
+{% endblock %}

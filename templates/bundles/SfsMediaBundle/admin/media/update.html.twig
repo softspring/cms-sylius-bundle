@@ -2,6 +2,9 @@
 {% extends '@SfsMedia/admin_layout_semantic.html.twig' %}
 {% block title %}{{ 'admin_medias.update.meta.title'|trans({'%type%':type_config.name}) }}{% endblock %}
 
+{% block header_title %}{{ 'admin_medias.update.meta.title'|trans({'%type%':type_config.name}) }}{% endblock %}
+{% block header_subtitle %}Manage content media{% endblock %}
+
 {% form_theme form
     '@SyliusUi/Form/theme.html.twig'
     '@SfsMedia/forms/media_type_theme_semantic.html.twig'
@@ -14,10 +17,10 @@
 {% endblock breadcrums_content %}
 
 {% block content %}
-    <h1 class="h3">{{ 'admin_medias.update.title'|trans({'%type%':type_config.name}) }}</h1>
 
     <div class="ui hidden divider"></div>
     <div class="ui segment">
+        <h1>{{ 'admin_medias.update.title'|trans({'%type%':type_config.name}) }}</h1>
         {{ form_start(form,{'attr':{'class':'ui form'}}) }}
 
         {{ form_row(form.name) }}

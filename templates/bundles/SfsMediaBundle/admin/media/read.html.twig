@@ -2,6 +2,9 @@
 {% extends '@SfsMedia/admin_layout_semantic.html.twig' %}
 {% block title %}{{ 'admin_medias.read.meta.title'|trans({'%name%': media.name }) }}{% endblock %}
 
+{% block header_title %}{{ 'admin_medias.read.title'|trans({'%name%': media.name }) }}{% endblock %}
+{% block header_subtitle %}Manage content media{% endblock %}
+
 {% block breadcrums_content %}
     {{ parent() }}
     <a class="section" href="{{ url('sfs_media_admin_medias_list') }}">{{ 'admin_medias.list.breadcrumb'|trans }}</a><i class="right chevron icon divider"></i>
@@ -27,8 +30,6 @@
         {{ (bytes / terabyte)|number_format(2, '.') ~ ' TiB' }}
     {% endif %}
 {%- endmacro -%}
-
-{% block header_title %}{{ 'admin_medias.read.title'|trans({'%name%': media.name }) }}{% endblock %}
 
 {% block content %}
 

@@ -2,13 +2,21 @@
 
 {% for route in entities %}
     <tr>
-        <td class="p-3">{{ route.id }}</td>
-        <td class="p-3">{{ route.sites|map((site) => site|sfs_cms_site_name)|join(', ') }}</td>
-        <td class="p-3">{{ ('admin_routes.types.'~route.type~'.name')|trans }}</td>
-        <td class="p-3">{{ route.content.name|default('') }}</td>
-        <td class="p-3 text-end">
-            <a href="{{ url('sfs_cms_admin_routes_read', {'route':route}) }}">{{ 'admin_routes.list.actions.details.link'|trans }}</a>
-            <a href="{{ url('sfs_cms_admin_routes_update', {'route':route}) }}">{{ 'admin_routes.list.actions.update.link'|trans }}</a>
+        <td>{{ route.id }}</td>
+        <td>{{ route.sites|map((site) => site|sfs_cms_site_name)|join(', ') }}</td>
+        <td>{{ ('admin_routes.types.'~route.type~'.name')|trans }}</td>
+        <td>{{ route.content.name|default('') }}</td>
+        <td class="text-end">
+            <div class="ui buttons">
+                <a class="ui labeled icon button" href="{{ url('sfs_cms_admin_routes_read', {'route':route}) }}">
+                    <i class="icon search"></i>
+                    {{ 'admin_routes.list.actions.details.link'|trans }}
+                </a>
+                <a class="ui labeled icon button" href="{{ url('sfs_cms_admin_routes_update', {'route':route}) }}">
+                    <i class="icon pencil"></i>
+                    {{ 'admin_routes.list.actions.update.link'|trans }}
+                </a>
+            </div>
         </td>
     </tr>
 {% endfor %}
