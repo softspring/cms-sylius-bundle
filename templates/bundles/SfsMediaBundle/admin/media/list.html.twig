@@ -13,7 +13,7 @@
 {% endblock breadcrums_content %}
 
 {% block header_buttons %}
-    {% if is_granted('ROLE_SFS_MEDIA_ADMIN_MEDIAS_CREATE') and media_types|length %}
+    {% if is_granted('PERMISSION_SFS_MEDIA_ADMIN_MEDIAS_CREATE') and media_types|length %}
         <div class="ui floating labeled icon dropdown button teal">
             <i class="plus icon"></i>
             <span class="text">{{ 'admin_medias.list.actions.create.link'|trans }}</span>

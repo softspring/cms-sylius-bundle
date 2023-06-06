@@ -2,7 +2,7 @@
 
 <div class="ui four cards">
         {% for media in entities %}
-                    {% if is_granted('ROLE_SFS_MEDIA_ADMIN_MEDIAS_DETAILS', media) %}
+                    {% if is_granted('PERMISSION_SFS_MEDIA_ADMIN_MEDIAS_DETAILS', media) %}
                     <a href="{{ url('sfs_media_admin_medias_read', {'media':media.id}) }}" class="card">
                         {% endif %}
                         <div class="image" style="min-height: 200px; display: flex; align-items: center; justify-content: center;">
@@ -12,7 +12,7 @@
                                 {{ media|sfs_media_render_image(['_thumbnail'], {'class':'img-fluid', 'style':' max-height: 200px; max-width: 100%; width: auto;'}) }}
                             {% endif %}
                         </div>
-                        {% if is_granted('ROLE_SFS_MEDIA_ADMIN_MEDIAS_DETAILS', media) %}
+                        {% if is_granted('PERMISSION_SFS_MEDIA_ADMIN_MEDIAS_DETAILS', media) %}
                         <div class="content">
                             <p class="header"><small><strong>{{ media.name }}</strong></small></p>
                         </div>

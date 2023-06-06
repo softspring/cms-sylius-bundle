@@ -9,13 +9,14 @@
 
 {% form_theme form
     '@SyliusUi/Form/theme.html.twig'
-    '@SfsCms/forms/routes_theme_semantic.html.twig'
-%}
+    '@SfsCms/forms/routes_theme_semantic.html.twig' %}
 
 {% block breadcrums_content %}
     {{ parent() }}
-    <a class="section" href="{{ url('sfs_cms_admin_routes_list') }}">{{ 'admin_routes.list.breadcrumb'|trans }}</a><i class="right chevron icon divider"></i>
-    <span class="section active" aria-current="content">{{ 'admin_routes.update.breadcrumb'|trans({'%name%': route.name|default(route.id) }) }}</span>
+    <a class="section" href="{{ url('sfs_cms_admin_routes_list') }}">{{ 'admin_routes.list.breadcrumb'|trans }}</a><i
+    class="right chevron icon divider"></i>
+    <span class="section active"
+          aria-current="content">{{ 'admin_routes.update.breadcrumb'|trans({'%name%': route.name|default(route.id) }) }}</span>
 {% endblock breadcrums_content %}
 
 {% block content %}
@@ -28,31 +29,43 @@
                 {{ form_row(form.id) }}
             </div>
             <div class="six wide field">
-                {{ form_row(form.type) }}
+                {{ form_row(form.parent) }}
             </div>
             <div class="six wide field">
-                {{ form_row(form.content) }}
+                {{ form_row(form.type) }}
             </div>
         </div>
-        {{ form_row(form.symfonyRoute) }}
+
         <div class="fields">
             <div class="eight wide field">
-                {# Separate element so that it does not paint the row with a div. Improves visualization.  #}
-                {{ form_label(form.redirectUrl) }}
-                {{ form_widget(form.redirectUrl) }}
-                {{ form_errors(form.redirectUrl) }}
+                <div>
+                    {{ form_row(form.content) }}
+                </div>
+                <div>
+                    {{ form_widget(form.symfonyRoute) }}
+                </div>
+                <div>
+                    {# Separate element so that it does not paint the row with a div. Improves visualization.  #}
+                    {{ form_label(form.redirectUrl) }}
+                    {{ form_widget(form.redirectUrl) }}
+                    {{ form_errors(form.redirectUrl) }}
+                </div>
             </div>
             <div class="eight wide field">
                 {{ form_row(form.redirectType) }}
             </div>
         </div>
 
+        {{ form_row(form.sites) }}
+        {{ form_row(form.paths) }}
 
         {{ form_rest(form) }}
         <div class="ui hidden divider"></div>
         <div class="ui buttons">
-            <button class="ui labeled icon primary button" type="submit"><i class="plus icon"></i>{{ 'admin_routes.update.actions.update.button'|trans }}</button>
-            <a href="{{ url('sfs_cms_admin_routes_list') }}" class="ui button">{{ 'admin_routes.update.actions.cancel.button'|trans }}</a>
+            <button class="ui labeled icon primary button" type="submit"><i
+                    class="plus icon"></i>{{ 'admin_routes.update.actions.update.button'|trans }}</button>
+            <a href="{{ url('sfs_cms_admin_routes_list') }}"
+               class="ui button">{{ 'admin_routes.update.actions.cancel.button'|trans }}</a>
         </div>
         {{ form_end(form) }}
     </div>
