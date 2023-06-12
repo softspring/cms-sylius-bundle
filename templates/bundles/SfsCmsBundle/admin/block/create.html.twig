@@ -39,13 +39,15 @@
         </div>
         {% endif %}
 
+        {% if block_config.form_template|default(false) %}
+            {% include block_config.form_template %}
+        {% endif  %}
+
         <div class="fields">
             <div class="six wide field">
-                {{ form_widget(form.data) }}
+                {{ form_rest(form) }}
             </div>
         </div>
-
-        {{ form_rest(form) }}
 
         <div class="ui hidden divider"></div>
         <div class="ui buttons">
