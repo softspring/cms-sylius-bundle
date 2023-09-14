@@ -7,7 +7,7 @@
     "prefer-stable": true,
     "require": {
         "php": ">=8.1",
-        "softspring/cms-bundle": "^5.0",
+        "softspring/cms-bundle": "^5.1",
         "sylius/theme-bundle": "^2.1.1 || ^2.3",
         "sylius/ui-bundle": "^1.11"
     },
