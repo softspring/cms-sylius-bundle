@@ -8,7 +8,7 @@
             <i class="filter icon"></i>
             Filters
         </div>
-        <div class="content">
+        <div class="content {{ filter_form.vars.submitted ? 'active' : '' }}">
             {{ form_start(filter_form) }}
             {% block filters %}
                 {{ form_widget(filter_form) }}

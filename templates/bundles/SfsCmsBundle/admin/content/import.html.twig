@@ -2,14 +2,14 @@
 
 {% extends '@SfsCms/admin_layout_semantic.html.twig' %}
 
-{% block title %}{{ ('admin_'~content~'.import.meta.title')|trans }}{% endblock %}
-{% block header_title %}{{ ('admin_'~content~'.import.title')|trans }}{% endblock %}
+{% block title %}{{ ('admin_'~content_type~'.import.meta.title')|trans }}{% endblock %}
+{% block header_title %}{{ ('admin_'~content_type~'.import.title')|trans }}{% endblock %}
 {% block header_subtitle %}Manage your content pages{% endblock %}
 {% block breadcrums_content %}
     {{ parent() }}
-    <a class="section" href="{{ url('sfs_cms_admin_content_'~content~'_list') }}">{{ ('admin_'~content~'.list.breadcrumb')|trans }}</a>
+    <a class="section" href="{{ url('sfs_cms_admin_content_'~content_type~'_list') }}">{{ ('admin_'~content_type~'.list.breadcrumb')|trans }}</a>
     <i class="right chevron icon divider"></i>
-    <a class="section active">{{ ('admin_'~content~'.import.breadcrumb')|trans }}</a>
+    <a class="section active">{{ ('admin_'~content_type~'.import.breadcrumb')|trans }}</a>
 {% endblock breadcrums_content %}
 
 {% form_theme form
@@ -24,8 +24,8 @@
         {{ form_rest(form) }}
         <div class="ui hidden divider"></div>
         <div class="ui buttons">
-            <button class="ui labeled icon primary button" type="submit"><i class="save icon"></i> {{ ('admin_'~content~'.import.actions.import.button')|trans }}</button>
-            <a href="{{ url('sfs_cms_admin_content_'~content~'_list') }}" class="ui button">{{ ('admin_'~content~'.import.actions.cancel.button')|trans }}</a>
+            <button class="ui labeled icon primary button" type="submit"><i class="save icon"></i> {{ ('admin_'~content_type~'.import.actions.import.button')|trans }}</button>
+            <a href="{{ url('sfs_cms_admin_content_'~content_type~'_list') }}" class="ui button">{{ ('admin_'~content_type~'.import.actions.cancel.button')|trans }}</a>
         </div>
         {{ form_end(form) }}
     </div>

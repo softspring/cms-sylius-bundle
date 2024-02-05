@@ -2,44 +2,53 @@
 {% extends '@SfsCms/admin_layout_semantic.html.twig' %}
 {% set sfs_components_theme = 'semantic-ui' %}
 
-{#{% form_theme filterForm 'bootstrap_5_horizontal_layout.html.twig' %}#}
+{% block title %}{{ ('admin_'~content_type~'.list.meta.title')|trans }}{% endblock %}
 
-{% block title %}{{ ('admin_'~content~'.list.meta.title')|trans }}{% endblock %}
-{% block header_title %}{{ ('admin_'~content~'.list.title')|trans }}{% endblock %}
+{% block header_title %}{{ ('admin_'~content_type~'.list.title')|trans }}{% endblock %}
 {% block header_subtitle %}Manage your content pages{% endblock %}
+
 {% block breadcrums_content %}
-    <a class="active section">{{ ('admin_'~content~'.list.breadcrumb')|trans }}</a>
+    <a class="active section">{{ ('admin_'~content_type~'.list.breadcrumb')|trans }}</a>
 {% endblock breadcrums_content %}
 
 {% block header_buttons %}
-    <a class="ui labeled icon button  primary " href="{{ url('sfs_cms_admin_content_'~content~'_create') }}">
-        <i class="icon plus"></i>
-        {{ ('admin_'~content~'.list.actions.create.link')|trans }}
-    </a>
-    <a class="ui labeled icon button  primary " href="{{ url('sfs_cms_admin_content_'~content~'_import') }}">
-        <i class="icon upload"></i>
-        {{ ('admin_'~content~'.list.actions.import.link')|trans }}
-    </a>
+    {% if not content_config.admin.create.is_granted or is_granted(content_config.admin.create.is_granted) %}
+        <a class="ui labeled icon button  primary " href="{{ url('sfs_cms_admin_content_'~content_type~'_create') }}">
+            <i class="icon plus"></i>
+            {{ ('admin_'~content_type~'.list.actions.create.link')|trans }}
+        </a>
+    {% endif %}
+
+    {% if not content_config.admin.import.is_granted or is_granted(content_config.admin.import.is_granted) %}
+        <a class="ui labeled icon button  primary " href="{{ url('sfs_cms_admin_content_'~content_type~'_import') }}">
+            <i class="icon upload"></i>
+            {{ ('admin_'~content_type~'.list.actions.import.link')|trans }}
+        </a>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
     {% block table %}
-        {% embed '@SfsComponents/paginator/table.html.twig' with {'collection':entities, 'filter_form':filterForm, 'pagination_route': 'sfs_cms_admin_content_'~content~'_list', 'classes':'table ui celled'} %}
+        {% embed '@SfsComponents/paginator/table.html.twig' with {'collection':entities, 'filter_form':filterForm, 'pagination_route': 'sfs_cms_admin_content_'~content_type~'_list', 'classes':'table ui celled'} %}
             {% trans_default_domain 'sfs_cms_contents' %}
 
             {% block filters %}
-
                 <div class="ui form">
                     <div class="inline fields">
                         {% if filterForm.name is defined %}
-                        <div class="field">
-                            {{ form_row(filter_form.name) }}
-                        </div>
+                            <div class="field">
+                                {{ form_row(filter_form.name) }}
+                            </div>
                         {% endif %}
                         {% if filterForm.sites is defined %}
-                        <div class="field">
-                            {{ form_row(filter_form.sites) }}
-                        </div>
+                            <div class="field">
+                                {{ form_row(filter_form.sites, {'attr':{'onchange':'submit()'}}) }}
+                            </div>
+                        {% endif %}
+                        {% if filterForm.sites is defined %}
+                            <div class="field">
+                                {{ form_row(filter_form.status, {'attr':{'onchange':'submit()'}}) }}
+                            </div>
                         {% endif %}
                         <div class="field">
                             <button class="ui blue labeled icon button" type="submit">
@@ -53,12 +62,15 @@
             {% block ths %}
                 <th scope="col">
                     <a href="{{ entities.sortToggleUrl(app.request, 'name') }}" class="text-dark">
-                        {{ ('admin_'~content~'.list.fields.name.header')|trans }}
-                        {% if entities.sortedBy('name', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif entities.sortedBy('name', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
+                        {{ ('admin_'~content_type~'.list.fields.name.header')|trans }}
+                        {% if entities.sortedBy('name', 'asc') %}<i
+                            class="bi bi-caret-up-fill"></i>{% elseif entities.sortedBy('name', 'desc') %}<i
+                            class="bi bi-caret-down-fill"></i>{% endif %}
                     </a>
                 </th>
-                <th class="">Sites</th>
-                <th class="">Publicado</th>
+                <th class="">{{ ('admin_'~content_type~'.list.fields.site.header')|trans }}</th>
+                <th class="">{{ ('admin_'~content_type~'.list.fields.status.header')|trans }}</th>
+                <th class="">{{ ('admin_'~content_type~'.list.fields.publishedAt.header')|trans }}</th>
                 <th class="">&nbsp;</th>
             {% endblock ths %}
 
@@ -67,12 +79,25 @@
             {% endblock tbody %}
 
             {% block empty_message %}
-                <p>{{ empty_message|default('The list is empty') }}</p>
-
-                <a class="ui labeled icon button  primary " href="{{ url('sfs_cms_admin_content_'~content~'_create') }}">
-                    <i class="icon plus"></i>
-                    {{ ('admin_'~content~'.list.actions.create.link')|trans }}
-                </a>
+                {% if filterForm.vars.submitted %}
+                    <p>
+                        {{ ('admin_'~content_type~'.list.empty.clean_filters')|trans({'%url%': url('sfs_cms_admin_content_'~content_type~'_list')})|raw }}
+                    </p>
+                {% else %}
+                    <p>
+                        {% if not content_config.admin.create.is_granted or is_granted(content_config.admin.create.is_granted) %}
+                            {{ ('admin_'~content_type~'.list.empty.create_first_content_raw')|trans({
+                                '%create_link%': url('sfs_cms_admin_content_'~content_type~'_create'),
+                                '%import_link%': url('sfs_cms_admin_content_'~content_type~'_import'),
+                            })|raw }}
+                        {% else %}
+                            {{ ('admin_'~content_type~'.list.empty.can_not_create_content')|trans }}
+                        {% endif %}
+                    </p>
+                    <p>
+                        {{ ('admin_'~content_type~'.list.empty.go_to_doc_raw')|trans|raw }}
+                    </p>
+                {% endif %}
             {% endblock empty_message %}
         {% endembed %}
     {% endblock table %}

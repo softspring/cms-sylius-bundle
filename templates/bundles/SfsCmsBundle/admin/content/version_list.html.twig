@@ -1,0 +1,54 @@
+{% trans_default_domain 'sfs_cms_contents' %}
+
+{% extends '@SfsCms/admin_layout_semantic.html.twig' %}
+
+{% block title %}{{ ('admin_'~content_type~'.versions.meta.title')|trans({'%name%':entity.name}) }}{% endblock %}
+
+{% block header_title %}{{ ('admin_'~content_type~'.versions.title')|trans({'%name%':entity.name}) }}{% endblock %}
+{% block header_subtitle %}Manage your page{% endblock %}
+
+{% block breadcrums_content %}
+    {{ parent() }}
+    <a class="section" href="{{ url('sfs_cms_admin_content_'~content_type~'_list') }}">{{ ('admin_'~content_type~'.list.breadcrumb')|trans }}</a>
+    <i class="right chevron icon divider"></i>
+    <a class="section" href="{{ url('sfs_cms_admin_content_'~content_type~'_list') }}">{{ ('admin_'~content_type~'.list.breadcrumb')|trans }}</a>
+    <i class="right chevron icon divider"></i>
+    <a class="section active">{{ ('admin_'~content_type~'.versions.breadcrumb')|trans({'%name%':entity.name}) }}</a>
+{% endblock breadcrums_content %}
+
+{% block content %}
+    {% include ['@content/'~content_type~'/admin/_content_tabs.html.twig', '@SfsCms/admin/content/_content_tabs.html.twig']  with {'current':'versions', 'content_type':content_type, 'entity':entity} %}
+
+    <div class="ui bottom attached active tab segment">
+        {# TODO restrict by permission #}
+        <div class="ui buttons">
+            {% if not content_config.admin.version_import.is_granted or is_granted(content_config.admin.version_import.is_granted, entity) %}
+            <a class="ui blue labeled icon button" href="{{ url('sfs_cms_admin_content_'~content_type~'_import_version', {'content':entity, 'back':'versions'}) }}">
+                <i class="icon upload"></i>
+                {{ ('admin_'~content_type~'.versions.actions.import_version.link')|trans }}
+            </a>
+            {% else %}
+                <a class="ui blue labeled icon button disabled" title="{{ ('admin_'~content_type~'.versions.actions.import_version.denied')|trans }}">
+                    <i class="icon upload"></i>
+                    {{ ('admin_'~content_type~'.versions.actions.import_version.link')|trans }}
+                </a>
+            {% endif %}
+
+            {% if not content_config.admin.version_cleanup.is_granted or is_granted(content_config.admin.version_cleanup.is_granted, entity) %}
+            <a class="ui red labeled icon button" href="{{ url('sfs_cms_admin_content_'~content_type~'_cleanup_versions', {'content':entity, 'back':'versions'}) }}">
+                <i class="icon eraser"></i>
+                {{ ('admin_'~content_type~'.versions.actions.cleanup_versions.link')|trans }}
+            </a>
+            {% else %}
+                <a class="ui red labeled icon button disabled" title="{{ ('admin_'~content_type~'.versions.actions.cleanup_versions.denied')|trans }}">
+                    <i class="icon eraser"></i>
+                    {{ ('admin_'~content_type~'.versions.actions.cleanup_versions.link')|trans }}
+                </a>
+            {% endif %}
+
+        </div>
+
+        {% include ['@content/'~content_type~'/admin/_version_list_table.html.twig', '@SfsCms/admin/content/_version_list_table.html.twig'] with {'versions': entity.versions} %}
+    </div>
+
+{% endblock content %}

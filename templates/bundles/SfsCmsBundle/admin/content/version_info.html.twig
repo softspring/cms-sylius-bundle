@@ -1,0 +1,100 @@
+{% trans_default_domain 'sfs_cms_contents' %}
+
+{% extends '@SfsCms/admin_layout_semantic.html.twig' %}
+
+{% block title %}{{ ('admin_'~content_type~'.version_info.meta.title')|trans({'%name%':entity.name, '%versionNumber%': version_entity.versionNumber}) }}{% endblock %}
+
+{% block header_title %}{{ ('admin_'~content_type~'.version_info.title')|trans({'%name%':entity.name, '%versionNumber%': version_entity.versionNumber}) }}{% endblock %}
+{% block header_subtitle %}Manage your page{% endblock %}
+
+{% block breadcrums_content %}
+    {{ parent() }}
+    <a class="section"
+       href="{{ url('sfs_cms_admin_content_'~content_type~'_list') }}">{{ ('admin_'~content_type~'.list.breadcrumb')|trans }}</a>
+    <i class="right chevron icon divider"></i>
+    <a class="section"
+       href="{{ url('sfs_cms_admin_content_'~content_type~'_versions', {'content':entity}) }}">{{ ('admin_'~content_type~'.versions.breadcrumb')|trans({'%name%':entity.name}) }}</a>
+    <i class="right chevron icon divider"></i>
+    <a class="section active">{{ ('admin_'~content_type~'.version_info.breadcrumb')|trans({'%name%':entity.name, '%versionNumber%': version_entity.versionNumber}) }}</a>
+{% endblock breadcrums_content %}
+
+{% block content %}
+    {% include ['@content/'~content_type~'/admin/_content_tabs.html.twig', '@SfsCms/admin/content/_content_tabs.html.twig']  with {'current':'versions', 'entity':entity} %}
+
+    <div class="float-end">
+        {% block actions %}
+            {% if not content_config.admin.version_create.is_granted or is_granted(content_config.admin.version_create.is_granted, version) %}
+                <a class="btn btn-outline-secondary"
+                   href="{{ url('sfs_cms_admin_content_'~content_type~'_content_from_version', {'content':entity, 'prevVersion':version}) }}">{{ ('admin_'~content_type~'.versions.actions.edit.link')|trans }}
+                    <span class="bi bi-pencil"></span></a>
+            {% endif %}
+
+            {% if not content_config.admin.preview.is_granted or is_granted(content_config.admin.preview.is_granted, version) %}
+                <a class="btn btn-outline-secondary"
+                   href="{{ url('sfs_cms_admin_content_'~content_type~'_preview', {'content':entity, 'version':version}) }}">{{ ('admin_'~content_type~'.versions.actions.preview.link')|trans }}
+                    <span class="bi bi-eye"></span></a>
+            {% endif %}
+
+            {% if not content_config.admin.export_version.is_granted or is_granted(content_config.admin.export_version.is_granted, version) %}
+                <a class="btn btn-outline-secondary"
+                   href="{{ url('sfs_cms_admin_content_'~content_type~'_export_version', {'content':entity, 'version':version}) }}">{{ ('admin_'~content_type~'.versions.actions.export.link')|trans }}
+                    <span class="bi bi-box-arrow-down"></span></a>
+            {% endif %}
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-outline-secondary dropdown-toggle"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                    More
+                </button>
+                <ul class="dropdown-menu">
+                    {% if not content_config.admin.publish_version.is_granted or is_granted(content_config.admin.publish_version.is_granted, version) %}
+                        {% if not version.published %}
+                            <li><a class="dropdown-item"
+                                   href="{{ url('sfs_cms_admin_content_'~content_type~'_publish_version', {'content':entity, 'version':version}) }}">{{ ('admin_'~content_type~'.versions.actions.publish.link')|trans }}</a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                    <li><a class="dropdown-item" href="#">Unpublish</a></li>
+                    <li><a class="dropdown-item disabled" href="#">Recompile</a></li>
+                    <li>
+                        {% if not content_config.admin.version_translations.is_granted or is_granted(content_config.admin.version_translations.is_granted, content_entity) %}
+                            <a class="dropdown-item"
+                               href="{{ url('sfs_cms_admin_content_'~content_type~'_translations', {'content':content_entity, 'version': version_entity}) }}">{{ ('admin_'~content_type~'.tabs_menu.translations')|trans }}</a>
+                        {% else %}
+                            <a class="dropdown-item disabled">{{ ('admin_'~content_type~'.tabs_menu.translations')|trans }}</a>
+                        {% endif %}
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item text-danger disabled" href="#">Delete</a></li>
+                </ul>
+            </div>
+        {% endblock actions %}
+    </div>
+
+    <div class="ui grid">
+        <div class="five wide column">
+            {% include ['@content/'~content_type~'/admin/_version_info_general.html.twig', '@SfsCms/admin/content/_version_info_general.html.twig'] %}
+        </div>
+        <div class="eleven wide column">
+            {% include ['@content/'~content_type~'/admin/_version_info_compiled.html.twig', '@SfsCms/admin/content/_version_info_compiled.html.twig'] %}
+            {% include ['@content/'~content_type~'/admin/_version_info_data.html.twig', '@SfsCms/admin/content/_version_info_data.html.twig'] %}
+
+            <div class="ui grid">
+                <div class="eight wide column">
+                    {% include ['@content/'~content_type~'/admin/_version_info_linked_routes.html.twig', '@SfsCms/admin/content/_version_info_linked_routes.html.twig'] %}
+                </div>
+                <div class="eight wide column">
+                    {% include ['@content/'~content_type~'/admin/_version_info_linked_medias.html.twig', '@SfsCms/admin/content/_version_info_linked_medias.html.twig'] %}
+                </div>
+            </div>
+        </div>
+
+        <div class="sixteen wide column">
+            {% include ['@content/'~content_type~'/admin/_version_info_history.html.twig', '@SfsCms/admin/content/_version_info_history.html.twig'] %}
+        </div>
+    </div>
+
+{% endblock content %}

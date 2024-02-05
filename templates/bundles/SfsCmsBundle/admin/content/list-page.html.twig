@@ -4,11 +4,14 @@
     <tr class="item">
         <td>{{ entity.name }}</td>
         <td>{{ entity.sitesSorted|map((site) => site|sfs_cms_site_name)|join(', ') }}</td>
-        <td>{{ entity.publishedVersion ? entity.publishedVersion.createdAt|date('H:i d-m-Y') : 'no' }}</td>
+        <td>{{ (content_type~'.status.'~entity.status)|trans }}</td>
+        <td>{{ entity.publishedVersion ? entity.publishedVersion.createdAt|date('H:i d-m-Y') : '' }}</td>
         <td class="text-end">
             <div class="ui buttons">
-                <a class="ui labeled icon button" href="{{ url('sfs_cms_admin_content_'~content~'_details', {'content':entity}) }}">
-                    <i class="icon search"></i>{{ ('admin_'~content~'.list.actions.details.link')|trans }}</a>
+                {% if not content_config.admin.read.is_granted or is_granted(content_config.admin.read.is_granted, entity) %}
+                <a class="ui labeled icon button" href="{{ url('sfs_cms_admin_content_'~content_type~'_details', {'content':entity}) }}">
+                    <i class="icon search"></i>{{ ('admin_'~content_type~'.list.actions.details.link')|trans }}</a>
+                {% endif %}
             </div>
         </td>
     </tr>

@@ -1,0 +1,6 @@
+<div class="bg-white p-3 mb-3">
+    {% block title %}{% if title is not empty %}<h4 class="ui top attached large header">{{ title }}</h4>{% endif %}{% endblock %}
+    <div class="ui attached segment">
+        {% block content %}{% endblock %}
+    </div>
+</div>

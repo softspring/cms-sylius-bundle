@@ -2,16 +2,16 @@
 
 {% extends '@SfsCms/admin_layout_semantic.html.twig' %}
 
-{% block title %}{{ ('admin_'~content~'.update.meta.title')|trans({'%name%':entity.name}) }}{% endblock %}
-{% block header_title %}{{ ('admin_'~content~'.update.title')|trans({'%name%':entity.name}) }}{% endblock %}
+{% block title %}{{ ('admin_'~content_type~'.update.meta.title')|trans({'%name%':entity.name}) }}{% endblock %}
+{% block header_title %}{{ ('admin_'~content_type~'.update.title')|trans({'%name%':entity.name}) }}{% endblock %}
 {% block header_subtitle %}Manage your page{% endblock %}
 {% block breadcrums_content %}
     {{ parent() }}
-    <a class="section" href="{{ url('sfs_cms_admin_content_'~content~'_list') }}">{{ ('admin_'~content~'.list.breadcrumb')|trans }}</a>
+    <a class="section" href="{{ url('sfs_cms_admin_content_'~content_type~'_list') }}">{{ ('admin_'~content_type~'.list.breadcrumb')|trans }}</a>
     <i class="right chevron icon divider"></i>
-    <a class="section" href="{{ url('sfs_cms_admin_content_'~content~'_list') }}">{{ ('admin_'~content~'.list.breadcrumb')|trans }}</a>
+    <a class="section" href="{{ url('sfs_cms_admin_content_'~content_type~'_list') }}">{{ ('admin_'~content_type~'.list.breadcrumb')|trans }}</a>
     <i class="right chevron icon divider"></i>
-    <a class="section active">{{ ('admin_'~content~'.update.breadcrumb')|trans({'%name%':entity.name}) }}</a>
+    <a class="section active">{{ ('admin_'~content_type~'.update.breadcrumb')|trans({'%name%':entity.name}) }}</a>
 {% endblock breadcrums_content %}
 
 {% form_theme form
@@ -22,7 +22,7 @@
 
 {% block content %}
 
-    {% include '@SfsCms/admin/content/_content_tabs.html.twig' with {'current':'update', 'content':content, 'entity':entity} %}
+    {% include ['@content/'~content_type~'/admin/_content_tabs.html.twig', '@SfsCms/admin/content/_content_tabs.html.twig']  with {'current':'update', 'content_type':content_type, 'entity':entity} %}
 
     <div class="ui bottom attached active tab segment">
         {{ form_start(form,{'attr':{'class':'ui form'}}) }}
@@ -30,9 +30,9 @@
             {{ form_rest(form) }}
             <div class="ui hidden divider"></div>
             <div class="ui buttons">
-                <button class="ui labeled icon primary button" type="submit"><i class="save icon"></i> {{ ('admin_'~content~'.update.actions.update.button')|trans }}</button>
-                <a href="{{ url('sfs_cms_admin_content_'~content~'_list') }}" class="ui button">{{ ('admin_'~content~'.update.actions.cancel.button')|trans }}</a>
-                <a href="{{ url('sfs_cms_admin_content_'~content~'_delete', {'content':entity}) }}" class="ui red button">{{ ('admin_'~content~'.update.actions.delete.button')|trans }}</a>
+                <button class="ui labeled icon primary button" type="submit"><i class="save icon"></i> {{ ('admin_'~content_type~'.update.actions.update.button')|trans }}</button>
+                <a href="{{ url('sfs_cms_admin_content_'~content_type~'_list') }}" class="ui button">{{ ('admin_'~content_type~'.update.actions.cancel.button')|trans }}</a>
+                <a href="{{ url('sfs_cms_admin_content_'~content_type~'_delete', {'content':entity}) }}" class="ui red button">{{ ('admin_'~content_type~'.update.actions.delete.button')|trans }}</a>
             </div>
         {{ form_end(form) }}
     </div>
