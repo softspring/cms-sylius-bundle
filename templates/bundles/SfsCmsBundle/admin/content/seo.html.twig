@@ -2,9 +2,17 @@
 
 {% extends '@SfsCms/admin_layout_semantic.html.twig' %}
 
+{% form_theme form
+    '@SyliusUi/Form/theme.html.twig'
+    '@SfsCms/forms/routes_theme_semantic.html.twig'
+    '@SfsCms/forms/types_theme_semantic.html.twig'
+%}
+
 {% block title %}{{ ('admin_'~content_type~'.seo.meta.title')|trans({'%name%':entity.name}) }}{% endblock %}
+
 {% block header_title %}{{ ('admin_'~content_type~'.seo.title')|trans({'%name%':entity.name}) }}{% endblock %}
 {% block header_subtitle %}Manage your page{% endblock %}
+
 {% block breadcrums_content %}
     {{ parent() }}
     <a class="section" href="{{ url('sfs_cms_admin_content_'~content_type~'_list') }}">{{ ('admin_'~content_type~'.list.breadcrumb')|trans }}</a>
@@ -14,14 +22,7 @@
     <a class="section active">{{ ('admin_'~content_type~'.seo.breadcrumb')|trans({'%name%':entity.name}) }}</a>
 {% endblock breadcrums_content %}
 
-{% form_theme form
-    '@SyliusUi/Form/theme.html.twig'
-    '@SfsCms/forms/routes_theme_semantic.html.twig'
-    '@SfsCms/forms/types_theme_semantic.html.twig'
-%}
-
 {% block content %}
-
     {% include ['@content/'~content_type~'/admin/_content_tabs.html.twig', '@SfsCms/admin/content/_content_tabs.html.twig']  with {'current':'seo', 'content_type':content_type, 'entity':entity} %}
 
     <div class="ui bottom attached active tab segment">

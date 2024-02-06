@@ -20,8 +20,7 @@
     {% include ['@content/'~content_type~'/admin/_content_tabs.html.twig', '@SfsCms/admin/content/_content_tabs.html.twig']  with {'current':'versions', 'content_type':content_type, 'entity':entity} %}
 
     <div class="ui bottom attached active tab segment">
-        {# TODO restrict by permission #}
-        <div class="ui buttons">
+        <div class="ui buttons right floated">
             {% if not content_config.admin.version_import.is_granted or is_granted(content_config.admin.version_import.is_granted, entity) %}
             <a class="ui blue labeled icon button" href="{{ url('sfs_cms_admin_content_'~content_type~'_import_version', {'content':entity, 'back':'versions'}) }}">
                 <i class="icon upload"></i>

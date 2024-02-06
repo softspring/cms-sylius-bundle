@@ -15,7 +15,7 @@
 {% endblock breadcrums_content %}
 
 {% block content %}
-    {% include ['@content/'~content_type~'/admin/_content_tabs.html.twig', '@SfsCms/admin/content/_content_tabs.html.twig']  with {'current':'read', 'content_type':content_type, 'entity':entity} %}
+    {% include ['@content/'~content_type~'/admin/_content_tabs.html.twig', '@SfsCms/admin/content/_content_tabs.html.twig']  with {'current':'details', 'content_type':content_type, 'entity':entity} %}
 
     <div class="ui bottom attached active tab">
         <div class="ui grid">

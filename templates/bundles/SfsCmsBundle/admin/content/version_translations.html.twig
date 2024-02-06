@@ -2,6 +2,12 @@
 
 {% extends '@SfsCms/admin_layout_semantic.html.twig' %}
 
+{% form_theme form
+    '@SyliusUi/Form/theme.html.twig'
+    '@SfsCms/forms/routes_theme_semantic.html.twig'
+    '@SfsCms/forms/types_theme_semantic.html.twig'
+%}
+
 {% block title %}{{ ('admin_'~content_type~'.translations.meta.title')|trans({'%name%':content_entity.name, '%versionNumber%': content_entity.versionNumber|default('0')}) }}{% endblock %}
 
 {% block header_title %}{{ ('admin_'~content_type~'.translations.title')|trans({'%name%':content_entity.name, '%versionNumber%': content_entity.versionNumber|default('0')}) }}{% endblock %}
@@ -16,27 +22,28 @@
 {% endblock breadcrums_content %}
 
 {% block content %}
-    {% include ['@content/'~content_type~'/admin/_content_tabs.html.twig', '@SfsCms/admin/content/_content_tabs.html.twig']  with {'current':'version_translations', 'content':content_entity, 'entity':version_entity} %}
+    {% include ['@content/'~content_type~'/admin/_content_tabs.html.twig', '@SfsCms/admin/content/_content_tabs.html.twig']  with {'current':'translations', 'content':content_entity, 'entity':version_entity} %}
 
-    {#    {% if not content_config.admin.version_translations_import.is_granted or is_granted(content_config.admin.version_translations_import.is_granted, entity) %} #}
-    {#        <a class="btn btn-outline-secondary" #}
-    {#           href="{{ url('sfs_cms_admin_content_'~content_type~'_translations_import_translations', {'content':entity, 'back':'translations'}) }}">{{ ('admin_'~content_type~'.translations.actions.import_translations.link')|trans }}</a> #}
-    {#    {% else %} #}
-    <a class="btn btn-outline-secondary disabled">{{ ('admin_'~content_type~'.translations.actions.import_translations.link')|trans }}</a>
-    {#    {% endif %} #}
+    <div class="ui buttons right floated">
+        {#    {% if not content_config.admin.version_translations_import.is_granted or is_granted(content_config.admin.version_translations_import.is_granted, entity) %} #}
+        {#        <a class="btn btn-outline-secondary" #}
+        {#           href="{{ url('sfs_cms_admin_content_'~content_type~'_translations_import_translations', {'content':entity, 'back':'translations'}) }}">{{ ('admin_'~content_type~'.translations.actions.import_translations.link')|trans }}</a> #}
+        {#    {% else %} #}
+        <a class="ui blue labeled icon disabled button">{{ ('admin_'~content_type~'.translations.actions.import_translations.link')|trans }}</a>
+        {#    {% endif %} #}
 
-    {#    {% if not content_config.admin.version_translations_export.is_granted or is_granted(content_config.admin.version_translations_export.is_granted, entity) %} #}
-    {#        <a class="btn btn-outline-secondary" #}
-    {#           href="{{ url('sfs_cms_admin_content_'~content_type~'_translations_export_translations', {'content':entity, 'back':'translations'}) }}">{{ ('admin_'~content_type~'.translations.actions.export_translations.link')|trans }}</a> #}
-    {#    {% else %} #}
-    <a class="btn btn-outline-secondary disabled">{{ ('admin_'~content_type~'.translations.actions.export_translations.link')|trans }}</a>
-    {#    {% endif %} #}
+        {#    {% if not content_config.admin.version_translations_export.is_granted or is_granted(content_config.admin.version_translations_export.is_granted, entity) %} #}
+        {#        <a class="btn btn-outline-secondary" #}
+        {#           href="{{ url('sfs_cms_admin_content_'~content_type~'_translations_export_translations', {'content':entity, 'back':'translations'}) }}">{{ ('admin_'~content_type~'.translations.actions.export_translations.link')|trans }}</a> #}
+        {#    {% else %} #}
+        <a class="ui grey labeled icon disabled button">{{ ('admin_'~content_type~'.translations.actions.export_translations.link')|trans }}</a>
+        {#    {% endif %} #}
+    </div>
 
     <div class="segment">
-
         {% set colors = [ 'primary', 'secondary', 'info', 'success', 'warning', 'danger' ] %}
-        {{ form_start(form) }}
-        <table class="table">
+        {{ form_start(form,{'attr':{'class':'ui form'}}) }}
+        <table class="ui table">
             <tr>
                 <th style="width: 10%">&nbsp;</th>
                 {% for i, locale in content_entity.locales %}
@@ -65,7 +72,7 @@
                 {% endif %}
 
                 <tr>
-                    <td>{{ field.vars.name }}</td>
+                    {#<td>{{ field.vars.name }}</td>#}
                     <td>
                         {{ (module_type~'.form.'~field.vars.attr['data-module-field']~'.label')|trans({}, 'sfs_cms_modules') }}
                         {{ form_widget(field._trans_id) }}

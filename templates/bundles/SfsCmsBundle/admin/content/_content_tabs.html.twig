@@ -3,63 +3,14 @@
 
 <ul class="ui top attached tabular menu" id="myTab" role="tablist">
     {% block tabs %}
-        <li class="{{ current == 'read' ? 'active ' : '' }}item">
-            <a href="{{ url('sfs_cms_admin_content_'~content_type~'_details', {'content':content_entity}) }}">{{ ('admin_'~content_type~'.tabs_menu.details')|trans }}</a>
-        </li>
-        <li class="{{ current == 'content' ? 'active ' : '' }}item">
-            {% if not content_config.admin.version_create.is_granted or is_granted(content_config.admin.version_create.is_granted, entity) %}
-                <a href="{{ url('sfs_cms_admin_content_'~content_type~'_content', {'content':content_entity}) }}">{{ ('admin_'~content_type~'.tabs_menu.content')|trans }}</a>
-            {% else %}
-                <a><em>{{ ('admin_'~content_type~'.tabs_menu.content')|trans }}</em></a>
-            {% endif %}
-        </li>
-        <li class="{{ current == 'preview' ? 'active ' : '' }}item">
-            {% if not content_config.admin.preview.is_granted or is_granted(content_config.admin.preview.is_granted, entity) %}
-                <a href="{{ url('sfs_cms_admin_content_'~content_type~'_preview', {'content':content_entity}) }}">{{ ('admin_'~content_type~'.tabs_menu.preview')|trans }}</a>
-            {% else %}
-                <a><em>{{ ('admin_'~content_type~'.tabs_menu.preview')|trans }}</em></a>
-            {% endif %}
-        </li>
-        <li class="{{ current == 'seo' ? 'active ' : '' }}item">
-            {% if not content_config.admin.seo.is_granted or is_granted(content_config.admin.seo.is_granted, content_entity) %}
-                <a href="{{ url('sfs_cms_admin_content_'~content_type~'_seo', {'content':content_entity}) }}">{{ ('admin_'~content_type~'.tabs_menu.seo')|trans }}</a>
-            {% else %}
-                <a><em>{{ ('admin_'~content_type~'.tabs_menu.seo')|trans }}</em></a>
-            {% endif %}
-        </li>
-        <li class="{{ current == 'routes' ? 'active ' : '' }}item">
-            <a tabindex="-1"><em>{{ ('admin_'~content_type~'.tabs_menu.routes')|trans }}</em></a>
-        </li>
-        <li class="{{ current == 'version_translations' ? 'active ' : '' }}item">
-            {% if not content_config.admin.version_translations.is_granted or is_granted(content_config.admin.version_translations.is_granted, content_entity) %}
-                <a href="{{ url('sfs_cms_admin_content_'~content_type~'_translations', {'content':content_entity}) }}">{{ ('admin_'~content_type~'.tabs_menu.translations')|trans }}</a>
-            {% else %}
-                <a><em>{{ ('admin_'~content_type~'.tabs_menu.translations')|trans }}</em></a>
-            {% endif %}
-        </li>
-        <li class="{{ current == 'versions' ? 'active ' : '' }}item">
-            {% if not content_config.admin.version_list.is_granted or is_granted(content_config.admin.version_list.is_granted, entity) %}
-                <a href="{{ url('sfs_cms_admin_content_'~content_type~'_versions', {'content':content_entity}) }}">{{ ('admin_'~content_type~'.tabs_menu.versions')|trans }}</a>
-            {% else %}
-                <a><em>{{ ('admin_'~content_type~'.tabs_menu.versions')|trans }}</em></a>
-            {% endif %}
-        </li>
-        <li class="{{ current == 'update' ? 'active ' : '' }}item">
-            {% if not content_config.admin.update.is_granted or is_granted(content_config.admin.update.is_granted, entity) %}
-                <a href="{{ url('sfs_cms_admin_content_'~content_type~'_update', {'content':content_entity}) }}">{{ ('admin_'~content_type~'.tabs_menu.update')|trans }}</a>
-            {% else %}
-                <a><em>{{ ('admin_'~content_type~'.tabs_menu.update')|trans }}</em></a>
-            {% endif %}
-        </li>
-        <li class="{{ current == 'permissions' ? 'active ' : '' }}item">
-            <a tabindex="-1"><em>{{ ('admin_'~content_type~'.tabs_menu.permissions')|trans }}</em></a>
-        </li>
-        <li class="{{ current == 'delete' ? 'active ' : '' }}item">
-            {% if not content_config.admin.delete.is_granted or is_granted(content_config.admin.delete.is_granted, entity) %}
-                <a href="{{ url('sfs_cms_admin_content_'~content_type~'_delete', {'content':content_entity}) }}">{{ ('admin_'~content_type~'.tabs_menu.delete')|trans }}</a>
-            {% else %}
-                <a><em>{{ ('admin_'~content_type~'.tabs_menu.delete')|trans }}</em></a>
-            {% endif %}
-        </li>
+        {% for item in sfs_cms_admin_content_menu(current, content_entity) %}
+            <li class="{{ item.active|default(false) ? 'active' : '' }} item">
+                {% if not (item.disabled|default(false)) %}
+                    <a href="{{ item.url|default('#') }}">{{ item.text }}</a>
+                {% else %}
+                    <a><em>{{ item.text }}</em></a>
+                {% endif %}
+            </li>
+        {% endfor %}
     {% endblock %}
 </ul>
