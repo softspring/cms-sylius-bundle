@@ -4,11 +4,6 @@
     {% trans_default_domain 'sfs_cms_contents' %}
 
     {% block title %}
-        {% if not content_config.admin.version_translations.is_granted or is_granted(content_config.admin.version_translations.is_granted, entity) %}
-            <a class="btn btn-sm btn-outline-secondary float-end"  href="{{ url('sfs_cms_admin_content_'~content_type~'_translations', {'content':entity}) }}">{{ ('admin_'~content_type~'.read.translations.edit.link')|trans }}</a>
-        {% else %}
-            <a class="btn btn-sm btn-outline-secondary float-end disabled">{{ ('admin_'~content_type~'.read.translations.edit.link')|trans }}</a>
-        {% endif %}
         {{ parent() }}
     {% endblock %}
 
@@ -34,5 +29,14 @@
 {#                                            </span>#}
 {#            </p>#}
 {#        {% endfor %}#}
+
+        <div class="ui divider"></div>
+        {% if not content_config.admin.version_translations.is_granted or is_granted(content_config.admin.version_translations.is_granted, entity) %}
+            <a class="fluid ui primary labeled icon button" href="{{ url('sfs_cms_admin_content_'~content_type~'_translations', {'content':entity}) }}">
+                <i class="icon pencil"></i>{{ ('admin_'~content_type~'.read.translations.edit.link')|trans }}</a>
+        {% else %}
+            <a class="fluid ui primary labeled icon button disabled">
+                <i class="icon pencil"></i>{{ ('admin_'~content_type~'.read.translations.edit.link')|trans }}</a>
+        {% endif %}
     {% endblock %}
 {% endembed %}

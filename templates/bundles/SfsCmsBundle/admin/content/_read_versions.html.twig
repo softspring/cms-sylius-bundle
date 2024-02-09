@@ -4,15 +4,18 @@
     {% trans_default_domain 'sfs_cms_contents' %}
 
     {% block title %}
-        {% if not content_config.admin.version_list.is_granted or is_granted(content_config.admin.version_list.is_granted, entity) %}
-            <a class="btn btn-sm btn-outline-secondary float-end"  href="{{ url('sfs_cms_admin_content_'~content_type~'_versions', {'content':entity}) }}">{{ ('admin_'~content_type~'.read.versions.more.link')|trans }}</a>
-        {% else %}
-            <a class="btn btn-sm btn-outline-secondary float-end disabled">{{ ('admin_'~content_type~'.read.versions.more.link')|trans }}</a>
-        {% endif %}
         {{ parent() }}
     {% endblock %}
 
     {% block content %}
         {% include ['@content/'~content_type~'/admin/_version_list_table.html.twig', '@SfsCms/admin/content/_version_list_table.html.twig'] with {'versions': entityLatestVersions} %}
+
+        {% if not content_config.admin.version_list.is_granted or is_granted(content_config.admin.version_list.is_granted, entity) %}
+            <a class="ui primary labeled icon button"  href="{{ url('sfs_cms_admin_content_'~content_type~'_versions', {'content':entity}) }}">
+                <i class="icon ellipsis horizontal"></i> {{ ('admin_'~content_type~'.read.versions.more.link')|trans }}</a>
+        {% else %}
+            <a class="ui primary labeled icon button disabled">
+                <i class="icon ellipsis horizontal"></i>{{ ('admin_'~content_type~'.read.versions.more.link')|trans }}</a>
+        {% endif %}
     {% endblock %}
 {% endembed %}
