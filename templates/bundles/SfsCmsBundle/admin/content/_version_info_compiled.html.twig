@@ -5,16 +5,19 @@
 
     {% block content %}
         {% import '@SfsCms/admin/content/_macros.html.twig' as tools %}
-
-        {% if not content_config.admin.version_recompile.is_granted or is_granted(content_config.admin.version_recompile.is_granted, entity) %}
-            <a class="btn btn-sm btn-outline-secondary float-end"
-               href="{{ url('sfs_cms_admin_content_'~content_type~'_recompile_version', {'content':entity, 'version': version_entity, 'back': 'version_info'}) }}">{{ ('admin_'~content_type~'.version_info.actions.recompile.link')|trans }}</a>
-        {% else %}
-            <a class="btn btn-sm btn-outline-secondary float-end disabled">{{ ('admin_'~content_type~'.version_info.actions.recompile.link')|trans }}</a>
-        {% endif %}
-
-        <h4 class="border-bottom border-1 border-light pb-2 mb-3">{{ ('admin_'~content_type~'.version_info.compiled.title')|trans }}</h4>
-        {% if version.hasCompileErrors %}
+        <div class="ui clearing">
+            <div class="ui right floated header">
+                {% if not content_config.admin.version_recompile.is_granted or is_granted(content_config.admin.version_recompile.is_granted, entity) %}
+                    <a class="ui button secondary"
+                       href="{{ url('sfs_cms_admin_content_'~content_type~'_recompile_version', {'content':entity, 'version': version_entity, 'back': 'version_info'}) }}">
+                        <i class="icon sync"></i> {{ ('admin_'~content_type~'.version_info.actions.recompile.link')|trans }}</a>
+                {% else %}
+                    <a class="ui button secondary disabled"><i class="icon sync"></i>{{ ('admin_'~content_type~'.version_info.actions.recompile.link')|trans }}</a>
+                {% endif %}
+            </div>
+            <h4 class="ui left floated header">{{ ('admin_'~content_type~'.version_info.compiled.title')|trans }}</h4>
+        </div>
+            {% if version.hasCompileErrors %}
             <div class="alert alert-danger" role="alert">
                 <i class="bi bi-exclamation-triangle text-danger"
                    title="This version has some compilation error"></i>

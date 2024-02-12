@@ -20,31 +20,32 @@
     {% include ['@content/'~content_type~'/admin/_content_tabs.html.twig', '@SfsCms/admin/content/_content_tabs.html.twig']  with {'current':'versions', 'content_type':content_type, 'entity':entity} %}
 
     <div class="ui bottom attached active tab segment">
-        <div class="ui buttons right floated">
-            {% if not content_config.admin.version_import.is_granted or is_granted(content_config.admin.version_import.is_granted, entity) %}
-            <a class="ui blue labeled icon button" href="{{ url('sfs_cms_admin_content_'~content_type~'_import_version', {'content':entity, 'back':'versions'}) }}">
-                <i class="icon upload"></i>
-                {{ ('admin_'~content_type~'.versions.actions.import_version.link')|trans }}
-            </a>
-            {% else %}
-                <a class="ui blue labeled icon button disabled" title="{{ ('admin_'~content_type~'.versions.actions.import_version.denied')|trans }}">
+        <div class="ui right aligned grid clearing">
+            <div class="ui buttons column">
+                {% if not content_config.admin.version_import.is_granted or is_granted(content_config.admin.version_import.is_granted, entity) %}
+                <a class="ui blue labeled icon button" href="{{ url('sfs_cms_admin_content_'~content_type~'_import_version', {'content':entity, 'back':'versions'}) }}">
                     <i class="icon upload"></i>
                     {{ ('admin_'~content_type~'.versions.actions.import_version.link')|trans }}
                 </a>
-            {% endif %}
+                {% else %}
+                    <a class="ui blue labeled icon button disabled" title="{{ ('admin_'~content_type~'.versions.actions.import_version.denied')|trans }}">
+                        <i class="icon download"></i>
+                        {{ ('admin_'~content_type~'.versions.actions.import_version.link')|trans }}
+                    </a>
+                {% endif %}
 
-            {% if not content_config.admin.version_cleanup.is_granted or is_granted(content_config.admin.version_cleanup.is_granted, entity) %}
-            <a class="ui red labeled icon button" href="{{ url('sfs_cms_admin_content_'~content_type~'_cleanup_versions', {'content':entity, 'back':'versions'}) }}">
-                <i class="icon eraser"></i>
-                {{ ('admin_'~content_type~'.versions.actions.cleanup_versions.link')|trans }}
-            </a>
-            {% else %}
-                <a class="ui red labeled icon button disabled" title="{{ ('admin_'~content_type~'.versions.actions.cleanup_versions.denied')|trans }}">
+                {% if not content_config.admin.version_cleanup.is_granted or is_granted(content_config.admin.version_cleanup.is_granted, entity) %}
+                <a class="ui red labeled icon button" href="{{ url('sfs_cms_admin_content_'~content_type~'_cleanup_versions', {'content':entity, 'back':'versions'}) }}">
                     <i class="icon eraser"></i>
                     {{ ('admin_'~content_type~'.versions.actions.cleanup_versions.link')|trans }}
                 </a>
-            {% endif %}
-
+                {% else %}
+                    <a class="ui red labeled icon button disabled" title="{{ ('admin_'~content_type~'.versions.actions.cleanup_versions.denied')|trans }}">
+                        <i class="icon eraser"></i>
+                        {{ ('admin_'~content_type~'.versions.actions.cleanup_versions.link')|trans }}
+                    </a>
+                {% endif %}
+            </div>
         </div>
 
         {% include ['@content/'~content_type~'/admin/_version_list_table.html.twig', '@SfsCms/admin/content/_version_list_table.html.twig'] with {'versions': entity.versions} %}

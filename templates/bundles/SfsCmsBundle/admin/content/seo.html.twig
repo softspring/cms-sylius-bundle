@@ -27,6 +27,24 @@
 
     <div class="ui bottom attached active tab segment">
         {{ form_start(form,{'attr':{'class':'ui form'}}) }}
+            <strong>{{ form_label(form.seo.metaTitle) }}</strong>
+            <div class="ui segment">
+            {{ form_widget(form.seo.metaTitle) }}
+            </div>
+            {{ form_errors(form.seo.metaTitle) }}
+
+            <strong>{{ form_label(form.seo.metaDescription) }}</strong>
+            <div class="ui segment">
+            {{ form_widget(form.seo.metaDescription) }}
+            </div>
+            {{ form_errors(form.seo.metaDescription) }}
+
+            <strong>{{ form_label(form.seo.metaKeywords) }}</strong>
+            <div class="ui segment">
+            {{ form_widget(form.seo.metaKeywords) }}
+            </div>
+            {{ form_errors(form.seo.metaKeywords) }}
+
             {{ form_widget(form.seo) }}
             {{ form_rest(form) }}
             <div class="ui hidden divider"></div>
