@@ -46,6 +46,8 @@
 
         {{ ('admin_'~content_type~'.delete.index_warnings_raw')|trans|raw }}
 
+        {{ form_row(form.action) }}
+
         <div data-route-field-container>
             {{ form_row(form.content) }}
         </div>
