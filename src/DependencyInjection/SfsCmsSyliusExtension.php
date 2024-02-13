@@ -41,7 +41,6 @@ class SfsCmsSyliusExtension extends Extension implements PrependExtensionInterfa
         }
         $container->prependExtensionConfig('twig', [
             'globals' => [
-                'sfs_components_theme' => 'semantic-ui', // important for cms plugins
                 'sfs_cms_sylius_bundle' => [
                     'version' => $version,
                     'version_branch' => str_ends_with($version, '-dev') ? str_replace('.x-dev', '', $version) : false,
