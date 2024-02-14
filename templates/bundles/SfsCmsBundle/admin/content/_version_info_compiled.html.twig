@@ -5,16 +5,19 @@
 
     {% block content %}
         {% import '@SfsCms/admin/content/_macros.html.twig' as tools %}
-
-        {% if not content_config.admin.version_recompile.is_granted or is_granted(content_config.admin.version_recompile.is_granted, entity) %}
-            <a class="btn btn-sm btn-outline-secondary float-end"
-               href="{{ url('sfs_cms_admin_content_'~content_type~'_recompile_version', {'content':entity, 'version': version_entity, 'back': 'version_info'}) }}">{{ ('admin_'~content_type~'.version_info.actions.recompile.link')|trans }}</a>
-        {% else %}
-            <a class="btn btn-sm btn-outline-secondary float-end disabled">{{ ('admin_'~content_type~'.version_info.actions.recompile.link')|trans }}</a>
-        {% endif %}
-
-        <h4 class="border-bottom border-1 border-light pb-2 mb-3">{{ ('admin_'~content_type~'.version_info.compiled.title')|trans }}</h4>
-        {% if version.hasCompileErrors %}
+        <div class="ui clearing">
+            <div class="ui right floated header">
+                {% if not content_config.admin.version_recompile.is_granted or is_granted(content_config.admin.version_recompile.is_granted, entity) %}
+                    <a class="ui button secondary"
+                       href="{{ url('sfs_cms_admin_content_'~content_type~'_recompile_version', {'content':entity, 'version': version_entity, 'back': 'version_info'}) }}">
+                        <i class="icon sync"></i> {{ ('admin_'~content_type~'.version_info.actions.recompile.link')|trans }}</a>
+                {% else %}
+                    <a class="ui button secondary disabled"><i class="icon sync"></i>{{ ('admin_'~content_type~'.version_info.actions.recompile.link')|trans }}</a>
+                {% endif %}
+            </div>
+            <h4 class="ui left floated header">{{ ('admin_'~content_type~'.version_info.compiled.title')|trans }}</h4>
+        </div>
+            {% if version.hasCompileErrors %}
             <div class="alert alert-danger" role="alert">
                 <i class="bi bi-exclamation-triangle text-danger"
                    title="This version has some compilation error"></i>
@@ -41,55 +44,40 @@
                 </div>
             {% endif %}
         {% endif %}
-
-        <div class="accordion" id="accordionCompiled">
-            <div class="accordion-item">
+        <div class="ui segment basic">
+            <div class="ui styled accordion">
                 {% set first = false %}
                 {% for key,compiled in version_entity.compiled %}
                     {% set keyCleaned = key|replace({'/': '', ' ': '', '.' : ''}) %}
-                    <h2 class="accordion-header" id="heading{{ keyCleaned }}">
-                        <button class="accordion-button {{ first?'':'collapsed' }}" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#collapse{{ keyCleaned }}"
-                                aria-expanded="{{ first?'true':'false' }}"
-                                aria-controls="collapse{{ keyCleaned }}">
-                            Pre-compiled content {{ key }}
-                        </button>
+                    <h2 class="title" id="heading{{ keyCleaned }}">
+                        <i class="dropdown icon"></i>
+                        Pre-compiled content {{ key }}
                     </h2>
                     <div id="collapse{{ keyCleaned }}"
-                         class="accordion-collapse collapse {{ first?'show':'' }}"
-                         aria-labelledby="heading{{ keyCleaned }}" data-bs-parent="#accordionCompiled">
-                        <div class="accordion-body">
-                            {% if compiled is not iterable %}
-                                {{ tools.drawEsiCalls(compiled) }}
-                                <pre class="overflow-auto"
-                                     style="max-height: 600px"><code
-                                        class="text-muted">{{ compiled }}</code></pre>
-                            {% endif %}
-                        </div>
+                         class="content {{ first?'active':'' }}">
+                        {% if compiled is not iterable %}
+                            {{ tools.drawEsiCalls(compiled) }}
+                            <pre class="overflow-auto"
+                                 style="max-height: 600px"><code
+                                    class="text-muted">{{ compiled }}</code></pre>
+                        {% endif %}
                     </div>
                     {% set first = false %}
                 {% endfor %}
                 {% for key,compiled in version_entity.compiledModules %}
                     {% set keyCleaned = ('modules'~key)|replace({'/': '', ' ': '', '.': ''}) %}
-                    <h2 class="accordion-header" id="heading{{ keyCleaned }}">
-                        <button class="accordion-button {{ first?'':'collapsed' }}" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#collapse{{ keyCleaned }}"
-                                aria-expanded="{{ first?'true':'false' }}"
-                                aria-controls="collapse{{ keyCleaned }}">
-                            Pre-compiled modules {{ key }}
-                        </button>
+                    <h2 class="title" id="heading{{ keyCleaned }}">
+                        <i class="dropdown icon"></i>
+                        Pre-compiled modules {{ key }}
                     </h2>
                     <div id="collapse{{ keyCleaned }}"
-                         class="accordion-collapse collapse {{ first?'show':'' }}"
-                         aria-labelledby="heading{{ keyCleaned }}" data-bs-parent="#accordionCompiled">
-                        <div class="accordion-body">
-                            {% for container, content in compiled|filter((content) => content is not iterable) %}
-                                <strong>{{ container }}</strong>
-                                {{ tools.drawEsiCalls(content) }}
-                                <pre class="overflow-auto"
-                                     style="max-height: 300px"><code class="text-muted">{{ content }}</code></pre>
-                            {% endfor %}
-                        </div>
+                         class="content {{ first?'active':'' }}">
+                        {% for container, content in compiled|filter((content) => content is not iterable) %}
+                            <strong>{{ container }}</strong>
+                            {{ tools.drawEsiCalls(content) }}
+                            <pre class="overflow-auto"
+                                 style="max-height: 300px"><code class="text-muted">{{ content }}</code></pre>
+                        {% endfor %}
                     </div>
                     {% set first = false %}
                 {% endfor %}

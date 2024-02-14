@@ -1,70 +1,60 @@
 {% embed '@SfsCms/admin/_embeds/_card.html.twig' %}
     {% trans_default_domain 'sfs_cms_contents' %}
 
-    {% block title %}{# not title #}{% endblock %}
+    {% block title %}<div class="ui header">Version information</div>{% endblock %}
 
     {% block content %}
         {{ form_start(form) }}
-        <dl>
-            <dt>{{ ('admin_'~content_type~'.version_info.info.version.title')|trans }}</dt>
-            <dd>v{{ version_entity.versionNumber }}</dd>
+        <div class="ui list">
+            <div class="item"><strong>{{ ('admin_'~content_type~'.version_info.info.version.title')|trans }}</strong> v{{ version_entity.versionNumber }}</div>
 
-            <dt>{{ ('admin_'~content_type~'.version_info.info.layout.title')|trans }}</dt>
-            <dd>{{ (version_entity.layout~'.title')|trans({}, 'sfs_cms_layouts') }}</dd>
+            <div class="item"><strong>{{ ('admin_'~content_type~'.version_info.info.layout.title')|trans }}</strong> {{ (version_entity.layout~'.title')|trans({}, 'sfs_cms_layouts') }}</div>
 
-            <dt>{{ ('admin_'~content_type~'.version_info.info.origin.title')|trans }}</dt>
-            <dd>{{ ('admin_'~content_type~'.versions.origin.'~(version_entity.origin|default('null')))|trans }} {{ version_entity.originDescription ? '('~version_entity.originDescription~')' : '' }}</dd>
+            <div class="item"><strong>{{ ('admin_'~content_type~'.version_info.info.origin.title')|trans }}</strong> {{ ('admin_'~content_type~'.versions.origin.'~(version_entity.origin|default('null')))|trans }} {{ version_entity.originDescription ? '('~version_entity.originDescription~')' : '' }}</div>
 
             {% set creator = version_entity.metaField('creator') %}
             {% if creator %}
-                <dt>{{ ('admin_'~content_type~'.version_info.info.creator.title')|trans }}</dt>
-                <dd>{{ creator.name|default(creator.id)|default('') }}</dd>
+                <div class="item"><strong>{{ ('admin_'~content_type~'.version_info.info.creator.title')|trans }}</strong>  {{ creator.name|default(creator.id)|default('') }}</div>
             {% endif %}
 
-            <dt>{{ ('admin_'~content_type~'.version_info.info.created.title')|trans }}</dt>
-            <dd>{{ version_entity.createdAt ? version_entity.createdAt|date('H:i:s d-m-Y') : '' }}</dd>
+            <div class="item"><strong>{{ ('admin_'~content_type~'.version_info.info.created.title')|trans }}</strong> {{ version_entity.createdAt ? version_entity.createdAt|date('H:i:s d-m-Y') : '' }}</div>
 
-            <dt>{{ ('admin_'~content_type~'.version_info.info.publish_status.title')|trans }}</dt>
-            <dd>{{ version_entity.published ? ('admin_'~content_type~'.versions.publish_status.published')|trans : ('admin_'~content_type~'.versions.publish_status.unpublished')|trans }}</dd>
+            <div class="item"><strong>{{ ('admin_'~content_type~'.version_info.info.publish_status.title')|trans }}</strong> {{ version_entity.published ? ('admin_'~content_type~'.versions.publish_status.published')|trans : ('admin_'~content_type~'.versions.publish_status.unpublished')|trans }}</div>
 
-            <dt>{{ ('admin_'~content_type~'.version_info.info.keep.title')|trans }}</dt>
-            <dd>
+            <div class="item"><strong>{{ ('admin_'~content_type~'.version_info.info.keep.title')|trans }}</strong>
                 {% if not content_config.admin.version_lock.is_granted or is_granted(content_config.admin.version_lock.is_granted, version) %}
                     {% if version.keep %}
                         <a class=""
-                           href="{{ url('sfs_cms_admin_content_'~content_type~'_unkeep_version', {'content':entity, 'version':version, 'back': 'version_info'}) }}"><i
-                                class="bi bi-pin-angle-fill"></i> {{ ('admin_'~content_type~'.versions.actions.keep.link')|trans }}
+                           href="{{ url('sfs_cms_admin_content_'~content_type~'_unkeep_version', {'content':entity, 'version':version, 'back': 'version_info'}) }}">
+                            <i class="icon lock"></i> {{ ('admin_'~content_type~'.versions.actions.keep.link')|trans }}
                         </a>
                     {% else %}
                         <a class=""
-                           href="{{ url('sfs_cms_admin_content_'~content_type~'_keep_version', {'content':entity, 'version':version, 'back': 'version_info'}) }}"><i
-                                class="bi bi-pin-angle"></i> {{ ('admin_'~content_type~'.versions.actions.nokeep.link')|trans }}
+                           href="{{ url('sfs_cms_admin_content_'~content_type~'_keep_version', {'content':entity, 'version':version, 'back': 'version_info'}) }}">
+                            <i class="icon lock open"></i> {{ ('admin_'~content_type~'.versions.actions.nokeep.link')|trans }}
                         </a>
                     {% endif %}
                 {% else %}
                     {% if version.keep %}
-                        <span><i
-                                class="bi bi-pin-angle-fill"></i> {{ ('admin_'~content_type~'.versions.actions.keep.link')|trans }}</span>
+                        <span><i class="icon lock"></i> {{ ('admin_'~content_type~'.versions.actions.keep.link')|trans }}</span>
                     {% else %}
-                        <span><i
-                                class="bi bi-pin-angle"></i> {{ ('admin_'~content_type~'.versions.actions.nokeep.link')|trans }}</span>
+                        <span><i  class="icon lock open"></i> {{ ('admin_'~content_type~'.versions.actions.nokeep.link')|trans }}</span>
                     {% endif %}
                 {% endif %}
-            </dd>
+            </div>
 
-            <dt>{{ form_label(form.note) }}</dt>
-            <dd>
-                <div class="input-group mb-3">
+            <div class="item"><strong>{{ form_label(form.note) }}</strong>
+                <div class="ui form">
+                    <div class="inline field">
                     {{ form_widget(form.note) }}
-                    <div class="input-group-append">
-                        <button class="btn btn-primary p-2 px-3 rounded-0"
+                        <button class="ui button primary icon"
                                 type="submit"
                                 title="{{ ('admin_'~content_type~'.version_info.actions.save.button')|trans }}">
-                            <i class="bi bi-check"></i></button>
+                            <i class="icon check"></i></button>
                     </div>
                 </div>
-            </dd>
-        </dl>
+            </div>
+        </div>
         {{ form_rest(form) }}
         {{ form_end(form) }}
     {% endblock %}

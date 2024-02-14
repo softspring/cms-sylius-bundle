@@ -29,6 +29,11 @@
     <div class="ui bottom attached active tab segment">
         {{ form_start(form,{'attr':{'class':'ui form'}}) }}
             {{ form_row(form.name) }}
+            <strong>{{ form_label(form.routes) }}</strong>
+            <div class="ui segment">
+            {{ form_widget(form.routes) }}
+            {{ form_errors(form.routes) }}
+            </div>
             {{ form_rest(form) }}
             <div class="ui hidden divider"></div>
             <div class="ui buttons">

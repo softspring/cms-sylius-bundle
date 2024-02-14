@@ -17,7 +17,7 @@
 {% block content %}
     {% include ['@content/'~content_type~'/admin/_content_tabs.html.twig', '@SfsCms/admin/content/_content_tabs.html.twig']  with {'current':'details', 'content_type':content_type, 'entity':entity} %}
 
-    <div class="ui bottom attached active tab">
+    <div class="ui bottom attached active tab segment">
         <div class="ui grid">
             <div class="four wide column">
                 {% include ['@content/'~content_type~'/admin/_read_general.html.twig', '@SfsCms/admin/content/_read_general.html.twig'] %}
@@ -31,9 +31,6 @@
             <div class="four wide column">
                 {% include ['@content/'~content_type~'/admin/_read_translations.html.twig', '@SfsCms/admin/content/_read_translations.html.twig'] %}
             </div>
-        </div>
-
-        <div class="ui grid">
             <div class="sixteen wide column">
                 {% include ['@content/'~content_type~'/admin/_read_versions.html.twig', '@SfsCms/admin/content/_read_versions.html.twig'] %}
             </div>
