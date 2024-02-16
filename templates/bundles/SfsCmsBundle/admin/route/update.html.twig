@@ -9,6 +9,7 @@
 
 {% form_theme form
     '@SyliusUi/Form/theme.html.twig'
+    '@SfsCms/forms/cms_theme_semantic.html.twig'
     '@SfsCms/forms/routes_theme_semantic.html.twig' %}
 
 {% block breadcrums_content %}
@@ -37,21 +38,23 @@
         </div>
 
         <div class="fields">
-            <div class="eight wide field" data-route-field-container>
+            <div class="eight wide field">
                 {{ form_row(form.content) }}
-            </div>
-            <div class="eight wide field" data-route-field-container>
-                {{ form_widget(form.symfonyRoute) }}
             </div>
         </div>
         <div class="fields">
-            <div class="eight wide field" data-route-field-container>
+            <div class="eight wide field">
                 {# Separate element so that it does not paint the row with a div. Improves visualization.  #}
-                {{ form_label(form.redirectUrl) }}
-                {{ form_widget(form.redirectUrl) }}
-                {{ form_errors(form.redirectUrl) }}
+                {{ form_row(form.redirectUrl) }}
             </div>
-            <div class="eight wide field" data-route-field-container>
+        </div>
+        <div class="fields">
+            <div class="eight wide field" >
+                {{ form_row(form.symfonyRoute) }}
+            </div>
+        </div>
+        <div class="fields">
+            <div class="eight wide field">
                 {{ form_row(form.redirectType) }}
             </div>
         </div>
