@@ -34,21 +34,21 @@
         </div>
 
         <div class="fields">
-            <div class="eight wide field">
-                <div>
-                    {{ form_row(form.content) }}
-                </div>
-                <div>
-                    {{ form_widget(form.symfonyRoute) }}
-                </div>
-                <div>
-                    {# Separate element so that it does not paint the row with a div. Improves visualization.  #}
-                    {{ form_label(form.redirectUrl) }}
-                    {{ form_widget(form.redirectUrl) }}
-                    {{ form_errors(form.redirectUrl) }}
-                </div>
+            <div class="eight wide field" data-route-field-container>
+                {{ form_row(form.content) }}
             </div>
-            <div class="eight wide field">
+            <div class="eight wide field" data-route-field-container>
+                {{ form_widget(form.symfonyRoute) }}
+            </div>
+        </div>
+        <div class="fields">
+            <div class="eight wide field" data-route-field-container>
+                {# Separate element so that it does not paint the row with a div. Improves visualization.  #}
+                {{ form_label(form.redirectUrl) }}
+                {{ form_widget(form.redirectUrl) }}
+                {{ form_errors(form.redirectUrl) }}
+            </div>
+            <div class="eight wide field" data-route-field-container>
                 {{ form_row(form.redirectType) }}
             </div>
         </div>

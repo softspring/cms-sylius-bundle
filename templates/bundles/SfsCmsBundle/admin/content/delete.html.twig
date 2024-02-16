@@ -24,21 +24,36 @@
     {% include '@SfsCms/admin/content/_content_tabs.html.twig' with {'current':'delete', 'content':content, 'entity':entity} %}
 
     <div class="ui bottom attached active tab segment">
+
+
+        <div class="ui icon warning message">
+            <i class="warning icon"></i>
+            <div class="content">
+                <div class="header">{{ ('admin_'~content_type~'.delete.main_warnings_raw')|trans|raw }}</div>
+                <p class="">
+                    {{ ('admin_'~content_type~'.delete.offer_backup')|trans }} &nbsp;&nbsp;
+                    <a href="{{ url('sfs_cms_admin_content_'~content_type~'_export_version', {'content':entity, 'version':entity.publishedVersion}) }}" class="ui primary button">
+                        {{ ('admin_'~content_type~'.delete.actions.export.button')|trans }}</a>
+                </p>
+            </div>
+        </div>
         {{ form_start(form,{'attr':{'class':'ui form'}}) }}
 
-        {{ ('admin_'~content_type~'.delete.main_warnings_raw')|trans|raw }}
 
         {% if entity.publishedVersion %}
-            <p>{{ ('admin_'~content_type~'.delete.offer_backup')|trans }}</p>
 
-            <div class="ui buttons">
-                <a href="{{ url('sfs_cms_admin_content_'~content_type~'_export_version', {'content':entity, 'version':entity.publishedVersion}) }}" class="ui primary button">
-                    {{ ('admin_'~content_type~'.delete.actions.export.button')|trans }}</a>
-            </div>
         {% endif %}
 
         {{ ('admin_'~content_type~'.delete.index_warnings_raw')|trans|raw }}
 
+        {{ form_row(form.action) }}
+
+        <div data-route-field-container>
+            {{ form_row(form.content) }}
+        </div>
+        <div data-route-field-container>
+            {{ form_row(form.symfonyRoute) }}
+        </div>
         {{ form_rest(form) }}
         <div class="ui hidden divider"></div>
         <div class="ui buttons">
