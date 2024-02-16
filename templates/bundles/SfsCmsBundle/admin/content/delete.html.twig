@@ -16,6 +16,7 @@
 
 {% form_theme form
     '@SyliusUi/Form/theme.html.twig'
+    '@SfsCms/forms/cms_theme_semantic.html.twig'
     '@SfsCms/forms/routes_theme_semantic.html.twig'
     '@SfsCms/forms/types_theme_semantic.html.twig'
 %}
@@ -39,21 +40,11 @@
         </div>
         {{ form_start(form,{'attr':{'class':'ui form'}}) }}
 
-
         {% if entity.publishedVersion %}
 
         {% endif %}
 
         {{ ('admin_'~content_type~'.delete.index_warnings_raw')|trans|raw }}
-
-        {{ form_row(form.action) }}
-
-        <div data-route-field-container>
-            {{ form_row(form.content) }}
-        </div>
-        <div data-route-field-container>
-            {{ form_row(form.symfonyRoute) }}
-        </div>
         {{ form_rest(form) }}
         <div class="ui hidden divider"></div>
         <div class="ui buttons">
