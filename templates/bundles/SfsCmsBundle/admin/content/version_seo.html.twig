@@ -8,9 +8,9 @@
     '@SfsCms/forms/types_theme_semantic.html.twig'
 %}
 
-{% block title %}{{ ('admin_'~content_type~'.seo.meta.title')|trans({'%name%':entity.name}) }}{% endblock %}
+{% block title %}{{ ('admin_'~content_type~'.version_seo.meta.title')|trans({'%name%':entity.name}) }}{% endblock %}
 
-{% block header_title %}{{ ('admin_'~content_type~'.seo.title')|trans({'%name%':entity.name}) }}{% endblock %}
+{% block header_title %}{{ ('admin_'~content_type~'.version_seo.title')|trans({'%name%':entity.name, '%versionNumber%': version_entity.versionNumber}) }}{% endblock %}
 {% block header_subtitle %}Manage your page{% endblock %}
 
 {% block breadcrums_content %}
@@ -19,7 +19,7 @@
     <i class="right chevron icon divider"></i>
     <a class="section" href="{{ url('sfs_cms_admin_content_'~content_type~'_list') }}">{{ ('admin_'~content_type~'.list.breadcrumb')|trans }}</a>
     <i class="right chevron icon divider"></i>
-    <a class="section active">{{ ('admin_'~content_type~'.seo.breadcrumb')|trans({'%name%':entity.name}) }}</a>
+    <a class="section active">{{ ('admin_'~content_type~'.version_seo.breadcrumb')|trans({'%name%':entity.name}) }}</a>
 {% endblock breadcrums_content %}
 
 {% block content %}
@@ -45,12 +45,12 @@
             </div>
             {{ form_errors(form.seo.metaKeywords) }}
 
-            {{ form_widget(form.seo) }}
+            {{ form_rest(form.seo) }}
             {{ form_rest(form) }}
             <div class="ui hidden divider"></div>
             <div class="ui buttons">
-                <button class="ui labeled icon primary button" type="submit"><i class="save icon"></i> {{ ('admin_'~content_type~'.seo.actions.save.button')|trans }}</button>
-                <a href="{{ url('sfs_cms_admin_content_'~content_type~'_list') }}" class="ui button">{{ ('admin_'~content_type~'.seo.actions.cancel.button')|trans }}</a>
+                <button class="ui labeled icon primary button" type="submit"><i class="save icon"></i> {{ ('admin_'~content_type~'.version_seo.actions.save.button')|trans }}</button>
+                <a href="{{ url('sfs_cms_admin_content_'~content_type~'_list') }}" class="ui button">{{ ('admin_'~content_type~'.version_seo.actions.cancel.button')|trans }}</a>
             </div>
         {{ form_end(form) }}
     </div>
