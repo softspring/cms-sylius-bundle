@@ -5,7 +5,7 @@
 
     {% block content %}
         {% import '@SfsCms/admin/content/_macros.html.twig' as tools %}
-        <div class="ui clearing">
+        <div class="ui clearing segment basic" style="padding: 0;">
             <div class="ui right floated header">
                 {% if not content_config.admin.version_recompile.is_granted or is_granted(content_config.admin.version_recompile.is_granted, entity) %}
                     <a class="ui button secondary"
@@ -18,34 +18,33 @@
             <h4 class="ui left floated header">{{ ('admin_'~content_type~'.version_info.compiled.title')|trans }}</h4>
         </div>
             {% if version.hasCompileErrors %}
-            <div class="alert alert-danger" role="alert">
+            <div class="ui ignored negative message" role="alert">
                 <i class="bi bi-exclamation-triangle text-danger"
                    title="This version has some compilation error"></i>
                 {{ ('admin_'~content_type~'.version_info.compiled.error')|trans }}
             </div>
         {% else %}
             {% if not content_can_be_compiled %}
-                <div class="alert alert-warning" role="alert">
+                <div class="ui ignored warning message" role="alert">
                     {{ ('admin_'~content_type~'.version_info.compiled.pre_compile_content_disabled')|trans }}
                 </div>
             {% elseif version_entity.compiled is empty %}
-                <div class="alert alert-danger" role="alert">
+                <div class="ui ignored negative message" role="alert">
                     {{ ('admin_'~content_type~'.version_info.compiled.pre_compile_content_missing')|trans }}
                 </div>
             {% endif %}
 
             {% if not content_can_compile_modules %}
-                <div class="alert alert-warning" role="alert">
+                <div class="ui ignored warning message" role="alert">
                     {{ ('admin_'~content_type~'.version_info.compiled.pre_compile_modules_disabled')|trans }}
                 </div>
             {% elseif version_entity.compiledModules is empty %}
-                <div class="alert alert-danger" role="alert">
+                <div class="ui ignored negative message" role="alert">
                     {{ ('admin_'~content_type~'.version_info.compiled.pre_compile_modules_missing')|trans }}
                 </div>
             {% endif %}
         {% endif %}
-        <div class="ui segment basic">
-            <div class="ui styled accordion">
+        <div class="ui styled accordion fluid">
                 {% set first = false %}
                 {% for key,compiled in version_entity.compiled %}
                     {% set keyCleaned = key|replace({'/': '', ' ': '', '.' : ''}) %}
@@ -82,6 +81,5 @@
                     {% set first = false %}
                 {% endfor %}
             </div>
-        </div>
     {% endblock %}
 {% endembed %}
