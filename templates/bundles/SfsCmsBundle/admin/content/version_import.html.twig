@@ -17,6 +17,8 @@
     {{ parent() }}
     <a class="section" href="{{ url('sfs_cms_admin_content_'~content_type~'_list') }}">{{ ('admin_'~content_type~'.list.breadcrumb')|trans }}</a>
     <i class="right chevron icon divider"></i>
+    <a class="section" href="{{ url('sfs_cms_admin_content_'~content_type~'_details', {'content':entity}) }}">{{ ('admin_'~content_type~'.read.breadcrumb')|trans({'%name%': entity.name}) }}</a>
+    <i class="right chevron icon divider"></i>
     <a class="section" href="{{ url('sfs_cms_admin_content_'~content_type~'_versions', {'content':entity}) }}">{{ ('admin_'~content_type~'.versions.breadcrumb')|trans({'%name%':entity.name}) }}</a>
     <i class="right chevron icon divider"></i>
     <span class="section active">{{ ('admin_'~content_type~'.import_version.breadcrumb')|trans({'%name%':entity.name}) }}</span>

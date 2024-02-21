@@ -25,7 +25,7 @@
         </div>
         <div class="ui divider"></div>
         {% if not content_config.admin.update.is_granted or is_granted(content_config.admin.update.is_granted, entity) %}
-            <a class="fluid ui primary labeled icon button" href="{{ url('sfs_cms_admin_content_'~content_type~'_seo', {'content':entity}) }}">
+            <a class="fluid ui primary labeled icon button" href="{{ url('sfs_cms_admin_content_'~content_type~'_update', {'content':entity}) }}">
                 <i class="icon pencil"></i>{{ ('admin_'~content_type~'.read.indexing.edit.link')|trans }}</a>
         {% else %}
             <a class="fluid ui primary labeled icon button disabled"><i class="icon pencil"></i> {{ ('admin_'~content_type~'.read.indexing.edit.link')|trans }}</a>

@@ -17,7 +17,7 @@
     {{ parent() }}
     <a class="section" href="{{ url('sfs_cms_admin_content_'~content_type~'_list') }}">{{ ('admin_'~content_type~'.list.breadcrumb')|trans }}</a>
     <i class="right chevron icon divider"></i>
-    <a class="section" href="{{ url('sfs_cms_admin_content_'~content_type~'_list') }}">{{ ('admin_'~content_type~'.list.breadcrumb')|trans }}</a>
+    <a class="section" href="{{ url('sfs_cms_admin_content_'~content_type~'_details', {'content':entity}) }}">{{ ('admin_'~content_type~'.read.breadcrumb')|trans({'%name%': entity.name}) }}</a>
     <i class="right chevron icon divider"></i>
     <a class="section active">{{ ('admin_'~content_type~'.version_seo.breadcrumb')|trans({'%name%':entity.name}) }}</a>
 {% endblock breadcrums_content %}
@@ -50,7 +50,7 @@
             <div class="ui hidden divider"></div>
             <div class="ui buttons">
                 <button class="ui labeled icon primary button" type="submit"><i class="save icon"></i> {{ ('admin_'~content_type~'.version_seo.actions.save.button')|trans }}</button>
-                <a href="{{ url('sfs_cms_admin_content_'~content_type~'_list') }}" class="ui button">{{ ('admin_'~content_type~'.version_seo.actions.cancel.button')|trans }}</a>
+                <a href="{{ url('sfs_cms_admin_content_'~content_type~'_details', {'content':entity}) }}" class="ui button">{{ ('admin_'~content_type~'.version_seo.actions.cancel.button')|trans }}</a>
             </div>
         {{ form_end(form) }}
     </div>
