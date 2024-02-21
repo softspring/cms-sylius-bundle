@@ -15,7 +15,6 @@
                     <a class="ui button secondary disabled"><i class="icon sync"></i>{{ ('admin_'~content_type~'.version_info.actions.recompile.link')|trans }}</a>
                 {% endif %}
             </div>
-            <h4 class="ui left floated header">{{ ('admin_'~content_type~'.version_info.compiled.title')|trans }}</h4>
         </div>
             {% if version.hasCompileErrors %}
             <div class="ui ignored negative message" role="alert">
