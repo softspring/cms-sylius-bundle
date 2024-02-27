@@ -94,17 +94,15 @@
                 {% endif %}
                 </div>
             </td>
-            <td>{% if version.deleteOnCleanup %}
-                    {% if not content_config.admin.delete.is_granted or is_granted(content_config.admin.delete.is_granted, entity) %}
+            <td>{% if not content_config.admin.delete.is_granted or is_granted(content_config.admin.delete.is_granted, entity) %}
                         <a class="ui icon button" href="{{ url('sfs_cms_admin_content_'~content_type~'_delete', {'content':entity}) }}">
                             <i class="icon trash alternate"
                                title="This version will be removed on versions cleanup"></i></a>
-                    {% else %}
+                    {% elseif version.deleteOnCleanup %}
                         <a class="ui icon button disabled">
                             <i class="icon trash alternate"
                                title="This version will be removed on versions cleanup"></i></a>
                     {% endif %}
-                {% endif %}
             </td>
         </tr>
     {% endfor %}
