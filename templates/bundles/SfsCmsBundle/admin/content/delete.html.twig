@@ -5,6 +5,9 @@
 {% block title %}{{ ('admin_'~content_type~'.delete.meta.title')|trans({'%name%':entity.name}) }}{% endblock %}
 {% block header_title %}{{ ('admin_'~content_type~'.delete.title')|trans({'%name%':entity.name}) }}{% endblock %}
 {% block header_subtitle %}Manage your page{% endblock %}
+{% block header_buttons %}
+    {% include '@SfsCms/admin/content/_content_header_buttons.html.twig' %}
+{% endblock %}
 {% block breadcrums_content %}
     {{ parent() }}
     <a class="section" href="{{ url('sfs_cms_admin_content_'~content_type~'_list') }}">{{ ('admin_'~content_type~'.list.breadcrumb')|trans }}</a>

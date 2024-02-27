@@ -12,6 +12,9 @@
 
 {% block header_title %}{{ ('admin_'~content_type~'.update.title')|trans({'%name%':entity.name}) }}{% endblock %}
 {% block header_subtitle %}Manage your page{% endblock %}
+{% block header_buttons %}
+    {% include '@SfsCms/admin/content/_content_header_buttons.html.twig' %}
+{% endblock %}
 
 {% block breadcrums_content %}
     {{ parent() }}
