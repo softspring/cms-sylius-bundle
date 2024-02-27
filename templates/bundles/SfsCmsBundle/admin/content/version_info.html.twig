@@ -64,7 +64,15 @@
                             <a class="item disabled">{{ ('admin_'~content_type~'.tabs_menu.translations')|trans }}</a>
                         {% endif %}
                         <hr class="ui divider">
-                        <a class="item text-danger disabled" href="#">Delete</a>
+                        {% if not content_config.admin.version_delete.is_granted or is_granted(content_config.admin.version_delete.is_granted, entity) %}
+                            <a class="ui item red header" href="{{ url('sfs_cms_admin_content_'~content_type~'_delete_version', {'content':entity, 'version':version}) }}">
+                                {{ ('admin_'~content_type~'.tabs_menu.delete')|trans }}
+                            </a>
+                        {% elseif version.deleteOnCleanup %}
+                            <a class="ui item red header disabled">
+                                {{ ('admin_'~content_type~'.tabs_menu.delete')|trans }}
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
             {% endblock actions %}
