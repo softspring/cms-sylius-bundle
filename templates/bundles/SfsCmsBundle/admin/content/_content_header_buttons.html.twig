@@ -1,0 +1,9 @@
+{% trans_default_domain 'sfs_cms_contents' %}
+
+{% if not content_config.admin.duplicate.is_granted or is_granted(content_config.admin.duplicate.is_granted, entity) %}
+    <a class="ui primary labeled icon button" href="{{ url('sfs_cms_admin_content_'~content_type~'_duplicate', {'content':entity}) }}">
+        <i class="icon copy outline"></i>{{ ('admin_page.header_buttons.duplicate')|trans }}</a>
+{% else %}
+    <a class="ui primary labeled icon button disabled">
+        <i class="icon copy outline"></i>{{ ('admin_page.header_buttons.duplicate')|trans }}</a>
+{% endif %}
