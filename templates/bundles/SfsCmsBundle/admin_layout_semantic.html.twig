@@ -37,7 +37,17 @@
 
         <div class="middle aligned column">
             <div class="ui right floated buttons">
-                {% block header_buttons %}{% endblock %}
+                {% block header_buttons %}
+                    <li class="item">
+                    {% if not content_config.admin.duplicate.is_granted or is_granted(content_config.admin.duplicate.is_granted, entity) %}
+                        <a class="ui primary labeled icon button" href="{{ url('sfs_cms_admin_content_'~content_type~'_duplicate', {'content':entity}) }}">
+                            <i class="icon copy outline"></i>{{ ('admin_content.header_buttons.duplicate')|trans }}</a>
+                    {% else %}
+                        <a class="ui primary labeled icon button disabled">
+                            <i class="icon copy outline"></i>{{ ('admin_content.header_buttons.duplicate')|trans }}</a>
+                    {% endif %}
+                    </li>
+                {% endblock %}
             </div>
         </div>
     </div>
