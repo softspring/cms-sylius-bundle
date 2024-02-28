@@ -12,6 +12,14 @@
                 <a class="ui labeled icon button" href="{{ url('sfs_cms_admin_content_'~content_type~'_details', {'content':entity}) }}">
                     <i class="icon search"></i>{{ ('admin_'~content_type~'.list.actions.details.link')|trans }}</a>
                 {% endif %}
+                {% if not content_config.admin.version_create.is_granted or is_granted(content_config.admin.version_create.is_granted, entity) %}
+                <a class="ui labeled icon button" href="{{ url('sfs_cms_admin_content_'~content_type~'_content', {'content':entity}) }}">
+                    <i class="icon pencil"></i>{{ ('admin_'~content_type~'.list.actions.content.link')|trans }}</a>
+                {% endif %}
+                {% if not content_config.admin.preview.is_granted or is_granted(content_config.admin.preview.is_granted, entity) %}
+                <a class="ui labeled icon button" href="{{ url('sfs_cms_admin_content_'~content_type~'_preview', {'content':entity}) }}">
+                    <i class="icon eye"></i>{{ ('admin_'~content_type~'.list.actions.preview.link')|trans }}</a>
+                {% endif %}
             </div>
         </td>
     </tr>
