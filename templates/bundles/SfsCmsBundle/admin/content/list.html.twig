@@ -45,9 +45,14 @@
                                 {{ form_row(filter_form.sites, {'attr':{'onchange':'submit()'}}) }}
                             </div>
                         {% endif %}
-                        {% if filterForm.sites is defined %}
+                        {% if filterForm.status is defined %}
                             <div class="field">
                                 {{ form_row(filter_form.status, {'attr':{'onchange':'submit()'}}) }}
+                            </div>
+                        {% endif %}
+                        {% if filterForm.publishedVersionContent is defined %}
+                            <div class="field">
+                                {{ form_row(filter_form.publishedVersionContent, {'attr':{'onchange':'submit()'}}) }}
                             </div>
                         {% endif %}
                         <div class="field">
