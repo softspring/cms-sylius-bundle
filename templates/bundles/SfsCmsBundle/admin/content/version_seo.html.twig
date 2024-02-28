@@ -10,7 +10,7 @@
 
 {% block title %}{{ ('admin_'~content_type~'.version_seo.meta.title')|trans({'%name%':entity.name}) }}{% endblock %}
 
-{% block header_title %}{{ ('admin_'~content_type~'.version_seo.title')|trans({'%name%':entity.name, '%versionNumber%': version_entity.versionNumber}) }}{% endblock %}
+{% block header_title %}{{ ('admin_'~content_type~'.version_seo.title')|trans({'%name%':entity.name, '%versionNumber%': prev_version.versionNumber}) }}{% endblock %}
 {% block header_subtitle %}Manage your page{% endblock %}
 {% block header_buttons %}
     {% include '@SfsCms/admin/content/_content_header_buttons.html.twig' %}
