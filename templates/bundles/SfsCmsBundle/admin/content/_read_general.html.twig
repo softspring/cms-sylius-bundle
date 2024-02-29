@@ -31,7 +31,11 @@
             {% if entity.publishedVersion %}
             <div class="item">
                 {{ ('admin_'~content_type~'.read.general.publishDate')|trans }}
-                <div class="header">{{ entity.publishedVersion.createdAt|date('H:i d-m-Y') }}</div>
+                <div class="header">
+                    {% if entity.lastModified %}
+                        {{ entity.lastModified|date('H:i d-m-Y') }}
+                    {% endif %}
+                </div>
             </div>
             {% endif %}
         </div>

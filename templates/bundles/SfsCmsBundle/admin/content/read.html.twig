@@ -22,6 +22,24 @@
 {% block content %}
     {% include ['@content/'~content_type~'/admin/_content_tabs.html.twig', '@SfsCms/admin/content/_content_tabs.html.twig']  with {'current':'details', 'content_type':content_type, 'entity':entity} %}
 
+    {% if cache_alert is defined %}
+        <div class="ui ignored warning message" role="alert">
+            {% if content.publishedVersion %}
+                {{ 'admin_content.read.published_cache_alert_raw'|trans({
+                    '%publishedDateTime%': cache_alert.publishedDatetime|date('H:i d-m-Y'),
+                    '%maxRouteTtl%': cache_alert.maxRouteTtl,
+                    '%waitSeconds%': cache_alert.waitTime,
+                }, 'sfs_cms_admin')|raw }}
+            {% else %}
+                {{ 'admin_content.read.unpublished_cache_alert_raw'|trans({
+                    '%publishedDateTime%': cache_alert.publishedDatetime|date('H:i d-m-Y'),
+                    '%maxRouteTtl%': cache_alert.maxRouteTtl,
+                    '%waitSeconds%': cache_alert.waitTime,
+                }, 'sfs_cms_admin')|raw }}
+            {% endif %}
+        </div>
+    {% endif %}
+
     <div class="ui bottom attached active tab segment">
         <div class="ui grid">
             <div class="four wide column">
