@@ -21,19 +21,19 @@ class SfsCmsSyliusExtension extends Extension implements PrependExtensionInterfa
 
     public function prepend(ContainerBuilder $container)
     {
-//        $doctrineConfig = [];
-//
-//        // add a default config to force load target_entities, will be overwritten by ResolveDoctrineTargetEntityPass
-//        $doctrineConfig['orm']['resolve_target_entities'][BlockInterface::class] = 'App\Entity\Block';
-//        $doctrineConfig['orm']['resolve_target_entities'][ContentInterface::class] = 'App\Entity\Content';
-//
-//        // disable auto-mapping for this bundle to prevent mapping errors
-//        $doctrineConfig['orm']['mappings']['SfsCmsBundle'] = [
-//            'is_bundle' => true,
-//            'mapping' => true,
-//        ];
-//
-//        $container->prependExtensionConfig('doctrine', $doctrineConfig);
+        //        $doctrineConfig = [];
+        //
+        //        // add a default config to force load target_entities, will be overwritten by ResolveDoctrineTargetEntityPass
+        //        $doctrineConfig['orm']['resolve_target_entities'][BlockInterface::class] = 'App\Entity\Block';
+        //        $doctrineConfig['orm']['resolve_target_entities'][ContentInterface::class] = 'App\Entity\Content';
+        //
+        //        // disable auto-mapping for this bundle to prevent mapping errors
+        //        $doctrineConfig['orm']['mappings']['SfsCmsBundle'] = [
+        //            'is_bundle' => true,
+        //            'mapping' => true,
+        //        ];
+        //
+        //        $container->prependExtensionConfig('doctrine', $doctrineConfig);
 
         $version = InstalledVersions::getVersion('softspring/cms-sylius-bundle');
         if (str_ends_with($version, '-dev')) {
@@ -44,7 +44,7 @@ class SfsCmsSyliusExtension extends Extension implements PrependExtensionInterfa
                 'sfs_cms_sylius_bundle' => [
                     'version' => $version,
                     'version_branch' => str_ends_with($version, '-dev') ? str_replace('.x-dev', '', $version) : false,
-                ]
+                ],
             ],
 //            'paths' => [
 //                '%kernel.project_dir%/cms'=> 'cms',

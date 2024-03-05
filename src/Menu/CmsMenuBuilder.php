@@ -60,7 +60,7 @@ final class CmsMenuBuilder
                     ]],
                 ])
                 ->setLabel("sfs_sylius_cms_plugin.ui.contents.{$contentId}")
-                ->setLabelAttribute( 'icon', $contentConfig['meta']['sylius']['icon'] ?? 'vertically file alternate')
+                ->setLabelAttribute('icon', $contentConfig['meta']['sylius']['icon'] ?? 'vertically file alternate')
             ;
         }
 
@@ -68,11 +68,11 @@ final class CmsMenuBuilder
             ->addChild('routes', [
                 'route' => 'sfs_cms_admin_routes_list',
                 'extras' => ['routes' => [
-                    ['route' => "sfs_cms_admin_routes_list"],
-                    ['route' => "sfs_cms_admin_routes_create"],
-                    ['route' => "sfs_cms_admin_routes_update"],
-                    ['route' => "sfs_cms_admin_routes_delete"],
-                    ['route' => "sfs_cms_admin_routes_read"],
+                    ['route' => 'sfs_cms_admin_routes_list'],
+                    ['route' => 'sfs_cms_admin_routes_create'],
+                    ['route' => 'sfs_cms_admin_routes_update'],
+                    ['route' => 'sfs_cms_admin_routes_delete'],
+                    ['route' => 'sfs_cms_admin_routes_read'],
                 ]],
             ])
             ->setLabel('sfs_sylius_cms_plugin.ui.routes')
@@ -83,11 +83,11 @@ final class CmsMenuBuilder
             ->addChild('blocks', [
                 'route' => 'sfs_cms_admin_blocks_list',
                 'extras' => ['routes' => [
-                    ['route' => "sfs_cms_admin_blocks_list"],
-                    ['route' => "sfs_cms_admin_blocks_create"],
-                    ['route' => "sfs_cms_admin_blocks_update"],
-                    ['route' => "sfs_cms_admin_blocks_delete"],
-                    ['route' => "sfs_cms_admin_blocks_read"],
+                    ['route' => 'sfs_cms_admin_blocks_list'],
+                    ['route' => 'sfs_cms_admin_blocks_create'],
+                    ['route' => 'sfs_cms_admin_blocks_update'],
+                    ['route' => 'sfs_cms_admin_blocks_delete'],
+                    ['route' => 'sfs_cms_admin_blocks_read'],
                 ]],
             ])
             ->setLabel('sfs_sylius_cms_plugin.ui.blocks')
@@ -98,11 +98,11 @@ final class CmsMenuBuilder
             ->addChild('menus', [
                 'route' => 'sfs_cms_admin_menus_list',
                 'extras' => ['routes' => [
-                    ['route' => "sfs_cms_admin_menus_list"],
-                    ['route' => "sfs_cms_admin_menus_create"],
-                    ['route' => "sfs_cms_admin_menus_update"],
-                    ['route' => "sfs_cms_admin_menus_delete"],
-                    ['route' => "sfs_cms_admin_menus_read"],
+                    ['route' => 'sfs_cms_admin_menus_list'],
+                    ['route' => 'sfs_cms_admin_menus_create'],
+                    ['route' => 'sfs_cms_admin_menus_update'],
+                    ['route' => 'sfs_cms_admin_menus_delete'],
+                    ['route' => 'sfs_cms_admin_menus_read'],
                 ]],
             ])
             ->setLabel('sfs_sylius_cms_plugin.ui.menus')
@@ -113,11 +113,11 @@ final class CmsMenuBuilder
             ->addChild('medias', [
                 'route' => 'sfs_media_admin_medias_list',
                 'extras' => ['routes' => [
-                    ['route' => "sfs_media_admin_medias_list"],
-                    ['route' => "sfs_media_admin_medias_create"],
-                    ['route' => "sfs_media_admin_medias_update"],
-                    ['route' => "sfs_media_admin_medias_delete"],
-                    ['route' => "sfs_media_admin_medias_read"],
+                    ['route' => 'sfs_media_admin_medias_list'],
+                    ['route' => 'sfs_media_admin_medias_create'],
+                    ['route' => 'sfs_media_admin_medias_update'],
+                    ['route' => 'sfs_media_admin_medias_delete'],
+                    ['route' => 'sfs_media_admin_medias_read'],
                 ]],
             ])
             ->setLabel('sfs_sylius_cms_plugin.ui.medias')
