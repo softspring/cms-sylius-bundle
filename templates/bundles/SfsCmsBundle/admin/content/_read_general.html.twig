@@ -43,7 +43,7 @@
         {% if entity.publishedVersion %}
             {% if not content_config.admin.unpublish.is_granted or is_granted(content_config.admin.unpublish.is_granted, entity) %}
             <a class="fluid ui primary labeled icon button" href="{{ url('sfs_cms_admin_content_'~content_type~'_unpublish', {'content':entity}) }}"
-                   onclick="return confirm('{{ ('admin_'~content_type~'.read.actions.unpublish.confirm')|trans({'%name%':entity.name}) }}')">
+               data-requires-confirmation>
                         <i class="icon eye slash"></i>{{ ('admin_'~content_type~'.read.actions.unpublish.link')|trans }}</a>
             {% else %}
                 <a class="fluid ui primary labeled icon button disabled">
