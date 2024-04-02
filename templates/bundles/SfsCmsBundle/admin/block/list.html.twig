@@ -19,7 +19,7 @@
             <i class="plus icon"></i>
             <span class="text">{{ 'admin_blocks.list.actions.create.link'|trans }}</span>
             <div class="menu">
-                {% for blockKey, blockConfig in config|filter((blockConfig) => not blockConfig.static) %}
+                {% for blockKey, blockConfig in blocks_config|filter((blockConfig) => not blockConfig.static) %}
                     <div class="item">
                         <a href="{{ url('sfs_cms_admin_blocks_create', {'blockType':blockKey}) }}">{{ ('admin_'~blockKey~'.name')|trans({}, 'sfs_cms_blocks') }}</a>
                     </div>
