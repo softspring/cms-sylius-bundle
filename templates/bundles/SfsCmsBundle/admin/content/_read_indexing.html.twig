@@ -12,15 +12,15 @@
         <div class="ui list">
             <div class="item">
                 {{ ('admin_'~content_type~'.read.indexing.noIndex.label')|trans }}
-                <div class="header">{{ ('admin_'~content_type~'.read.indexing.noIndex.'~entity.indexing.noIndex|default(false)?'yes':'no')|trans }}</div>
+                <div class="header">{{ ('admin_'~content_type~'.read.indexing.noIndex.'~(entity.indexing.noIndex|default(false)?'yes':'no'))|trans }}</div>
             </div>
             <div class="item">
                 {{ ('admin_'~content_type~'.read.indexing.noFollow.label')|trans }}
-                <div class="header">{{ ('admin_'~content_type~'.read.indexing.noFollow.'~entity.indexing.noFollow|default(false)?'yes':'no')|trans }}</div>
+                <div class="header">{{ ('admin_'~content_type~'.read.indexing.noFollow.'~(entity.indexing.noFollow|default(false)?'yes':'no'))|trans }}</div>
             </div>
             <div class="item">
                 {{ ('admin_'~content_type~'.read.indexing.sitemap.label')|trans }}
-                <div class="header">{{ ('admin_'~content_type~'.read.indexing.sitemap.'~entity.indexing.sitemap|default(false)?'yes':'no')|trans }}</div>
+                <div class="header">{{ ('admin_'~content_type~'.read.indexing.sitemap.'~(entity.indexing.sitemap|default(false)?'yes':'no'))|trans }}</div>
             </div>
         </div>
         <div class="ui divider"></div>
