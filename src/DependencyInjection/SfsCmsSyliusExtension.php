@@ -46,15 +46,15 @@ class SfsCmsSyliusExtension extends Extension implements PrependExtensionInterfa
                     'version_branch' => str_ends_with($version, '-dev') ? str_replace('.x-dev', '', $version) : false,
                 ],
             ],
-//            'paths' => [
-//                '%kernel.project_dir%/cms'=> 'cms',
-//                '%kernel.project_dir%/cms/modules'=> 'module', // use @module/html/render.html.twig
-//                '%kernel.project_dir%/vendor/softspring/cms-module-collection/modules'=> 'module', // use @module/html/render.html.twig
-//                '%kernel.project_dir%/cms/contents'=> 'content', // use @content/article/render.html.twig
-//                '%kernel.project_dir%/cms/blocks'=> 'block', // use @block/header/render.html.twig
-//                '%kernel.project_dir%/cms/layouts'=> 'layout', // use @layout/default/render.html.twig
-//                '%kernel.project_dir%/cms/menus'=> 'menu', // use @menu/main/render.html.twig
-//            ],
+            //            'paths' => [
+            //                '%kernel.project_dir%/cms'=> 'cms',
+            //                '%kernel.project_dir%/cms/modules'=> 'module', // use @module/html/render.html.twig
+            //                '%kernel.project_dir%/vendor/softspring/cms-module-collection/modules'=> 'module', // use @module/html/render.html.twig
+            //                '%kernel.project_dir%/cms/contents'=> 'content', // use @content/article/render.html.twig
+            //                '%kernel.project_dir%/cms/blocks'=> 'block', // use @block/header/render.html.twig
+            //                '%kernel.project_dir%/cms/layouts'=> 'layout', // use @layout/default/render.html.twig
+            //                '%kernel.project_dir%/cms/menus'=> 'menu', // use @menu/main/render.html.twig
+            //            ],
         ]);
     }
 }
