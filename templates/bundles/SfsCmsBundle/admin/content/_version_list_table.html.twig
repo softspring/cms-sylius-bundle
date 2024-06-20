@@ -23,9 +23,9 @@
             <td>{{ ('admin_'~content_type~'.versions.origin.'~(version.origin|default('null')))|trans }} {{ version.originDescription ? '('~version.originDescription~')' : '' }}</td>
             <td>
                 {% if version.note %}
-                    <a class="ui labeled icon button" href="{{ url('sfs_cms_admin_content_'~content_type~'_version_info', {'content':entity, 'version':version}) }}"><i class="icon tag"></i> {{ version.note }}</a>
+                    <a class="ui labeled icon button" href="{{ url('sfs_cms_admin_content_'~content_type~'_version_info', {'content':entity, 'version':version.id}) }}"><i class="icon tag"></i> {{ version.note }}</a>
                 {% else %}
-                    <a class="ui labeled icon button" href="{{ url('sfs_cms_admin_content_'~content_type~'_version_info', {'content':entity, 'version':version}) }}" class="text-muted"><i class="icon tag"></i> {{ ('admin_'~content_type~'.versions.actions.add_note.link')|trans }}</a>
+                    <a class="ui labeled icon button" href="{{ url('sfs_cms_admin_content_'~content_type~'_version_info', {'content':entity, 'version':version.id}) }}" class="text-muted"><i class="icon tag"></i> {{ ('admin_'~content_type~'.versions.actions.add_note.link')|trans }}</a>
                 {% endif %}
             </td>
             <td>
@@ -41,12 +41,12 @@
                 {% if not content_config.admin.version_lock.is_granted or is_granted(content_config.admin.version_lock.is_granted, version) %}
                     {% if version.keep %}
                         <a class="ui icon button black"
-                           href="{{ url('sfs_cms_admin_content_'~content_type~'_unkeep_version', {'content':entity, 'version':version, 'back': 'versions'}) }}"
+                           href="{{ url('sfs_cms_admin_content_'~content_type~'_unkeep_version', {'content':entity, 'version':version.id, 'back': 'versions'}) }}"
                            title="{{ ('admin_'~content_type~'.versions.actions.keep.link')|trans }}"><i
                                     class="icon lock"></i></a>
                     {% else %}
                         <a class="ui icon button grey"
-                           href="{{ url('sfs_cms_admin_content_'~content_type~'_keep_version', {'content':entity, 'version':version, 'back': 'versions'}) }}"
+                           href="{{ url('sfs_cms_admin_content_'~content_type~'_keep_version', {'content':entity, 'version':version.id, 'back': 'versions'}) }}"
                            title="{{ ('admin_'~content_type~'.versions.actions.nokeep.link')|trans }}"><i
                                     class="icon lock open"></i></a>
                     {% endif %}
@@ -64,30 +64,30 @@
             <td>
                 <div class="ui buttons">
                 {% if not content_config.admin.version_info.is_granted or is_granted(content_config.admin.version_info.is_granted, version) %}
-                    <a href="{{ url('sfs_cms_admin_content_'~content_type~'_version_info', {'content':entity, 'version':version}) }}"
+                    <a href="{{ url('sfs_cms_admin_content_'~content_type~'_version_info', {'content':entity, 'version':version.id}) }}"
                        class="ui labeled icon button">{{ ('admin_'~content_type~'.versions.actions.info.link')|trans }} <i class="icon search"></i></a>
                 {% endif %}
 
                 {% if not content_config.admin.version_create.is_granted or is_granted(content_config.admin.version_create.is_granted, version) %}
-                    <a href="{{ url('sfs_cms_admin_content_'~content_type~'_content_from_version', {'content':entity, 'prevVersion':version}) }}"
+                    <a href="{{ url('sfs_cms_admin_content_'~content_type~'_content_from_version', {'content':entity, 'prevVersion':version.id}) }}"
                        class="ui labeled icon button">{{ ('admin_'~content_type~'.versions.actions.edit.link')|trans }}  <i class="icon pencil"></i></a>
                 {% endif %}
 
                 {% if not content_config.admin.preview.is_granted or is_granted(content_config.admin.preview.is_granted, version) %}
-                    <a href="{{ url('sfs_cms_admin_content_'~content_type~'_preview', {'content':entity, 'version':version}) }}"
+                    <a href="{{ url('sfs_cms_admin_content_'~content_type~'_preview', {'content':entity, 'version':version.id}) }}"
                        class="ui labeled icon button">{{ ('admin_'~content_type~'.versions.actions.preview.link')|trans }}
                         <i class="icon eye"></i></a>
                 {% endif %}
 
                 {% if not content_config.admin.export_version.is_granted or is_granted(content_config.admin.export_version.is_granted, version) %}
-                    <a href="{{ url('sfs_cms_admin_content_'~content_type~'_export_version', {'content':entity, 'version':version}) }}"
+                    <a href="{{ url('sfs_cms_admin_content_'~content_type~'_export_version', {'content':entity, 'version':version.id}) }}"
                        class="ui labeled icon button">{{ ('admin_'~content_type~'.versions.actions.export.link')|trans }}
                         <i class="icon download"></i></a>
                 {% endif %}
 
                 {% if not content_config.admin.publish_version.is_granted or is_granted(content_config.admin.publish_version.is_granted, version) %}
                     {% if not version.published %}
-                        <a href="{{ url('sfs_cms_admin_content_'~content_type~'_publish_version', {'content':entity, 'version':version}) }}"
+                        <a href="{{ url('sfs_cms_admin_content_'~content_type~'_publish_version', {'content':entity, 'version':version.id}) }}"
                            class="ui labeled icon button">{{ ('admin_'~content_type~'.versions.actions.publish.link')|trans }}
                             <i class="icon external alternate"></i></a>
                     {% endif %}
@@ -96,7 +96,7 @@
             </td>
             <td>
                 {% if not content_config.admin.version_delete.is_granted or is_granted(content_config.admin.version_delete.is_granted, entity) %}
-                <a class="ui icon button" href="{{ url('sfs_cms_admin_content_'~content_type~'_delete_version', {'content':entity, 'version':version}) }}">
+                <a class="ui icon button" href="{{ url('sfs_cms_admin_content_'~content_type~'_delete_version', {'content':entity, 'version':version.id}) }}">
                         <i class="icon trash alternate"
                            title="This version will be removed on versions cleanup"></i></a>
                 {% elseif version.deleteOnCleanup %}
