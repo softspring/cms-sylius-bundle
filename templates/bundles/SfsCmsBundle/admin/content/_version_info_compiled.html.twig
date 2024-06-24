@@ -7,12 +7,22 @@
         {% import '@SfsCms/admin/content/_macros.html.twig' as tools %}
         <div class="ui clearing segment basic" style="padding: 0;">
             <div class="ui right floated header">
-                {% if not content_config.admin.version_recompile.is_granted or is_granted(content_config.admin.version_recompile.is_granted, entity) %}
+                {% if sfs_cms_admin_content_recompile_enabled %}
+                    {% if not content_config.admin.version_recompile.is_granted or is_granted(content_config.admin.version_recompile.is_granted, version_entity) %}
+                        <a class="ui button secondary"
+                           href="{{ url('sfs_cms_admin_content_'~content_type~'_recompile_version', {'content':entity, 'version': version_entity, 'back': 'version_info'}) }}">
+                            <i class="icon sync"></i> {{ ('admin_'~content_type~'.version_info.actions.recompile.link')|trans }}</a>
+                    {% else %}
+                        <a class="ui button secondary disabled"><i class="icon sync"></i>{{ ('admin_'~content_type~'.version_info.actions.recompile.link')|trans }}</a>
+                    {% endif %}
+                {% endif %}
+
+                {% if not content_config.admin.version_clear_compiled.is_granted or is_granted(content_config.admin.version_clear_compiled.is_granted, version_entity) %}
                     <a class="ui button secondary"
-                       href="{{ url('sfs_cms_admin_content_'~content_type~'_recompile_version', {'content':entity, 'version': version_entity, 'back': 'version_info'}) }}">
-                        <i class="icon sync"></i> {{ ('admin_'~content_type~'.version_info.actions.recompile.link')|trans }}</a>
+                       href="{{ url('sfs_cms_admin_content_'~content_type~'_clear_compiled_version', {'content':entity, 'version': version_entity, 'back': 'version_info'}) }}">
+                        <i class="icon sync"></i> {{ ('admin_'~content_type~'.version_info.actions.clear_compiled.link')|trans }}</a>
                 {% else %}
-                    <a class="ui button secondary disabled"><i class="icon sync"></i>{{ ('admin_'~content_type~'.version_info.actions.recompile.link')|trans }}</a>
+                    <a class="ui button secondary disabled"><i class="icon sync"></i>{{ ('admin_'~content_type~'.version_info.actions.clear_compiled.link')|trans }}</a>
                 {% endif %}
             </div>
         </div>
@@ -28,9 +38,13 @@
                     {{ ('admin_'~content_type~'.version_info.compiled.pre_compile_content_disabled')|trans }}
                 </div>
             {% elseif version_entity.compiled is empty %}
-                <div class="ui ignored negative message" role="alert">
-                    {{ ('admin_'~content_type~'.version_info.compiled.pre_compile_content_missing')|trans }}
-                </div>
+                {% if sfs_cms_admin_content_recompile_enabled %}
+                    <div class="ui ignored negative message" role="alert">
+                        {{ ('admin_'~content_type~'.version_info.compiled.pre_compile_content_missing')|trans }}
+                    </div>
+                {% else %}
+
+                {% endif %}
             {% endif %}
 
             {% if not content_can_compile_modules %}
@@ -38,9 +52,13 @@
                     {{ ('admin_'~content_type~'.version_info.compiled.pre_compile_modules_disabled')|trans }}
                 </div>
             {% elseif version_entity.compiledModules is empty %}
-                <div class="ui ignored negative message" role="alert">
-                    {{ ('admin_'~content_type~'.version_info.compiled.pre_compile_modules_missing')|trans }}
-                </div>
+                {% if sfs_cms_admin_content_recompile_enabled %}
+                    <div class="ui ignored negative message" role="alert">
+                        {{ ('admin_'~content_type~'.version_info.compiled.pre_compile_modules_missing')|trans }}
+                    </div>
+                {% else %}
+
+                {% endif %}
             {% endif %}
         {% endif %}
         <div class="ui styled accordion fluid">
