@@ -6,7 +6,7 @@
 [![License](https://poser.pugx.org/softspring/cms-sylius-bundle/license.svg)](https://packagist.org/packages/softspring/cms-sylius-bundle)
 [![PHP Version Require](http://poser.pugx.org/softspring/cms-sylius-bundle/require/php)](https://packagist.org/packages/softspring/cms-sylius-bundle)
 [![Total Downloads](https://poser.pugx.org/softspring/cms-sylius-bundle/downloads)](https://packagist.org/packages/softspring/cms-sylius-bundle)
-[![Build status](https://github.com/softspring/cms-sylius-bundle/actions/workflows/php.yml/badge.svg?branch=5.2)](https://github.com/softspring/cms-sylius-bundle/actions/workflows/php.yml)
+[![Build status](https://github.com/softspring/cms-sylius-bundle/actions/workflows/php.yml/badge.svg?branch=5.3)](https://github.com/softspring/cms-sylius-bundle/actions/workflows/php.yml)
 
 # Installation
 
