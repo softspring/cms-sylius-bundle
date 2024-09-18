@@ -23,11 +23,19 @@
     <div class="ui segment">
         {{ form_start(form,{'attr':{'class':'ui form'}}) }}
             {{ form_row(form.name) }}
-            <strong>{{ form_label(form.items) }}</strong>
-            <div class="ui segment">
-                {{ form_widget(form.items) }}
-                {{ form_errors(form.items) }}
-            </div>
+
+            {% if menu_config.items %}
+                <strong>{{ form_label(form.items) }}</strong>
+                <div class="ui segment">
+                    {{ form_widget(form.items) }}
+                    {{ form_errors(form.items) }}
+                </div>
+            {% endif %}
+
+            {% if menu_config.form_template|default(false) %}
+                {% include menu_config.form_template %}
+            {% endif  %}
+
             {{ form_rest(form) }}
 
             <div class="ui hidden divider"></div>
