@@ -32,6 +32,10 @@
                 </div>
             {% endif %}
 
+            <div class="ui horizontal divider">
+                {{ 'admin_menus.form.items.new_format'|trans }}
+            </div>
+
             {% if menu_config.form_template|default(false) %}
                 {% include menu_config.form_template %}
             {% endif  %}
