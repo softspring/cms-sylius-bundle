@@ -32,6 +32,10 @@
                 </div>
             {% endif %}
 
+            <div class="ui horizontal divider">
+                {{ 'admin_menus.form.items.new_format'|trans }}
+            </div>
+
             {% if menu_config.form_template|default(false) %}
                 {% include menu_config.form_template %}
             {% endif  %}
@@ -40,7 +44,7 @@
 
             <div class="ui hidden divider"></div>
             <div class="ui buttons">
-                <button class="ui labeled icon primary button" type="submit"><i class="plus icon"></i>{{ 'admin_menus.create.actions.create.button'|trans }}</button>
+                <button class="ui labeled icon primary button" type="submit"><i class="save icon"></i>{{ 'admin_menus.create.actions.create.button'|trans }}</button>
                 <a href="{{ url('sfs_cms_admin_menus_list') }}" class="ui button">{{ 'admin_menus.create.actions.cancel.button'|trans }}</a>
             </div>
         {{ form_end(form) }}
