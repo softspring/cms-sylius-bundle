@@ -1,14 +1,13 @@
+# CMS Sylius bundle
 
-*This bundle is under development, more features will be added soon, and existing ones may change.*
+![Latest Stable](https://img.shields.io/packagist/v/softspring/cms-sylius-bundle?label=stable&style=flat-square)
+![Latest Unstable](https://img.shields.io/packagist/v/softspring/cms-sylius-bundle?label=unstable&style=flat-square&include_prereleases)
+![License](https://img.shields.io/packagist/l/softspring/cms-sylius-bundle?style=flat-square)
+![PHP Version](https://img.shields.io/packagist/dependency-v/softspring/cms-sylius-bundle/php?style=flat-square)
+![Downloads](https://img.shields.io/packagist/dt/softspring/cms-sylius-bundle?style=flat-square)
+[![CI](https://img.shields.io/github/actions/workflow/status/softspring/cms-sylius-bundle/php.yml?branch=5.3&style=flat-square&label=CI)](https://github.com/softspring/cms-sylius-bundle/actions/workflows/php.yml)
 
-[![Latest Stable Version](https://poser.pugx.org/softspring/cms-sylius-bundle/v/stable.svg)](https://packagist.org/packages/softspring/cms-sylius-bundle)
-[![Latest Unstable Version](https://poser.pugx.org/softspring/cms-sylius-bundle/v/unstable.svg)](https://packagist.org/packages/softspring/cms-sylius-bundle)
-[![License](https://poser.pugx.org/softspring/cms-sylius-bundle/license.svg)](https://packagist.org/packages/softspring/cms-sylius-bundle)
-[![PHP Version Require](http://poser.pugx.org/softspring/cms-sylius-bundle/require/php)](https://packagist.org/packages/softspring/cms-sylius-bundle)
-[![Total Downloads](https://poser.pugx.org/softspring/cms-sylius-bundle/downloads)](https://packagist.org/packages/softspring/cms-sylius-bundle)
-[![Build status](https://github.com/softspring/cms-sylius-bundle/actions/workflows/php.yml/badge.svg?branch=5.3)](https://github.com/softspring/cms-sylius-bundle/actions/workflows/php.yml)
-
-# Installation
+## Installation
 
 Open a command console, enter your project directory and execute:
 
