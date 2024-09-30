@@ -1,7 +1,7 @@
-{% macro collectionItem(form, allow_delete, button_delete_label, index) %}
+{% macro collectionItem(form, allow_delete, button_delete_label, index, allow_up_down = false) %}
     {% spaceless %}
-        <div data-form-collection="item"
-             data-form-collection-index="{{ index }}"
+        <div data-collection="node"
+             data-collection-index="{{ index }}"
              class="collection-item">
             <div class="collection-box{% if form|length == 1 %} unique-field{% endif %}">
                 <div class="ui grid">
@@ -15,9 +15,19 @@
                         </div>
                     </div>
                     <div class="one wide column middle aligned">
+                        {#{% if allow_up_down %}
+                            <div class="text-right">
+                                <a href="#" data-collection-action="up" class="ui circular icon button remove_route_path">
+                                    <i class="icon times"></i>
+                                </a>
+                                <a href="#" data-collection-action="down" class="ui circular icon button remove_route_path">
+                                    <i class="icon times"></i>
+                                </a>
+                            </div>
+                        {% endif %}#}
                         {% if allow_delete %}
                             <div class="text-right">
-                                <a href="#" data-form-collection="delete" class="negative ui circular icon button remove_route_path">
+                                <a href="#" data-collection-action="delete" class="negative ui circular icon button remove_route_path">
                                     <i class="icon times"></i>
                                     {#                                {{ button_delete_label|trans }}#}
                                 </a>

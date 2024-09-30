@@ -1,7 +1,7 @@
 import '@softspring/cms-bundle/scripts/tools';
 
+import '@softspring/collection-form-type/scripts/collection-form-type';
 import '@softspring/cms-bundle/scripts/admin/routes-forms';
-import '@softspring/cms-bundle/scripts/admin/form-collections';
 import '@softspring/cms-bundle/scripts/admin/fields-visibility';
 import '@softspring/cms-bundle/scripts/admin/locales-widgets';
 
