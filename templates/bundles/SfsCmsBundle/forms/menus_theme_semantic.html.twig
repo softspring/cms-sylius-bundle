@@ -23,11 +23,6 @@
             {%- endif -%}
         </div>
     </div>
-    {#    <div class="col-sm-6 text-end">#}
-    {#        <button type="button" class="btn btn-primary cursor-pointer add_menu_item" data-collection="#{{ id }}">#}
-    {#            {{ 'admin_menus.form.items.add.button'|trans }}#}
-    {#        </button>#}
-    {#    </div>#}
 {% endblock menu_item_collection_label %}
 
 {% block menu_item_collection_widget -%}
@@ -37,32 +32,25 @@
     {% set attr = attr|merge({'class': attr.class|default ~ ' controls collection-widget'}) %}
 
     {% spaceless %}
-        <div data-form-type="collection"
-            {{ block('widget_container_attributes') }}
-            {% if prototype is defined and allow_add %}
-            data-prototype='{{ collectionItem(prototype, allow_delete, button_delete_label, '__name__')|e }}'
-            {%- endif -%}>
+        <div {{ block('widget_container_attributes') }}>
 
             {{ error(form.vars.errors) }}
 
-            {% if prototypes|default is iterable %}
-                {% for key, subPrototype in prototypes %}
-                    <input type="hidden"
-                           data-form-prototype="{{ key }}"
-                           value="{{ collectionItem(subPrototype, allow_delete, button_delete_label, '__name__')|e }}" />
-                {% endfor %}
-            {% endif %}
-
-            <div data-form-collection="list"
-                 class="row collection-list">
+            <div data-collection="collection" id="{{ id }}_container"
+                  class="row collection-list"
+                  data-collection-prototype="{{ collectionItem(prototype, allow_delete, button_delete_label, '__name__', true)|e }}"
+                  data-collection-prototype-name="{{ prototype.vars.name }}"
+            >
                 {% for child in form %}
-                    {{ collectionItem(child, allow_delete, button_delete_label, loop.index0) }}
+                    {{ collectionItem(child, allow_delete, button_delete_label, loop.index0, true) }}
                 {% endfor %}
             </div>
             {% if prototype is defined and allow_add %}
                 <div class="ui hidden divider"></div>
-                <a href="#" class="ui labeled icon button primary add_route_path"
-                   data-form-collection="add">
+                <a class="ui labeled icon button primary"
+                   data-collection-action="add"
+                   data-collection-target="{{ id }}_container"
+                >
                     <i class="icon plus"></i>
                     {{ button_add_label|trans }}
                 </a>
