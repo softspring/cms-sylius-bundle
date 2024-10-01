@@ -25,11 +25,9 @@
             {{ form_row(form.name) }}
 
             {% if menu_config.items %}
-                <strong>{{ form_label(form.items) }}</strong>
-                <div class="ui segment">
-                    {{ form_widget(form.items) }}
-                    {{ form_errors(form.items) }}
-                </div>
+                <p><strong>{{ form_label(form.items) }}</strong></p>
+                {{ form_widget(form.items) }}
+                {{ form_errors(form.items) }}
             {% endif %}
 
             {% if menu_config.form_template|default(false) %}
