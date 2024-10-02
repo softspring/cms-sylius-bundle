@@ -2,7 +2,7 @@
     {% spaceless %}
         <div data-collection="node"
              data-collection-index="{{ index }}"
-             class="collection-item">
+             class="collection-item ui segment message">
             <div class="collection-box{% if form|length == 1 %} unique-field{% endif %}">
                 <div class="ui grid">
                     <div class="twelve wide column">
@@ -30,7 +30,6 @@
                         {% endif %}
                     </div>
                 </div>
-                <div class="ui divider"></div>
             </div>
         </div>
     {% endspaceless %}
