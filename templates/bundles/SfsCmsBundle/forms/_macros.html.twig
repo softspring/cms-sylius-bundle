@@ -6,7 +6,7 @@
             <div class="collection-box{% if form|length == 1 %} unique-field{% endif %}">
                 <div class="ui grid">
                     <div class="twelve wide column">
-                        <div class="fields">
+                        <div class="fields equal width">
                             {% if not form.children|length %}
                                 {{ form_widget(form) }}
                             {% else %}
