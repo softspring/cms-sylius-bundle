@@ -12,6 +12,26 @@
 {% endblock breadcrums_content %}
 
 
+{% block header_buttons %}
+    {% if (checkVersions.new|length) + (checkVersions.delete|length) + (checkVersions.changed|length) %}
+        {% if is_granted('PERMISSION_SFS_MEDIA_ADMIN_MEDIAS_MIGRATE', media) %}
+            <a href="{{ url('sfs_media_admin_medias_migrate', {'media': media}) }}" class="ui labeled icon button  primary"><i class="icon plus"></i> {{ 'admin_medias.read.actions.migrate.button'|trans }}</a>
+        {% else %}
+            <a class="ui labeled icon button  primary disabled"><i class="icon plus"></i> {{ 'admin_medias.read.actions.migrate.button'|trans }}</a>
+        {% endif %}
+    {% endif %}
+    {% if is_granted('PERMISSION_SFS_MEDIA_ADMIN_MEDIAS_UPDATE', media) %}
+        <a href="{{ url('sfs_media_admin_medias_update', {'media': media}) }}" class="ui labeled icon button  primary"><i class="icon plus"></i> {{ 'admin_medias.read.actions.update.button'|trans }}</a>
+    {% else %}
+        <a class="ui labeled icon button  primary disabled"><i class="icon plus"></i> {{ 'admin_medias.read.actions.update.button'|trans }}</a>
+    {% endif %}
+    {% if is_granted('PERMISSION_SFS_MEDIA_ADMIN_MEDIAS_DELETE', media) %}
+        <a href="{{ url('sfs_media_admin_medias_delete', {'media': media}) }}" class="ui labeled icon button  red"><i class="icon plus"></i> {{ 'admin_medias.read.actions.delete.button'|trans }}</a>
+    {% else %}
+        <a class="ui labeled icon button  red disabled"><i class="icon plus"></i> {{ 'admin_medias.read.actions.delete.button'|trans }}</a>
+    {% endif %}
+{% endblock %}
+
 {%- macro bytesToSize(bytes) -%}
     {% set kilobyte = 1024 %}
     {% set megabyte = kilobyte * 1024 %}
