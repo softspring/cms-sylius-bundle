@@ -13,7 +13,7 @@
         {{ form_rest(form) }}
         <div class="ui hidden divider"></div>
         <div class="ui buttons">
-            <input type="submit" value="{{ 'admin_medias.delete.actions.delete.button'|trans }}" class="ui labeled icon primary button" />
+            <button type="submit" class="ui labeled icon primary button"><i class="check icon"></i>{{ 'admin_medias.delete.actions.delete.button'|trans }}</button>
             <a href="{{ url('sfs_media_admin_medias_list') }}" class="ui button">{{ 'admin_medias.delete.actions.cancel.button'|trans }}</a>
         </div>
     {{ form_end(form) }}

@@ -30,8 +30,8 @@
 
         <div class="ui hidden divider"></div>
         <div class="ui buttons">
-            <button class="ui labeled icon primary button" type="submit"><i class="plus icon"></i>{{ 'admin_medias.update.actions.update.button'|trans }}</button>
-            <a href="{{ url('sfs_media_admin_medias_delete', {'media':media.id}) }}" class="ui red button">{{ 'admin_medias.update.actions.delete.button'|trans }}</a>
+            <button class="ui labeled icon primary button" type="submit"><i class="save icon"></i>{{ 'admin_medias.update.actions.update.button'|trans }}</button>
+            <a href="{{ url('sfs_media_admin_medias_delete', {'media':media.id}) }}" class="ui red button"><i class="trash icon"></i>{{ 'admin_medias.read.actions.delete.button'|trans }}</a>
             <a href="{{ url('sfs_media_admin_medias_list') }}" class="ui button">{{ 'admin_medias.update.actions.cancel.button'|trans }}</a>
         </div>
         {{ form_end(form) }}
