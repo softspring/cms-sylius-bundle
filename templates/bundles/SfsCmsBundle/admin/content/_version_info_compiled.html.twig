@@ -28,7 +28,7 @@
         </div>
             {% if version.hasCompileErrors %}
             <div class="ui ignored negative message" role="alert">
-                <i class="bi bi-exclamation-triangle text-danger"
+                <i class="bi bi-exclamation-triangle"
                    title="This version has some compilation error"></i>
                 {{ ('admin_'~content_type~'.version_info.compiled.error')|trans }}
             </div>
@@ -65,7 +65,7 @@
                 {% set first = false %}
                 {% for compiled in version_entity.compiled|filter((compiled)=>compiled.dataPart('content')|default(false)) %}
                     {% set keyCleaned = compiled.key|replace({'/': '', ' ': '', '.' : ''}) %}
-                    <h2 class="title" id="heading{{ keyCleaned }}">
+                    <h2 class="title {{ compiled.hasErrors ? 'ui red message' : '' }}" id="heading{{ keyCleaned }}">
                         <i class="dropdown icon"></i>
                         Pre-compiled content {{ compiled.key }}
                     </h2>
@@ -73,12 +73,15 @@
                          class="content {{ first?'active':'' }}">
                         {% if compiled is not iterable %}
                             {{ tools.drawEsiCalls(compiled.dataPart('content')) }}
-                            <pre class="overflow-auto"
-                                 style="max-height: 600px"><code
-                                        class="text-muted">{{ compiled.dataPart('content') }}</code>
-<code
-        class="text-danger">{{ compiled.dataPart('errors')|default(false) }}</code>
-                                </pre>
+                            {% set errors = compiled.dataPart('errors')|default(false) %}
+                            {% if errors is iterable %}
+                                {% for error in errors %}
+                                    <p style="border: 1px solid #860e0e; padding: 2px;"><code style="color: #860e0e">{{ error|json_encode(128) }}</code></p>
+                                {% endfor %}
+                            {% else %}
+                                {{ errors }}
+                            {% endif %}
+                            <pre class="overflow-auto" style="max-height: 600px"><code class="text-muted">{{ compiled.dataPart('content') }}</code></pre>
                         {% endif %}
                     </div>
                     {% set first = false %}
@@ -86,7 +89,7 @@
 
                 {% for compiled in version_entity.compiled|filter((compiled)=>compiled.dataPart('modules')|default(false)) %}
                     {% set keyCleaned = ('modules'~compiled.key)|replace({'/': '', ' ': '', '.': ''}) %}
-                    <h2 class="title" id="heading{{ keyCleaned }}">
+                    <h2 class="title {{ compiled.hasErrors ? 'ui red message' : '' }}" id="heading{{ keyCleaned }}">
                         <i class="dropdown icon"></i>
                         Pre-compiled modules {{ compiled.key }}
                     </h2>
