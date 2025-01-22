@@ -1,0 +1,42 @@
+{% trans_default_domain 'sfs_cms_admin' %}
+{% extends '@SfsCms/admin_layout_semantic.html.twig' %}
+{% block title %}{{ 'admin_routes.delete.meta.title'|trans }}{% endblock %}
+
+
+{% block header_icon %}vertically linkify{% endblock %}
+{% block header_title %}{{ 'admin_routes.delete.title'|trans }}{% endblock %}
+{% block header_subtitle %}Manage content route{% endblock %}
+
+{% form_theme form
+    '@SyliusUi/Form/theme.html.twig'
+    '@SfsCms/forms/cms_theme_semantic.html.twig'
+    '@SfsCms/forms/routes_theme_semantic.html.twig' %}
+
+{% block breadcrums_content %}
+    {{ parent() }}
+    <a class="section" href="{{ url('sfs_cms_admin_routes_list') }}">{{ 'admin_routes.list.breadcrumb'|trans }}</a><i
+    class="right chevron icon divider"></i>
+    <span class="section active"
+          aria-current="content">{{ 'admin_routes.delete.breadcrumb'|trans({'%name%': route.name|default(route.id) }) }}</span>
+{% endblock breadcrums_content %}
+
+{% block content %}
+    {% include '@SfsCms/admin/route/_route_tabs.html.twig' with {'current':'delete', 'route':route} %}
+
+    <div class="ui hidden divider"></div>
+    <div class="ui segment">
+        {{ ('admin_routes.delete.main_warnings_raw')|trans|raw }}
+
+        {{ form_start(form,{'attr':{'class':'ui form'}}) }}
+        {{ form_widget(form) }}
+        {{ form_rest(form) }}
+        <div class="ui hidden divider"></div>
+        <div class="ui buttons">
+            <button class="ui labeled icon red button" type="submit"><i
+                    class="plus icon"></i>{{ 'admin_routes.delete.actions.delete.button'|trans }}</button>
+            <a href="{{ url('sfs_cms_admin_routes_update', {'route':route.id}) }}"
+               class="ui button">{{ 'admin_routes.delete.actions.cancel.button'|trans }}</a>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock content %}

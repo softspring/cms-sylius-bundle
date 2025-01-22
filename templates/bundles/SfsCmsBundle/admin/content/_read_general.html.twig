@@ -11,10 +11,10 @@
 
     {% block content %}
         <div class="ui list">
-            <div class="item">
+            {#<div class="item">
                 {{ ('admin_'~content_type~'.read.name')|trans }}
                 <div class="header">{{ entity.name }}</div>
-            </div>
+            </div>#}
             <div class="item">
                 {{ ('admin_'~content_type~'.read.sites')|trans }}
                 <div class="header">{{ entity.sites|map((site) => site|sfs_cms_site_name)|join(', ') }}</div>
@@ -24,7 +24,7 @@
 
                 <div class="header">{{ (content_type~'.status.'~entity.status)|trans }}
                 {% if entity.publishedVersion %}
-                    (<a href="{{ url('sfs_cms_admin_content_'~content_type~'_version_info', {'content':entity, 'version':entity.publishedVersion}) }}">v{{ entity.publishedVersion.versionNumber }}</a>)
+                    (<a href="{{ url('sfs_cms_admin_content_'~content_type~'_version_info', {'content':entity.id, 'version':entity.publishedVersion.id}) }}">v{{ entity.publishedVersion.versionNumber }}</a>)
                 {% endif %}
                 </div>
             </div>
@@ -42,7 +42,7 @@
         <div class="ui divider"></div>
         {% if entity.publishedVersion %}
             {% if not content_config.admin.unpublish.is_granted or is_granted(content_config.admin.unpublish.is_granted, entity) %}
-            <a class="fluid ui primary labeled icon button" href="{{ url('sfs_cms_admin_content_'~content_type~'_unpublish', {'content':entity}) }}"
+            <a class="fluid ui primary labeled icon button" href="{{ url('sfs_cms_admin_content_'~content_type~'_unpublish', {'content':entity.id}) }}"
                data-requires-confirmation>
                         <i class="icon eye slash"></i>{{ ('admin_'~content_type~'.read.actions.unpublish.link')|trans }}</a>
             {% else %}
