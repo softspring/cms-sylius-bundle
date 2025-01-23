@@ -8,11 +8,11 @@
         <td>{{ route.content.name|default('') }}</td>
         <td class="text-end">
             <div class="ui buttons">
-                <a class="ui labeled icon button" href="{{ url('sfs_cms_admin_routes_read', {'route':route}) }}">
+                <a class="ui labeled icon button" href="{{ url('sfs_cms_admin_routes_read', {'route':route.id}) }}">
                     <i class="icon search"></i>
                     {{ 'admin_routes.list.actions.details.link'|trans }}
                 </a>
-                <a class="ui labeled icon button" href="{{ url('sfs_cms_admin_routes_update', {'route':route}) }}">
+                <a class="ui labeled icon button" href="{{ url('sfs_cms_admin_routes_update', {'route':route.id}) }}">
                     <i class="icon pencil"></i>
                     {{ 'admin_routes.list.actions.update.link'|trans }}
                 </a>

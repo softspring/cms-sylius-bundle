@@ -57,6 +57,10 @@ final class CmsMenuBuilder
                         ['route' => "sfs_cms_admin_content_{$contentId}_seo"],
                         ['route' => "sfs_cms_admin_content_{$contentId}_seo_version"],
                         ['route' => "sfs_cms_admin_content_{$contentId}_delete_version"],
+                        ['route' => "sfs_cms_admin_content_{$contentId}_translations"],
+                        ['route' => "sfs_cms_admin_content_{$contentId}_translations_export"],
+                        ['route' => "sfs_cms_admin_content_{$contentId}_translations_export_all"],
+                        ['route' => "sfs_cms_admin_content_{$contentId}_translations_import"],
                     ]],
                 ])
                 ->setLabel("sfs_sylius_cms_plugin.ui.contents.{$contentId}")

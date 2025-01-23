@@ -20,15 +20,15 @@
     {{ parent() }}
     <a class="section" href="{{ url('sfs_cms_admin_content_'~content_type~'_list') }}">{{ ('admin_'~content_type~'.list.breadcrumb')|trans }}</a>
     <i class="right chevron icon divider"></i>
-    <a class="section" href="{{ url('sfs_cms_admin_content_'~content_type~'_details', {'content':entity}) }}">{{ ('admin_'~content_type~'.read.breadcrumb')|trans({'%name%': entity.name}) }}</a>
+    <a class="section" href="{{ url('sfs_cms_admin_content_'~content_type~'_details', {'content':entity.id}) }}">{{ ('admin_'~content_type~'.read.breadcrumb')|trans({'%name%': entity.name}) }}</a>
     <i class="right chevron icon divider"></i>
-    <a class="section" href="{{ url('sfs_cms_admin_content_'~content_type~'_versions', {'content':entity}) }}">{{ ('admin_'~content_type~'.versions.breadcrumb')|trans({'%name%':entity.name}) }}</a>
+    <a class="section" href="{{ url('sfs_cms_admin_content_'~content_type~'_versions', {'content':entity.id}) }}">{{ ('admin_'~content_type~'.versions.breadcrumb')|trans({'%name%':entity.name}) }}</a>
     <i class="right chevron icon divider"></i>
     <span class="section active">{{ ('admin_'~content_type~'.import_version.breadcrumb')|trans({'%name%':entity.name}) }}</span>
 {% endblock breadcrums_content %}
 
 {% block content %}
-   {% include '@SfsCms/admin/content/_content_tabs.html.twig' with {'current':'versions', 'content':content, 'entity':entity} %}
+    {% include ['@content/'~content_type~'/admin/_content_tabs.html.twig', '@SfsCms/admin/content/_content_tabs.html.twig']  with {'current':'versions', 'content_entity':content} %}
 
     <div class="container-fluid p-3 bg-white">
         <div class="row mt-4">
@@ -40,7 +40,7 @@
             <div class="ui hidden divider"></div>
             <div class="ui buttons">
                 <button class="ui labeled icon primary button" type="submit"><i class="upload icon"></i> {{ ('admin_'~content_type~'.import_version.actions.import.button')|trans }}</button>
-                <a href="{{ url('sfs_cms_admin_content_'~content_type~'_versions', {'content':entity}) }}" class="ui button">{{ ('admin_'~content_type~'.import_version.actions.cancel.button')|trans }}</a>
+                <a href="{{ url('sfs_cms_admin_content_'~content_type~'_versions', {'content':entity.id}) }}" class="ui button">{{ ('admin_'~content_type~'.import_version.actions.cancel.button')|trans }}</a>
             </div>
 
             {{ form_end(form) }}

@@ -7,7 +7,7 @@
         <td>{{ menu.type }}</td>
         <td class="text-end">
             <div class="ui buttons">
-                <a class="ui labeled icon button" href="{{ url('sfs_cms_admin_menus_update', {'menu':menu}) }}">
+                <a class="ui labeled icon button" href="{{ url('sfs_cms_admin_menus_update', {'menu':menu.id}) }}">
                     <i class="icon pencil"></i>{{ 'admin_menus.list.actions.update.link'|trans }}</a>
             </div>
         </td>
