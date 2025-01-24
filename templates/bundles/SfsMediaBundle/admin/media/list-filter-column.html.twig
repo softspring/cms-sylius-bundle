@@ -1,0 +1,49 @@
+{% form_theme filterForm
+    '@SyliusUi/Form/theme.html.twig'
+    'form_table_layout.html.twig'
+    '@SfsMedia/forms/admin_theme.html.twig'
+%}
+
+{% block fields %}
+    {% if filterForm.name is defined %}
+    <div class="field">
+        {{ form_row(filterForm.name, {'attr': {'onchange': 'submit()'}}) }}
+    </div>
+    {% endif %}
+
+    {% if filterForm.description is defined %}
+    <div class="field">
+        {{ form_row(filterForm.description, {'attr': {'onchange': 'submit()'}}) }}
+    </div>
+    {% endif %}
+
+    {% if filterForm.text is defined %}
+    <div class="field">
+        {{ form_row(filterForm.text, {'attr': {'onchange': 'submit()'}}) }}
+    </div>
+    {% endif %}
+
+    {% if filterForm.type is defined %}
+    <div class="grouped fields">
+        {{ form_row(filterForm.type, {}) }}
+    </div>
+    {% endif %}
+
+    {% if filterForm.content_entity is defined %}
+        <div class="field">
+            {{ form_row(filterForm.content_entity, {'attr': {'onchange': 'submit()', 'class':'fluid'}}) }}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block actions %}
+<div class="field">
+    <button type="submit" class="ui blue labeled icon button fluid"><i class="icon search"></i> Filter</button>
+</div>
+{% if filterForm.vars.data|filter(v=>v) is not empty %}
+<div class="field">
+    <a class="ui labeled icon button fluid" href="{{ url('sfs_media_admin_medias_list') }}"><i class="icon remove"></i> Clear filters</a>
+</div>
+{% endif %}
+
+{% endblock %}

@@ -2,9 +2,6 @@
 {% extends '@SfsMedia/admin_layout_semantic.html.twig' %}
 {% set sfs_components_theme = 'semantic-ui' %}
 
-{% form_theme filterForm 'form_table_layout.html.twig' %}
-
-
 {% block title %}{{ 'admin_medias.list.meta.title'|trans }}{% endblock %}
 {% block header_title %}{{ 'admin_medias.list.title'|trans }}{% endblock %}
 {% block header_subtitle %}Manage content media{% endblock %}
@@ -29,48 +26,89 @@
 {% endblock %}
 
 {% block content %}
-    {% if entities|length %}
         <div class="ui hidden divider"></div>
-
-        <div class="ui styled fluid accordion">
-            <div class="title">
-                <i class="dropdown icon"></i>
-                <i class="filter icon"></i>
-                Filters
+        {% if media_types is empty %}
+            <div class="ui segment sylius-grid-table-wrapper">
+                <p class="text-center text-muted">
+                    No media types are configured.
+                    <br/>
+                    <br/>
+                    Check how to configure media types at <a href="https://github.com/softspring/media-bundle"
+                                                             target="_blank">documentation</a>
+                </p>
             </div>
-            <div class="content">
-                {{ form_start(filterForm, {'attr':{'class':'ui form'}}) }}
-                    <div class="inline fields">
-                        {% if filterForm.name is defined %}
-                            <div class="field">
-                                {{ form_row(filterForm.name, {'row_class':'form-floating'}) }}
+        {% else %}
+
+            {{ form_start(filterForm, {'attr': {'class':'ui form'}}) }}
+            <div class="ui segment sylius-grid-table-wrapper">
+                <div class="ui grid">
+                    <div class="three wide  column" style="border-right: 1px solid #CCC;">
+                        {% include '@SfsMedia/admin/media/list-filter-column.html.twig' %}
+                    </div>
+                    <div class="thirteen wide column">
+                        <div class="h-100 overflow-auto">
+                            <div class="ui grid">
+                                <div class="ten wide column">
+                                    {{ entities.total }} medias
+                                </div>
+                                <div class="three wide column">{{ form_widget(filterForm.order, {'attr': {'onchange': 'submit()', 'class': 'form-control-sm'}}) }}</div>
+                                <div class="three wide column">{{ form_widget(filterForm.sort, {'attr': {'onchange': 'submit()', 'class': 'form-control-sm'}}) }}</div>
                             </div>
-                        {% endif %}
-                        {% if filterForm.type is defined %}
-                            <div class="field">
-                                {{ form_row(filterForm.type, {'row_class':'form-floating'}) }}
-                            </div>
-                        {% endif %}
-                        {{ form_widget(filterForm) }}
-                        {{ form_rest(filterForm) }}
-                        <div class="field">
-                            <button class="ui blue labeled icon button" type="submit">
-                                <i class="icon search"></i> Filter
-                            </button>
+
+                            {% if entities|length %}
+                                {% include '@SfsMedia/admin/media/list-page.html.twig' %}
+                                <div class="ui hidden divider"></div>
+                                {% include '@SfsComponents/paginator/pager.html.twig' with {'collection': entities} %}
+
+                            {% else %}
+                                <div class="p-5 m-5">
+                                    <p class="text-center text-muted">
+                                        {% if filterForm|default(false) and filterForm.vars.data|default([])|filter(v=>v) is not empty %}
+                                            No search results found, try to be less restrictive.
+                                        {% else %}
+                                            Upload first media
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
-                {{ form_end(filterForm) }}
+                </div>
             </div>
+            {{ form_end(filterForm) }}
+        {% endif %}
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <div class="offcanvas offcanvas-end w-75" data-bs-scroll="false" data-bs-backdrop="true" tabindex="-1"
+         id="mediaPreview" aria-labelledby="mediaPreviewLabel">
+        {#    <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="mediaPreview" aria-labelledby="mediaPreviewLabel"> #}
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title me-auto" id="mediaPreviewLabel">Offcanvas</h5>
+            <div class="offcanvas-header-buttons text-right">
+
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-    {% endif %}
-
-    <div class="ui hidden divider"></div>
-
-    {% include '@SfsComponents/paginator/pager.html.twig' with {'collection': entities} %}
-
-    <div class="ui segment sylius-grid-table-wrapper">
-        {% include '@SfsMedia/admin/media/list-page.html.twig' %}
+        <div class="offcanvas-body"></div>
     </div>
 
-    {% include '@SfsComponents/paginator/pager.html.twig' with {'collection': entities} %}
-{% endblock content %}
+    <script type="text/javascript">
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.matches('[data-bulk-select]')) {
+                return;
+            }
+
+            e.stopPropagation();
+
+            if (e.target.checked) {
+                e.target.parentNode.parentNode.classList.add('border-danger');
+            } else {
+                e.target.parentNode.parentNode.classList.remove('border-danger');
+            }
+        });
+    </script>
+{% endblock javascripts %}
