@@ -21,7 +21,7 @@
 {% endblock breadcrums_content %}
 
 {% block content %}
-
+    {% include '@SfsCms/admin/route/_route_tabs.html.twig' with {'current':'update', 'route':route} %}
     <div class="ui hidden divider"></div>
     <div class="ui segment">
         {{ form_start(form,{'attr':{'class':'ui form'}}) }}
@@ -69,6 +69,8 @@
                     class="plus icon"></i>{{ 'admin_routes.update.actions.update.button'|trans }}</button>
             <a href="{{ url('sfs_cms_admin_routes_list') }}"
                class="ui button">{{ 'admin_routes.update.actions.cancel.button'|trans }}</a>
+            <a href="{{ url('sfs_cms_admin_routes_delete', {'route': route.id}) }}"
+               class="ui button">{{ 'admin_routes.update.actions.delete.button'|trans }}</a>
         </div>
         {{ form_end(form) }}
     </div>

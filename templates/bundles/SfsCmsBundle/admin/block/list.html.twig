@@ -14,7 +14,7 @@
 {% endblock breadcrums_content %}
 
 {% block header_buttons %}
-{#    {% if is_granted('PERMISSION_SFS_CMS_ADMIN_BLOCKS_CREATE') %}#}
+    {% if is_granted('PERMISSION_SFS_CMS_ADMIN_BLOCKS_CREATE') and blocks_config|filter((blockConfig) => not blockConfig.static)|length %}
         <div class="ui floating labeled icon dropdown button teal">
             <i class="plus icon"></i>
             <span class="text">{{ 'admin_blocks.list.actions.create.link'|trans }}</span>
@@ -26,7 +26,7 @@
                 {% endfor %}
             </div>
         </div>
-{#    {% endif %}#}
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -34,18 +34,18 @@
         {% trans_default_domain 'sfs_cms_admin' %}
 
         {% block filters %}
-            <div class="ui form">
-                <div class="inline fields">
-                    <div class="field">
-                        {{ form_row(filter_form) }}
-                    </div>
-                    <div class="field">
-                        <button class="ui blue labeled icon button" type="submit">
-                            <i class="icon search"></i> Filter
-                        </button>
-                    </div>
-                </div>
-            </div>
+{#            <div class="ui form">#}
+{#                <div class="inline fields">#}
+{#                    <div class="field">#}
+{#                        {{ form_rest(filter_form) }}#}
+{#                    </div>#}
+{#                    <div class="field">#}
+{#                        <button class="ui blue labeled icon button" type="submit">#}
+{#                            <i class="icon search"></i> Filter#}
+{#                        </button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
         {% endblock filters %}
 
         {% block ths %}
