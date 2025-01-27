@@ -4,7 +4,7 @@
     <tr>
         <td>{{ route.id }}</td>
         <td>{{ route.sites|map((site) => site|sfs_cms_site_name)|join(', ') }}</td>
-        <td>{{ ('admin_routes.types.'~route.type~'.name')|trans }}</td>
+        <td>{{ ('admin_routes.types.'~route.type~'.name')|trans({'%redirectType%': route.redirectType}) }}</td>
         <td>{{ route.content.name|default('') }}</td>
         <td class="text-end">
             <div class="ui buttons">

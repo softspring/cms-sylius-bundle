@@ -15,7 +15,7 @@
 {% block breadcrums_content %}
     {{ parent() }}
     <a class="section" href="{{ url('sfs_cms_admin_routes_list') }}">{{ 'admin_routes.list.breadcrumb'|trans }}</a><i
-    class="right chevron icon divider"></i>
+        class="right chevron icon divider"></i>
     <span class="section active"
           aria-current="content">{{ 'admin_routes.delete.breadcrumb'|trans({'%name%': route.name|default(route.id) }) }}</span>
 {% endblock breadcrums_content %}
@@ -33,6 +33,8 @@
         <div class="ui hidden divider"></div>
         <div class="ui buttons">
             <button class="ui labeled icon red button" type="submit"><i
+                        class="icon trash alternate"></i>{{ 'admin_routes.delete.actions.delete.button'|trans }}</button>
+            <a href="{{ url('sfs_cms_admin_routes_list') }}"
                     class="plus icon"></i>{{ 'admin_routes.delete.actions.delete.button'|trans }}</button>
             <a href="{{ url('sfs_cms_admin_routes_update', {'route':route.id}) }}"
                class="ui button">{{ 'admin_routes.delete.actions.cancel.button'|trans }}</a>

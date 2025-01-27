@@ -70,6 +70,7 @@
             <a href="{{ url('sfs_cms_admin_routes_list') }}"
                class="ui button">{{ 'admin_routes.update.actions.cancel.button'|trans }}</a>
             <a href="{{ url('sfs_cms_admin_routes_delete', {'route': route.id}) }}"
+               class="ui labeled icon red button"><i class="icon trash alternate"></i> {{ 'admin_routes.update.actions.delete.button'|trans }}</a>
                class="ui button">{{ 'admin_routes.update.actions.delete.button'|trans }}</a>
         </div>
         {{ form_end(form) }}
