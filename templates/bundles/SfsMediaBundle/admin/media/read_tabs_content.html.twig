@@ -1,0 +1,44 @@
+{% trans_default_domain 'sfs_media_admin' %}
+
+{% import '@SfsMedia/admin/media/_macros.html.twig' as macros %}
+
+<div class="ui bottom attached tab segment active" data-tab="original">
+    {{ macros.renderOriginal(media) }}
+</div>
+{% for version in media.versions|filter((version) => version.version not in ['_original'])|sort((a, b) => (a.width+a.height) <=> (b.width+b.height))|reverse %}
+    <div class="ui bottom attached tab segment" data-tab="{{ version.version }}">
+        {{ macros.renderVersion(media, version) }}
+    </div>
+{% endfor %}
+
+{% if type_config.pictures|length %}
+  {% for picture_id, config in type_config.pictures %}
+      <div class="ui bottom attached tab segment" data-tab="{{ picture_id }}">
+          {{ macros.renderPicture(media, picture_id, config) }}
+      </div>
+  {% endfor %}
+{% endif %}
+{% if type_config.video_sets|length %}
+    {% for video_set_id, config in type_config.video_sets %}
+        <div class="ui bottom attached tab segment" data-tab="{{ video_set_id }}">
+            {{ macros.renderVideoSet(media, video_set_id, config) }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% if linked_cms_versions is defined and linked_cms_versions|length %}
+    <div class="ui bottom attached tab segment" data-tab="linked-cms">
+        {#            <h3>Linked CMS contents</h3>#}
+        <ul>
+            {% for content_version in linked_cms_versions %}
+                <li>
+                    {% set content_type = sfs_cms_content_type(content_version.content) %}
+                    <a href="{{ url('sfs_cms_admin_content_'~content_type~'_version_info', {'content':content_version.content, 'version':content_version}) }}">
+                        {{ content_version.content.name }}
+                        v{{ content_version.versionNumber }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

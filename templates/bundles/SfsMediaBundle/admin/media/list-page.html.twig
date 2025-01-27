@@ -2,27 +2,35 @@
 
 <div class="ui four cards">
         {% for media in entities %}
-                    {% if is_granted('PERMISSION_SFS_MEDIA_ADMIN_MEDIAS_DETAILS', media) %}
-                    <a href="{{ url('sfs_media_admin_medias_read', {'media':media.id}) }}" class="card">
-                        {% endif %}
-                        <div class="image" style="min-height: 200px; display: flex; align-items: center; justify-content: center;">
-                            {% if media.isVideo %}
-                               {{ media|sfs_media_render_video('_original', {'class':'img-fluid', 'style':' max-height: 200px; max-width: 100%;'}) }}
-                            {% elseif media.isImage %}
-                                {{ media|sfs_media_render_image(['_thumbnail'], {'class':'img-fluid', 'style':' max-height: 200px; max-width: 100%; width: auto;'}) }}
-                            {% endif %}
-                        </div>
-                        {% if is_granted('PERMISSION_SFS_MEDIA_ADMIN_MEDIAS_DETAILS', media) %}
-                        <div class="content">
-                            <p class="header"><small><strong>{{ media.name }}</strong></small></p>
-                        </div>
-                        <div class="extra content">
-                            <span>
-                                {{ media_types[media.type].name }}
-                                {{ media.version('_original').width }}x{{ media.version('_original').height }}
-                            </span>
-                        </div>
-                    </a>
+            {% set valid_media_type = media_types[media.type]|default(false) %}
+                {% if is_granted('PERMISSION_SFS_MEDIA_ADMIN_MEDIAS_DETAILS', media) %}
+                <a {% if valid_media_type %}
+                    href="{{ url('sfs_media_admin_medias_read', {'media':media.id}) }}"
                     {% endif %}
+                    class="card{% if not valid_media_type %} red{% endif %}">
+                    {% endif %}
+                    <div class="image" style="min-height: 200px; display: flex; align-items: center; justify-content: center;">
+                        {% if media.isVideo %}
+                           {{ media|sfs_media_render_video('_original', {'class':'img-fluid', 'style':' max-height: 200px; max-width: 100%;'}) }}
+                        {% elseif media.isImage %}
+                            {{ media|sfs_media_render_image(['_thumbnail'], {'class':'img-fluid', 'style':' max-height: 200px; max-width: 100%; width: auto;'}) }}
+                        {% endif %}
+                    </div>
+                    {% if is_granted('PERMISSION_SFS_MEDIA_ADMIN_MEDIAS_DETAILS', media) %}
+                    <div class="content">
+                        <p class="header"><small><strong>{{ media.name }}</strong></small></p>
+                    </div>
+                    <div class="extra content">
+                        <span>
+                            {% if valid_media_type %}
+                                <small>{{ media_types[media.type].name }}</small>
+                            {% else %}
+                                <div class="ui red message"><small>Media type {{ media.type }} does not exit</small></div>
+                            {% endif %}
+                            <small>{{ media.version('_original').width }}x{{ media.version('_original').height }}</small>
+                        </span>
+                    </div>
+                </a>
+                {% endif %}
         {% endfor %}
     </div>
