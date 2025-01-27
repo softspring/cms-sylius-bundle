@@ -14,6 +14,8 @@
 {% endblock breadcrums_content %}
 
 {% block content %}
+    {% include '@SfsCms/admin/route/_route_tabs.html.twig' with {'current':'read', 'route':route} %}
+
     <div class="ui hidden divider"></div>
     <div class="ui segment">
         <div class="ui list">

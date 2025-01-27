@@ -14,6 +14,7 @@
 {% endblock breadcrums_content %}
 
 {% block header_buttons %}
+    {% if is_granted('PERMISSION_SFS_CMS_ADMIN_MENUS_CREATE') and menus_config|length %}
     <div class="ui floating labeled icon dropdown button teal">
         <i class="plus icon"></i>
         <span class="text">{{ 'admin_menus.list.actions.create.link'|trans }}</span>
@@ -23,6 +24,7 @@
             {% endfor %}
         </div>
     </div>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
