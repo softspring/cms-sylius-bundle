@@ -1,16 +1,16 @@
 {% trans_default_domain 'sfs_media_admin' %}
 
 {% block media_version_upload_row %}
-    <div class="row">
-        <div class="col-3">{{ form_label(form) }}</div>
-        <div class="col">{{ form_widget(form) }}</div>
+    <div class="field">
+        {{ form_label(form) }}
+        {{ form_widget(form) }}
     </div>
 {% endblock media_version_upload_row %}
 
 {% block media_version_upload_widget %}
     {{ form_widget(form.upload) }}
     {{ form_errors(form.upload) }}
-    <p class="py-2 small">
+    <p>
         <em>
             {{ 'admin_medias.form.upload_requirements.title'|trans }}:
             {% for attribute, value in form.vars.upload_requirements|filter((value, attribute) => attribute not in ['detectCorrupted']) %}
