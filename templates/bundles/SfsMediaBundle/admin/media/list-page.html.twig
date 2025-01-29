@@ -7,6 +7,7 @@
                 <a {% if valid_media_type %}
                     href="{{ url('sfs_media_admin_medias_read', {'media':media.id}) }}"
                     {% endif %}
+                    title="{{ media.name }}"
                     class="card{% if not valid_media_type %} red{% endif %}">
                     {% endif %}
                     <div class="image" style="min-height: 200px; display: flex; align-items: center; justify-content: center;">
@@ -18,7 +19,7 @@
                     </div>
                     {% if is_granted('PERMISSION_SFS_MEDIA_ADMIN_MEDIAS_DETAILS', media) %}
                     <div class="content">
-                        <p class="header"><small><strong>{{ media.name }}</strong></small></p>
+                        <p class="header" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><small><strong>{{ media.name }}</strong></small></p>
                     </div>
                     <div class="extra content">
                         <span>
