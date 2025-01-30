@@ -34,6 +34,12 @@
             {{ form_row(filterForm.content_entity, {'attr': {'onchange': 'submit()', 'class':'fluid'}}) }}
         </div>
     {% endif %}
+
+    {% if filterForm.no_content_entity is defined %}
+        <div class="field">
+            {{ form_row(filterForm.no_content_entity, {'attr': {'onchange': 'submit()', 'class':'fluid'}}) }}
+        </div>
+    {% endif %}
 {% endblock %}
 
 {% block actions %}
