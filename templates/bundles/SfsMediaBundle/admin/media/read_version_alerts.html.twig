@@ -23,3 +23,9 @@
         It's mandatory that you provide this file manually.
     </div>
 {% endfor %}
+
+{% if duplicates|length %}
+    <div class="ui warning message" role="alert">
+        Hay {{ duplicates|length }} duplicados de este media. <a href="{{ url('sfs_media_admin_medias_list', {'duplicates':media.id}) }}">Ver listado</a>
+    </div>
+{% endif %}
