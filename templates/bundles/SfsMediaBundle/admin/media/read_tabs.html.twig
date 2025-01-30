@@ -2,11 +2,11 @@
 <div class="ui top attached primary menu">
     <a class="item active" data-tab="original"><i class="image icon"></i> Original</a>
     {% for version in media.versions|filter((version) => version.version not in ['_original'])|sort((a, b) => (a.width+a.height) <=> (b.width+b.height))|reverse %}
-    <a class="item" data-tab="{{ version.version }}"><i class="image icon"></i>{{ version.version }}</a>
+        <a class="item" data-tab="{{ version.version }}"><i class="image icon"></i>{{ version.version }}</a>
     {% endfor %}
     {% if type_config.pictures|length %}
         {% for picture_id, config in type_config.pictures %}
-        <a class="item" data-tab="{{ picture_id }}"><i class="code icon"></i> {{ picture_id }}</a>
+            <a class="item" data-tab="{{ picture_id }}"><i class="code icon"></i> {{ picture_id }}</a>
         {% endfor %}
     {% endif %}
     {% if type_config.video_sets|length %}
@@ -14,7 +14,11 @@
             <a class="item" data-tab="{{ video_set_id }}"><i class="film icon"></i> {{ video_set_id }}</a>
         {% endfor %}
     {% endif %}
-    {% if linked_cms_versions is defined and linked_cms_versions|length %}
-        <a class="item" data-tab="linked-cms"><i class="linkify icon"></i> linked CMS contents</a>
+    {% if linked_cms_versions is defined %}
+        {% if linked_cms_versions|length %}
+            <a class="item" data-tab="linked-cms"><i class="linkify icon"></i> linked CMS contents ({{ linked_cms_versions|length }})</a>
+        {% else %}
+            <a class="disabled item"><i class="linkify icon"></i> linked CMS contents (0)</a>
+        {% endif %}
     {% endif %}
 </div>
