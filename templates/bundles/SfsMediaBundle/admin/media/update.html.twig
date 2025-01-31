@@ -1,8 +1,8 @@
 {% trans_default_domain 'sfs_media_admin' %}
 {% extends '@SfsMedia/admin_layout_semantic.html.twig' %}
-{% block title %}{{ 'admin_medias.update.meta.title'|trans({'%type%':type_config.name}) }}{% endblock %}
+{% block title %}{{ 'admin_medias.update.meta.title'|trans({'%name%':media.name}) }}{% endblock %}
 
-{% block header_title %}{{ 'admin_medias.update.meta.title'|trans({'%type%':type_config.name}) }}{% endblock %}
+{% block header_title %}{{ 'admin_medias.update.meta.title'|trans({'%name%':media.name}) }}{% endblock %}
 {% block header_subtitle %}Manage content media{% endblock %}
 
 {% form_theme form
@@ -13,14 +13,14 @@
 {% block breadcrums_content %}
     {{ parent() }}
     <a class="section" href="{{ url('sfs_media_admin_medias_list') }}">{{ 'admin_medias.list.breadcrumb'|trans }}</a><i class="right chevron icon divider"></i>
-    <span class="section active" aria-current="content">{{ 'admin_medias.update.breadcrumb'|trans({'%type%':type_config.name}) }}</span>
+    <span class="section active" aria-current="content">{{ 'admin_medias.update.breadcrumb'|trans({'%name%':media.name}) }}</span>
 {% endblock breadcrums_content %}
 
 {% block content %}
 
     <div class="ui hidden divider"></div>
     <div class="ui segment">
-        <h1>{{ 'admin_medias.update.title'|trans({'%type%':type_config.name}) }}</h1>
+        <h1>{{ 'admin_medias.update.title'|trans({'%name%':media.name}) }}</h1>
         {{ form_start(form,{'attr':{'class':'ui form'}}) }}
 
         {{ form_row(form.name) }}
