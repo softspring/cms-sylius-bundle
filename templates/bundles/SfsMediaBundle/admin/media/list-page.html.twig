@@ -14,7 +14,7 @@
                         {% if media.isVideo %}
                            {{ media|sfs_media_render_video('_original', {'class':'img-fluid', 'style':' max-height: 200px; max-width: 100%;'}) }}
                         {% elseif media.isImage %}
-                            {{ media|sfs_media_render_image(['_thumbnail'], {'class':'img-fluid', 'style':' max-height: 200px; max-width: 100%; width: auto;'}) }}
+                            {{ media|sfs_media_render_image(['_thumbnail'], {'class':'transparent-background img-fluid', 'style':' max-height: 200px; max-width: 100%; width: auto;'}) }}
                         {% endif %}
                     </div>
                     {% if is_granted('PERMISSION_SFS_MEDIA_ADMIN_MEDIAS_DETAILS', media) %}
