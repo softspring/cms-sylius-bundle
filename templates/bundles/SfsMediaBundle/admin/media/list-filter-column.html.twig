@@ -5,6 +5,20 @@
 %}
 
 {% block fields %}
+    {{ form_widget(filterForm.duplicates) }}
+
+    {% if filterForm.duplicates.vars.media %}
+        <div class="ui info message visible" title="Duplicates this media">
+            <i class="close icon" title="Clear this filter" onclick="document.getElementById('duplicates').value=''; this.closest('form').submit()"></i>
+            {% if filterForm.duplicates.vars.media.isVideo %}
+                {{ filterForm.duplicates.vars.media|sfs_media_render_video('_original', {'style':' vertical-align:middle; max-height: 50px; max-width: 100%;'}) }}
+            {% elseif filterForm.duplicates.vars.media.isImage %}
+                {{ filterForm.duplicates.vars.media|sfs_media_render_image(['_thumbnail'], {'style':' vertical-align:middle; max-height: 50px; max-width: 100%; width: auto;'}) }}
+            {% endif %}
+            Duplicates this media
+        </div>
+    {% endif %}
+
     {% if filterForm.name is defined %}
     <div class="field">
         {{ form_row(filterForm.name, {'attr': {'onchange': 'submit()'}}) }}
@@ -30,13 +44,13 @@
     {% endif %}
 
     {% if filterForm.content_entity is defined %}
-        <div class="field">
+        <div class="field" style="{{ filterForm.no_content_entity.vars.data|default(false) ? 'display:none' : '' }}">
             {{ form_row(filterForm.content_entity, {'attr': {'onchange': 'submit()', 'class':'fluid'}}) }}
         </div>
     {% endif %}
 
-    {% if filterForm.no_content_entity is defined %}
-        <div class="field">
+    {% if filterForm.no_content_entity is defined  %}
+        <div class="field" style="{{ filterForm.content_entity.vars.data|default(false) ? 'display:none' : '' }}">
             {{ form_row(filterForm.no_content_entity, {'attr': {'onchange': 'submit()', 'class':'fluid'}}) }}
         </div>
     {% endif %}
