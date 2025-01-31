@@ -1,8 +1,8 @@
 {% trans_default_domain 'sfs_media_admin' %}
 {% extends '@SfsMedia/admin_layout_semantic.html.twig' %}
-{% block title %}{{ 'admin_medias.delete.meta.title'|trans }}{% endblock %}
+{% block title %}{{ 'admin_medias.delete.meta.title'|trans({'%name%':media.name}) }}{% endblock %}
 
-{% block header_title %}{{ 'admin_medias.delete.meta.title'|trans }}{% endblock %}
+{% block header_title %}{{ 'admin_medias.delete.meta.title'|trans({'%name%':media.name}) }}{% endblock %}
 {% block header_subtitle %}Manage content media{% endblock %}
 
 {% block content %}
