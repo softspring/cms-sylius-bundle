@@ -32,6 +32,8 @@
             <span>Format: {{ version.fileMimeType }}</span>
             |
             <span>File size: {{ _self.bytesToSize(version.fileSize) }}</span>
+            |
+            <abbr title="{{ version.sha1 }}">SHA1</abbr>
         </div>
 
         <div class="eight wide column" style="text-align: right;">
