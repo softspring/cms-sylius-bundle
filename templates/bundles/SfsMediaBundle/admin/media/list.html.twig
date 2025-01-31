@@ -39,6 +39,13 @@
             </div>
         {% else %}
 
+            {% if duplicates.total %}
+                <div class="ui warning message" role="alert">
+                    {{ 'admin_medias.alerts.total_duplicates_raw'|trans({'%different%': duplicates.different, '%total%': duplicates.total, '%duplicates%': duplicates.total - duplicates.different})|raw }}
+                </div>
+                {#{{ dump(duplicates) }}#}
+            {% endif %}
+
             {{ form_start(filterForm, {'attr': {'class':'ui form'}}) }}
             <div class="ui segment sylius-grid-table-wrapper">
                 <div class="ui grid">

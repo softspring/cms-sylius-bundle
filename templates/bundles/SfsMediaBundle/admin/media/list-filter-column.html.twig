@@ -10,13 +10,12 @@
     {% if filterForm.duplicates.vars.media %}
         <div class="ui info message visible" title="Duplicates this media">
             <i class="close icon" title="Clear this filter" onclick="document.getElementById('duplicates').value=''; this.closest('form').submit()"></i>
-
             {% if filterForm.duplicates.vars.media.isVideo %}
-                {{ filterForm.duplicates.vars.media|sfs_media_render_video('_original', {'class':'img-fluid', 'style':' max-height: 50px; max-width: 100%;'}) }}
+                {{ filterForm.duplicates.vars.media|sfs_media_render_video('_original', {'style':' vertical-align:middle; max-height: 50px; max-width: 100%;'}) }}
             {% elseif filterForm.duplicates.vars.media.isImage %}
-                {{ filterForm.duplicates.vars.media|sfs_media_render_image(['_thumbnail'], {'class':'img-fluid', 'style':' max-height: 50px; max-width: 100%; width: auto;'}) }}
+                {{ filterForm.duplicates.vars.media|sfs_media_render_image(['_thumbnail'], {'style':' vertical-align:middle; max-height: 50px; max-width: 100%; width: auto;'}) }}
             {% endif %}
-{#            Duplicates this media#}
+            Duplicates this media
         </div>
     {% endif %}
 
