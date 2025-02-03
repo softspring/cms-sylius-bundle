@@ -11,34 +11,33 @@
     <span class="section active" aria-current="content">{{ 'admin_medias.read.breadcrumb'|trans({'%name%': media.name }) }}</span>
 {% endblock breadcrums_content %}
 
+{% block header_buttons %}
+    {% if is_granted('PERMISSION_SFS_MEDIA_ADMIN_MEDIAS_DELETE', media) %}
+        <a href="{{ url('sfs_media_admin_medias_delete', {'media': media}) }}"
+           class="ui button red"><i class="icon trash"></i> {{ 'admin_medias.read.actions.delete.button'|trans }}</a>
+    {% else %}
+        <a class="ui button red disabled"><i class="icon trash"></i> {{ 'admin_medias.read.actions.delete.button'|trans }}</a>
+    {% endif %}
+
+    {% if (checkVersions.new|length) + (checkVersions.delete|length) + (checkVersions.changed|length) %}
+        {% if is_granted('PERMISSION_SFS_MEDIA_ADMIN_MEDIAS_MIGRATE', media) %}
+            <a href="{{ url('sfs_media_admin_medias_migrate', {'media': media}) }}"
+               class="ui button"><i class="icon exchange"></i> {{ 'admin_medias.read.actions.migrate.button'|trans }}</a>
+        {% else %}
+            <a class="ui button disabled"><i class="icon exchange"></i> {{ 'admin_medias.read.actions.migrate.button'|trans }}</a>
+        {% endif %}
+    {% endif %}
+    {% if is_granted('PERMISSION_SFS_MEDIA_ADMIN_MEDIAS_UPDATE', media) %}
+        <a href="{{ url('sfs_media_admin_medias_update', {'media': media}) }}"
+           class="ui button teal"><i class="icon pencil"></i> {{ 'admin_medias.read.actions.update.button'|trans }}</a>
+    {% else %}
+        <a class="ui button teal disabled"><i class="icon pencil"></i> {{ 'admin_medias.read.actions.update.button'|trans }}</a>
+    {% endif %}
+{% endblock %}
+
 {% block content %}
 
     {% include '@SfsMedia/admin/media/read_version_alerts.html.twig' %}
-    <div class="ui segment">
-        <div class="ui">
-            {% if is_granted('PERMISSION_SFS_MEDIA_ADMIN_MEDIAS_DELETE', media) %}
-                <a href="{{ url('sfs_media_admin_medias_delete', {'media': media}) }}"
-                   class="ui right floated button red"><i class="icon trash"></i> {{ 'admin_medias.read.actions.delete.button'|trans }}</a>
-            {% else %}
-                <a class="ui right floated button red disabled"><i class="icon trash"></i> {{ 'admin_medias.read.actions.delete.button'|trans }}</a>
-            {% endif %}
-            {% if is_granted('PERMISSION_SFS_MEDIA_ADMIN_MEDIAS_UPDATE', media) %}
-                <a href="{{ url('sfs_media_admin_medias_update', {'media': media}) }}"
-                   class="ui right floated button teal"><i class="icon pencil"></i> {{ 'admin_medias.read.actions.update.button'|trans }}</a>
-            {% else %}
-                <a class="ui right floated button teal disabled"><i class="icon pencil"></i> {{ 'admin_medias.read.actions.update.button'|trans }}</a>
-            {% endif %}
-            {% if (checkVersions.new|length) + (checkVersions.delete|length) + (checkVersions.changed|length) %}
-                {% if is_granted('PERMISSION_SFS_MEDIA_ADMIN_MEDIAS_MIGRATE', media) %}
-                    <a href="{{ url('sfs_media_admin_medias_migrate', {'media': media}) }}"
-                       class="ui right floated button teal"><i class="icon pencil"></i> {{ 'admin_medias.read.actions.migrate.button'|trans }}</a>
-                {% else %}
-                    <a class="ui right floated button teal disabled"><i class="icon pencil"></i> {{ 'admin_medias.read.actions.migrate.button'|trans }}</a>
-                {% endif %}
-            {% endif %}
-            <div class="ui hidden divider"  style="clear: both;"></div>
-        </div>
-    </div>
 
     {% include '@SfsMedia/admin/media/read_tabs.html.twig' %}
 
