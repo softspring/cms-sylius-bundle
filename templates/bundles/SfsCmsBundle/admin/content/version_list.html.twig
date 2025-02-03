@@ -38,7 +38,9 @@
                 {% endif %}
 
                 {% if not content_config.admin.version_cleanup.is_granted or is_granted(content_config.admin.version_cleanup.is_granted, entity) %}
-                <a class="ui red labeled icon button" data-requires-confirmation href="{{ url('sfs_cms_admin_content_'~content_type~'_cleanup_versions', {'content':entity.id, 'back':'versions'}) }}">
+                <a class="ui red labeled icon button"
+                   onclick="return confirm('Are you sure you want to unpublish this page? It will show a 404 error to the users.');"
+                    href="{{ url('sfs_cms_admin_content_'~content_type~'_cleanup_versions', {'content':entity.id, 'back':'versions'}) }}">
                     <i class="icon eraser"></i>
                     {{ ('admin_'~content_type~'.versions.actions.cleanup_versions.link')|trans }}
                 </a>
