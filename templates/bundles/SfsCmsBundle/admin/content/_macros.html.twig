@@ -4,8 +4,10 @@
             <p style="border: 1px solid #0e860e; padding: 2px;"><code style="color: #0e860e">ESI:
                     {% if esiCall.processed.type|default(false) == 'block' %}
                         Block {{ esiCall.processed.block_type }}
+                        {% if esiCall.processed.block_config.cache_ttl|default(false) %}(TTL: {{ esiCall.processed.block_config.cache_ttl }}){% endif %}
                     {% elseif esiCall.processed.type|default(false) == 'menu' %}
                         Menu {{ esiCall.processed.menu_type }}
+                        {% if esiCall.processed.menu_config.cache_ttl|default(false) %}(TTL: {{ esiCall.processed.menu_config.cache_ttl }}){% endif %}
                     {% else %}
                         {{ esiCall.url }}
                     {% endif %}
