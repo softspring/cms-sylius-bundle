@@ -28,7 +28,10 @@
                             {% else %}
                                 <div class="ui red message"><small>Media type {{ media.type }} does not exit</small></div>
                             {% endif %}
-                            <small>{{ media.version('_original').width }}x{{ media.version('_original').height }}</small>
+                            {#<small>{{ media.createdAt|time_ago }}</small>#}
+                            {% if media.isImage %}
+                                <small>{{ media.version('_original').width }}x{{ media.version('_original').height }}</small>
+                            {% endif %}
                         </span>
                     </div>
                 </a>

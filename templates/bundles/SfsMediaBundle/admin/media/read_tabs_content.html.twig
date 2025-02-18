@@ -3,11 +3,11 @@
 {% import '@SfsMedia/admin/media/_macros.html.twig' as macros %}
 
 <div class="ui bottom attached tab segment active" data-tab="original">
-    {{ macros.renderOriginal(media) }}
+    {{ macros.renderOriginal(media, media_types) }}
 </div>
 {% for version in media.versions|filter((version) => version.version not in ['_original'])|sort((a, b) => (a.width+a.height) <=> (b.width+b.height))|reverse %}
     <div class="ui bottom attached tab segment" data-tab="{{ version.version }}">
-        {{ macros.renderVersion(media, version) }}
+        {{ macros.renderVersion(media, version, media_types) }}
     </div>
 {% endfor %}
 
