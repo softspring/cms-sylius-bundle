@@ -18,13 +18,14 @@
 {%- endmacro -%}
 
 
-{%- macro renderOriginal(media) -%}
-    {{ _self.renderVersion(media, media.version('_original')) }}
+{%- macro renderOriginal(media, media_types) -%}
+    {{ _self.renderVersion(media, media.version('_original'), media_types) }}
 {%- endmacro -%}
 
-{%- macro renderVersion(media, version) -%}
+{%- macro renderVersion(media, version, media_types) -%}
     <div class="ui grid">
-        <div class="eight wide column"
+        <div class="eight wide column">
+            {% if media_types[media.type].name|default(null) %}<span>{{ media_types[media.type].name }}</span> | {% endif %}
             {% if media.isImage %}
                 <span>Image size: {{ version.width }}x{{ version.height }}</span>
                 |
