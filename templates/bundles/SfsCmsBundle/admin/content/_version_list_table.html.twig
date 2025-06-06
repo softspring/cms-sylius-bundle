@@ -1,3 +1,4 @@
+{% set backSection = backSection|default('versions') %}
 {% trans_default_domain 'sfs_cms_contents' %}
 
 <table class="ui celled table">
@@ -87,7 +88,7 @@
 
                 {% if not content_config.admin.publish_version.is_granted or is_granted(content_config.admin.publish_version.is_granted, version) %}
                     {% if not version.published %}
-                        <a href="{{ url('sfs_cms_admin_content_'~content_type~'_publish_version', {'content':entity.id, 'version':version.id}) }}"
+                        <a href="{{ url('sfs_cms_admin_content_'~content_type~'_publish_version', {'content':entity.id, 'version':version.id, 'back': backSection}) }}"
                            class="ui labeled icon button">{{ ('admin_'~content_type~'.versions.actions.publish.link')|trans }}
                             <i class="icon external alternate"></i></a>
                     {% endif %}
@@ -95,8 +96,8 @@
                 </div>
             </td>
             <td>
-                {% if not content_config.admin.version_delete.is_granted or is_granted(content_config.admin.version_delete.is_granted, entity) %}
-                <a class="ui icon button" href="{{ url('sfs_cms_admin_content_'~content_type~'_delete_version', {'content':entity.id, 'version':version.id}) }}">
+                {% if content_config.admin.version_delete.is_granted and is_granted(content_config.admin.version_delete.is_granted, version) %}
+                    <a class="ui icon button" href="{{ url('sfs_cms_admin_content_'~content_type~'_delete_version', {'content':entity.id, 'version':version.id, 'back': backSection}) }}">
                         <i class="icon trash alternate"
                            title="This version will be removed on versions cleanup"></i></a>
                 {% elseif version.deleteOnCleanup %}
