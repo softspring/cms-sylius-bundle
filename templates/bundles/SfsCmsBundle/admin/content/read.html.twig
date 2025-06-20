@@ -55,7 +55,7 @@
                 {% include ['@content/'~content_type~'/admin/_read_translations.html.twig', '@SfsCms/admin/content/_read_translations.html.twig'] %}
             </div>
             <div class="sixteen wide column">
-                {% include ['@content/'~content_type~'/admin/_read_versions.html.twig', '@SfsCms/admin/content/_read_versions.html.twig'] with {'backSection': 'details'} %}
+                {% include ['@content/'~content_type~'/admin/_read_versions.html.twig', '@SfsCms/admin/content/_read_versions.html.twig'] with {'backSection': 'details', 'content_entity': entity} %}
             </div>
         </div>
     </div>
