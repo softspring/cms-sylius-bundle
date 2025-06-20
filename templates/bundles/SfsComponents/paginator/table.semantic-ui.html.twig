@@ -23,7 +23,9 @@
 {% if collection|length %}
     <div class="ui hidden divider"></div>
 
-    {% include '@SfsComponents/paginator/pager.html.twig' with {'collection':entities, 'pagination_route': pagination_route|default(false), 'pagination_route_attributes': pagination_route_attributes|default([])} %}
+    {% if collection.pages|default(false) %}
+        {% include '@SfsComponents/paginator/pager.html.twig' with {'collection':collection, 'pagination_route': pagination_route|default(false), 'pagination_route_attributes': pagination_route_attributes|default([])} %}
+    {% endif %}
 
     <div class="ui hidden divider"></div>
 
@@ -57,7 +59,9 @@
         </table>
     </div>
 
-    {% include '@SfsComponents/paginator/pager.html.twig' with {'collection':entities, 'pagination_route': pagination_route|default(false), 'pagination_route_attributes': pagination_route_attributes|default([])} %}
+    {% if collection.pages|default(false) %}
+        {% include '@SfsComponents/paginator/pager.html.twig' with {'collection':collection, 'pagination_route': pagination_route|default(false), 'pagination_route_attributes': pagination_route_attributes|default([])} %}
+    {% endif %}
 {% else %}
     {% block empty %}
         <div class="ui icon info message">
