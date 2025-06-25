@@ -1,0 +1,92 @@
+{% trans_default_domain 'sfs_cms_admin' %}
+{% extends '@SfsCms/admin_layout_semantic.html.twig' %}
+{% set sfs_components_theme = 'semantic-ui' %}
+
+{% block title %}{{ 'admin_sections.list.meta.title'|trans }}{% endblock %}
+
+{% block header_title %}{{ 'admin_sections.list.title'|trans }}{% endblock %}
+{% block header_subtitle %}Manage your sections{% endblock %}
+{% block header_icon %}th{% endblock %}
+
+{% block breadcrums_content %}
+    <a class="active section">{{ 'admin_sections.list.breadcrumb'|trans }}</a>
+{% endblock breadcrums_content %}
+
+{% block header_buttons %}
+    {% trans_default_domain 'sfs_cms_admin' %}
+    <a class="ui labeled icon button primary" href="{{ url('sfs_cms_admin_sections_create') }}">
+        <i class="icon plus"></i>
+        {{ 'admin_sections.list.actions.create.link'|trans }}
+    </a>
+{% endblock %}
+
+{% block content %}
+    {% embed '@SfsComponents/paginator/table.html.twig' with {
+        'collection': entities,
+        'filter_form': filterForm,
+        'pagination_route': 'sfs_cms_admin_sections_list',
+        'classes': 'table ui celled'
+    } %}
+        {% trans_default_domain 'sfs_cms_admin' %}
+
+        {% block filters %}
+            <div class="ui form">
+                <div class="inline fields">
+                    {% if filterForm.name is defined %}
+                        <div class="field">
+                            {{ form_row(filter_form.name) }}
+                        </div>
+                    {% endif %}
+                    {% if filterForm.status is defined %}
+                        <div class="field">
+                            {{ form_row(filter_form.status, {'attr':{'onchange':'submit()'}}) }}
+                        </div>
+                    {% endif %}
+                    {% if filterForm.publishedVersionSection is defined %}
+                        <div class="field">
+                            {{ form_row(filter_form.publishedVersionSection, {'attr':{'onchange':'submit()'}}) }}
+                        </div>
+                    {% endif %}
+                    <div class="field">
+                        <button class="ui blue labeled icon button" type="submit">
+                            <i class="icon search"></i> Filter
+                        </button>
+                    </div>
+                </div>
+            </div>
+        {% endblock filters %}
+
+        {% block ths %}
+            <th scope="col">
+                <a href="{{ collection.sortToggleUrl(app.request, 'id') }}" class="text-dark">
+                    {{ 'admin_sections.list.fields.id.header'|trans }}
+                    {% if collection.sortedBy('id', 'asc') %}<i class="bi bi-caret-up-fill"></i>{% elseif collection.sortedBy('id', 'desc') %}<i class="bi bi-caret-down-fill"></i>{% endif %}
+                </a>
+            </th>
+            <th>{{ 'admin_sections.list.fields.status.header'|trans }}</th>
+            <th>{{ 'admin_sections.list.fields.publishedAt.header'|trans }}</th>
+            <th>&nbsp;</th>
+        {% endblock ths %}
+
+        {% block tbody %}
+            {% include '@SfsCms/admin/section/list-page.html.twig' %}
+        {% endblock tbody %}
+
+        {% block empty_message %}
+            {% if filterForm.vars.submitted %}
+                <p>
+                    {{ 'admin_sections.list.empty.clean_filters'|trans({'%url%': url('sfs_cms_admin_sections_list')})|raw }}
+                </p>
+            {% else %}
+                <p>
+                    {{ 'admin_sections.list.empty.create_first_section_raw'|trans({
+                        '%create_link%': url('sfs_cms_admin_sections_create'),
+                    })|raw }}
+                </p>
+                <p>
+                    {{ 'admin_sections.list.empty.go_to_doc_raw'|trans|raw }}
+                </p>
+            {% endif %}
+        {% endblock empty_message %}
+    {% endembed %}
+{% endblock content %}

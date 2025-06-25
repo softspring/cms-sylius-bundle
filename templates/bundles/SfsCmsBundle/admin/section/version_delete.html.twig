@@ -1,0 +1,61 @@
+{% trans_default_domain 'sfs_cms_admin' %}
+
+{% extends '@SfsCms/admin_layout_semantic.html.twig' %}
+
+{% form_theme form
+    '@SfsCms/forms/cms_theme_semantic.html.twig'
+    '@SfsCms/forms/routes_theme_semantic.html.twig'
+    '@SfsCms/forms/types_theme_semantic.html.twig'
+%}
+
+{% block title %}{{ ('admin_sections.version_delete.meta.title')|trans({'%name%':section_entity.name, '%versionNumber%': version_entity.versionNumber}) }}{% endblock %}
+
+{% block breadcrums_content %}
+    {{ parent() }}
+    <a class="section" href="{{ url('sfs_cms_admin_sections_list') }}">{{ ('admin_sections.list.breadcrumb')|trans }}</a>
+    <i class="right chevron icon divider"></i>
+    <a class="section" href="{{ url('sfs_cms_admin_sections_details', {'section':section_entity.id}) }}">{{ ('admin_sections.read.breadcrumb')|trans({'%name%':section_entity.name}) }}</a>
+    <i class="right chevron icon divider"></i>
+    <a class="section" href="{{ url('sfs_cms_admin_sections_versions', {'section':section_entity.id}) }}">{{ ('admin_sections.versions.breadcrumb')|trans({'%name%':section_entity.name}) }}</a>
+    <i class="right chevron icon divider"></i>
+    <a class="section active">{{ ('admin_sections.version_delete.breadcrumb')|trans({'%name%':section_entity.name, '%versionNumber%': version_entity.versionNumber}) }}</a>
+{% endblock breadcrums_content %}
+
+{% block content %}
+    {% include '@SfsCms/admin/section/_section_tabs.html.twig'  with {'current':'versions', 'section_entity':section_entity} %}
+
+    <div class="ui bottom attached active tab segment">
+        <div class="ui icon warning message">
+            <i class="warning icon"></i>
+            <div class="content">
+                <div class="header">
+                    <p>{{ ('admin_sections.version_delete.main_warnings_raw')|trans({'%versionNumber%': version_entity.versionNumber})|raw }}</p>
+                </div>
+                {# Si quieres mostrar la oferta de backup y el botón de exportar, descomenta lo siguiente: #}
+                {#
+                <p>
+                    {{ ('admin_sections.version_delete.offer_backup')|trans }} &nbsp;&nbsp;
+                    <a href="{{ url('sfs_cms_admin_sections_export_version', {'section':section_entity.id, 'version':version_entity.id}) }}" class="ui button primary">
+                        {{ ('admin_sections.version_delete.actions.export.button')|trans }}
+                    </a>
+                </p>
+                #}
+            </div>
+        </div>
+
+        {{ form_start(form, {'attr': {'class': 'ui form'}}) }}
+        {{ form_errors(form) }}
+        {{ form_rest(form) }}
+
+        <div class="ui hidden divider"></div>
+        <div class="ui buttons">
+            <button class="ui labeled icon red button" type="submit">
+                <i class="icon trash alternate"></i> {{ ('admin_sections.version_delete.actions.delete.button')|trans }}
+            </button>
+            <a href="{{ url('sfs_cms_admin_sections_version_info', {'section':section_entity.id, 'version':version_entity.id}) }}" class="ui button">
+                {{ ('admin_sections.version_delete.actions.cancel.button')|trans }}
+            </a>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock content %}

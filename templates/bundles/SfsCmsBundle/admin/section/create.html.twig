@@ -1,0 +1,43 @@
+{% trans_default_domain 'sfs_cms_admin' %}
+
+{% extends '@SfsCms/admin_layout_semantic.html.twig' %}
+
+{% form_theme form
+    '@SfsCms/forms/cms_theme_semantic.html.twig'
+%}
+
+{% block title %}{{ 'admin_sections.create.meta.title'|trans }}{% endblock %}
+
+{% block header_title %}{{ 'admin_sections.create.title'|trans }}{% endblock %}
+{% block header_subtitle %}Manage your section{% endblock %}
+{% block header_icon %}th{% endblock %}
+
+{% block header_buttons %}
+{% endblock %}
+
+{% block breadcrums_content %}
+    {{ parent() }}
+    <a class="section" href="{{ url('sfs_cms_admin_sections_list') }}">{{ 'admin_sections.list.breadcrumb'|trans }}</a>
+    <i class="right chevron icon divider"></i>
+    <a class="section active">{{ 'admin_sections.create.breadcrumb'|trans }}</a>
+{% endblock breadcrums_content %}
+
+{% block content %}
+    <div class="ui hidden divider"></div>
+    <div class="ui bottom attached active tab segment">
+        {{ form_start(form, {'attr': {'class': 'ui form'}}) }}
+            {{ form_errors(form) }}
+            {{ form_widget(form) }}
+            {{ form_rest(form) }}
+            <div class="ui hidden divider"></div>
+            <div class="ui buttons">
+                <button class="ui labeled icon primary button" type="submit">
+                    <i class="save icon"></i> {{ 'admin_sections.create.actions.create.button'|trans }}
+                </button>
+                <a href="{{ url('sfs_cms_admin_sections_list') }}" class="ui button">
+                    {{ 'admin_sections.create.actions.cancel.button'|trans }}
+                </a>
+            </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock content %}

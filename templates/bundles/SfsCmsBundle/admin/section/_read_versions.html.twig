@@ -1,0 +1,21 @@
+{% trans_default_domain 'sfs_cms_admin' %}
+
+<div class="ui card fluid">
+    <div class="content">
+        <div class="header">
+            {{ 'admin_sections.read.versions.title'|trans }}
+            {% if is_granted('PERMISSION_SFS_CMS_ADMIN_SECTION_VERSIONS', section) %}
+                <a class="ui mini basic button right floated" href="{{ url('sfs_cms_admin_sections_versions', {'section':section.id}) }}">
+                    {{ 'admin_sections.read.versions.more.link'|trans }}
+                </a>
+            {% else %}
+                <button class="ui mini basic button right floated disabled">
+                    {{ 'admin_sections.read.versions.more.link'|trans }}
+                </button>
+            {% endif %}
+        </div>
+    </div>
+    <div class="content">
+        {% include '@SfsCms/admin/section/_version_list_table.html.twig' with {'versions': lastestVersions} %}
+    </div>
+</div>
