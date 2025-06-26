@@ -1,0 +1,58 @@
+{% embed '@SfsCms/admin/_embeds/_card.html.twig' %}
+    {% trans_default_domain 'sfs_cms_admin' %}
+
+    {% block title %}<div class="ui header">{{ ('admin_sections.version_info.title')|trans }}</div>{% endblock %}
+
+    {% block content %}
+        {{ form_start(form) }}
+        <div class="ui list">
+            <div class="item"><strong>{{ ('admin_sections.version_info.info.version.title')|trans }}</strong> v{{ version_entity.versionNumber }}</div>
+
+            <div class="item"><strong>{{ ('admin_sections.version_info.info.origin.title')|trans }}</strong> {{ ('admin_sections.versions.origin.'~(version_entity.origin|default('null')))|trans }} {{ version_entity.originDescription ? '('~version_entity.originDescription~')' : '' }}</div>
+
+            {% set creator = version_entity.metaField('creator') %}
+            {% if creator %}
+                <div class="item"><strong>{{ ('admin_sections.version_info.info.creator.title')|trans }}</strong> {{ creator.name|default(creator.id)|default('') }}</div>
+            {% endif %}
+
+            <div class="item"><strong>{{ ('admin_sections.version_info.info.created.title')|trans }}</strong> {{ version_entity.createdAt ? version_entity.createdAt|date('H:i:s d-m-Y') : '' }}</div>
+
+            <div class="item"><strong>{{ ('admin_sections.version_info.info.publish_status.title')|trans }}</strong> {{ version_entity.published ? ('admin_sections.versions.publish_status.published')|trans : ('admin_sections.versions.publish_status.unpublished')|trans }}</div>
+
+            <div class="item"><strong>{{ ('admin_sections.version_info.info.keep.title')|trans }}</strong>
+                {% if is_granted('PERMISSION_SFS_CMS_ADMIN_SECTION_VERSION_KEEP', version) %}
+                    {% if version.keep %}
+                        <a href="{{ url('sfs_cms_admin_sections_unkeep_version', {'section':section_entity.id, 'version':version.id, 'back': 'version_info'}) }}">
+                            <i class="icon lock"></i> {{ ('admin_sections.versions.actions.keep.link')|trans }}
+                        </a>
+                    {% else %}
+                        <a href="{{ url('sfs_cms_admin_sections_keep_version', {'section':section_entity.id, 'version':version.id, 'back': 'version_info'}) }}">
+                            <i class="icon lock open"></i> {{ ('admin_sections.versions.actions.nokeep.link')|trans }}
+                        </a>
+                    {% endif %}
+                {% else %}
+                    {% if version.keep %}
+                        <span><i class="icon lock"></i> {{ ('admin_sections.versions.actions.keep.link')|trans }}</span>
+                    {% else %}
+                        <span><i class="icon lock open"></i> {{ ('admin_sections.versions.actions.nokeep.link')|trans }}</span>
+                    {% endif %}
+                {% endif %}
+            </div>
+
+            <div class="item"><strong>{{ form_label(form.note) }}</strong>
+                <div class="ui form">
+                    <div class="inline field">
+                        {{ form_widget(form.note) }}
+                        <button class="ui button primary icon"
+                                type="submit"
+                                title="{{ ('admin_sections.version_info.actions.save.button')|trans }}">
+                            <i class="icon check"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+    {% endblock %}
+{% endembed %}

@@ -1,0 +1,37 @@
+{% trans_default_domain 'sfs_cms_admin' %}
+
+{% embed '@SfsCms/admin/_embeds/_card.html.twig' with {'title': ('admin_sections.read.usages.title')|trans} %}
+    {% trans_default_domain 'sfs_cms_admin' %}
+
+    {% set max_versions = max_versions|default(3) %}
+
+    {% block content %}
+        <div class="ui list" style="margin-top: 1em;">
+            {% for version in linked_cms_versions|slice(0, max_versions) %}
+                <div class="item">
+                    {% if version.content is defined %}
+                        {% set content_type = sfs_cms_content_type(version.parent) %}
+                        <a class="header" target="_blank"
+                           href="{{ url('sfs_cms_admin_content_'~content_type~'_version_info', {'content':version.parent.id, 'version':version.id}) }}">
+                            {{ version.parent.name }}
+                            v{{ version.versionNumber }}
+                            <i class="external alternate icon" style="margin-left: 0.5em;"></i>
+                        </a>
+                    {% else %}
+                        <a class="header" target="_blank"
+                           href="{{ url('sfs_cms_admin_sections_version_info', {'section':version.parent.id, 'version':version.id}) }}">
+                            {{ version.parent.name }}
+                            v{{ version.versionNumber }}
+                            <i class="external alternate icon" style="margin-left: 0.5em;"></i>
+                        </a>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            {% if linked_cms_versions|length > max_versions %}
+                <div class="item" style="text-align: center; color: #999;">
+                    <em>({{ (linked_cms_versions|length)-max_versions }} more)</em>
+                </div>
+            {% endif %}
+        </div>
+    {% endblock %}
+{% endembed %}

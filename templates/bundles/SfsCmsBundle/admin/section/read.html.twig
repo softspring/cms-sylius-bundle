@@ -1,0 +1,63 @@
+{% trans_default_domain 'sfs_cms_admin' %}
+
+{% extends '@SfsCms/admin_layout_semantic.html.twig' %}
+
+{% block title %}{{ ('admin_sections.read.meta.title')|trans({'%name%':section.name}) }}{% endblock %}
+
+{% block header_title %}{{ ('admin_sections.read.title')|trans({'%name%':section.name}) }}{% endblock %}
+{% block header_subtitle %}Manage your section{% endblock %}
+{% block header_icon %}th{% endblock %}
+{% block header_buttons %}
+    {% include '@SfsCms/admin/section/_section_header_buttons.html.twig' %}
+{% endblock %}
+
+{% set sfs_components_theme = 'semantic-ui' %}
+
+{% block breadcrums_content %}
+    {{ parent() }}
+    <a class="section" href="{{ url('sfs_cms_admin_section_sections_list') }}">{{ ('admin_sections.list.breadcrumb')|trans }}</a>
+    <i class="right chevron icon divider"></i>
+    <a class="section active">{{ ('admin_sections.read.breadcrumb')|trans({'%name%':section.name}) }}</a>
+{% endblock breadcrums_content %}
+
+{% block content %}
+    {% include '@SfsCms/admin/section/_section_tabs.html.twig' with {'current':'details', 'section_entity':section} %}
+
+    {% if cache_alert is defined %}
+        <div class="ui ignored warning message" role="alert">
+            {% if section.publishedVersion %}
+                {{ 'admin_section.read.published_cache_alert_raw'|trans({
+                    '%publishedDateTime%': cache_alert.publishedDatetime|date('H:i d-m-Y'),
+                    '%maxRouteTtl%': cache_alert.maxRouteTtl,
+                    '%waitSeconds%': cache_alert.waitTime,
+                }, 'sfs_cms_admin')|raw }}
+            {% else %}
+                {{ 'admin_section.read.unpublished_cache_alert_raw'|trans({
+                    '%publishedDateTime%': cache_alert.publishedDatetime|date('H:i d-m-Y'),
+                    '%maxRouteTtl%': cache_alert.maxRouteTtl,
+                    '%waitSeconds%': cache_alert.waitTime,
+                }, 'sfs_cms_admin')|raw }}
+            {% endif %}
+        </div>
+    {% endif %}
+
+    <div class="ui bottom attached active tab segment">
+        <div class="ui grid">
+            <div class="four wide column">
+                {% include '@SfsCms/admin/section/_read_general.html.twig' %}
+            </div>
+            <div class="four wide column">
+                {% include '@SfsCms/admin/section/_read_caching.html.twig' %}
+            </div>
+            <div class="four wide column">
+                {% include '@SfsCms/admin/section/_read_usages.html.twig' %}
+            </div>
+            <div class="four wide column">
+                {% include '@SfsCms/admin/section/_read_translations.html.twig' %}
+            </div>
+            <div class="sixteen wide column">
+                {% include '@SfsCms/admin/section/_read_versions.html.twig' with {'backSection': 'details'} %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

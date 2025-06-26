@@ -4,6 +4,7 @@ sfs_sylius_cms_plugin:
         contents.page: "Pages"
         routes: "Routes"
         blocks: "Blocks"
+        sections: "Sections"
         menus: "Menus"
         medias: "Medias"
         

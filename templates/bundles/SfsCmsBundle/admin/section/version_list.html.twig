@@ -1,0 +1,61 @@
+{% trans_default_domain 'sfs_cms_admin' %}
+
+{% extends '@SfsCms/admin_layout_semantic.html.twig' %}
+
+{% block title %}{{ ('admin_sections.versions.meta.title')|trans({'%name%':section_entity.name}) }}{% endblock %}
+
+{% block header_title %}{{ ('admin_sections.versions.title')|trans({'%name%':section_entity.name}) }}{% endblock %}
+{% block header_subtitle %}Manage your section{% endblock %}
+{% block header_buttons %}
+    {% include '@SfsCms/admin/section/_section_header_buttons.html.twig' %}
+{% endblock %}
+
+{% block breadcrums_content %}
+    {{ parent() }}
+    <a class="section" href="{{ url('sfs_cms_admin_sections_list') }}">{{ ('admin_sections.list.breadcrumb')|trans }}</a>
+    <i class="right chevron icon divider"></i>
+    <a class="section" href="{{ url('sfs_cms_admin_sections_details', {'section':section_entity.id}) }}">{{ ('admin_sections.read.breadcrumb')|trans({'%name%': section_entity.name}) }}</a>
+    <i class="right chevron icon divider"></i>
+    <a class="section active">{{ ('admin_sections.versions.breadcrumb')|trans({'%name%':section_entity.name}) }}</a>
+{% endblock breadcrums_content %}
+
+{% block content %}
+    {% include '@SfsCms/admin/section/_section_tabs.html.twig' with {'current':'versions', 'section_entity':section_entity} %}
+
+    <div class="ui bottom attached active tab segment">
+        <div class="ui right aligned grid clearing">
+            <div class="ui buttons column">
+                {# Uncomment and adapt if/when import version is implemented for sections #}
+                {# 
+                {% if is_granted('PERMISSION_SFS_CMS_ADMIN_SECTION_IMPORT_VERSION', section_entity) %}
+                    <a class="ui blue labeled icon button" href="{{ url('sfs_cms_admin_sections_import_version', {'section':section_entity.id, 'back':'versions'}) }}">
+                        <i class="icon upload"></i>
+                        {{ ('admin_sections.versions.actions.import_version.link')|trans }}
+                    </a>
+                {% else %}
+                    <a class="ui blue labeled icon button disabled">
+                        <i class="icon upload"></i>
+                        {{ ('admin_sections.versions.actions.import_version.link')|trans }}
+                    </a>
+                {% endif %}
+                #}
+
+                {% if is_granted('PERMISSION_SFS_CMS_ADMIN_SECTION_CLEANUP_VERSIONS', section_entity) %}
+                    <a class="ui red labeled icon button"
+                       onclick="return confirm('Are you sure you want to cleanup old versions?');"
+                       href="{{ url('sfs_cms_admin_sections_cleanup_versions', {'section':section_entity.id, 'back':'versions'}) }}">
+                        <i class="icon eraser"></i>
+                        {{ ('admin_sections.versions.actions.cleanup_versions.link')|trans }}
+                    </a>
+                {% else %}
+                    <a class="ui red labeled icon button disabled">
+                        <i class="icon eraser"></i>
+                        {{ ('admin_sections.versions.actions.cleanup_versions.link')|trans }}
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+
+        {% include '@SfsCms/admin/section/_version_list_table.html.twig' with {'versions': entities, 'section': section_entity} %}
+    </div>
+{% endblock content %}

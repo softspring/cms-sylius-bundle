@@ -1,0 +1,21 @@
+{% trans_default_domain 'sfs_cms_admin' %}
+
+<div class="ui card">
+    <div class="content">
+        <div class="header">
+            {{ 'admin_sections.read.translations.title'|trans }}
+        </div>
+        <div class="description">
+            <div class="ui list">
+                <div class="item">
+                    <div class="header" style="display: inline-block; margin-right: 1em;">Default language</div>
+                    <strong>{{ section.defaultLocale }}</strong>
+                </div>
+                <div class="item">
+                    <div class="header" style="display: inline-block; margin-right: 1em;">Languages</div>
+                    <strong>{{ section.locales|join(', ') }}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+{% trans_default_domain 'sfs_cms_admin' %}
+
+{% extends '@SfsCms/admin_layout_semantic.html.twig' %}
+
+{% block title %}{{ ('admin_sections.delete.meta.title')|trans({'%name%':section.name}) }}{% endblock %}
+{% block header_title %}{{ ('admin_sections.delete.title')|trans({'%name%':section.name}) }}{% endblock %}
+{% block header_subtitle %}Manage your section{% endblock %}
+{% block header_icon %}th{% endblock %}
+{% block header_buttons %}
+    {% include '@SfsCms/admin/section/_section_header_buttons.html.twig' %}
+{% endblock %}
+
+{% block breadcrums_content %}
+    {{ parent() }}
+    <a class="section" href="{{ url('sfs_cms_admin_sections_list') }}">{{ ('admin_sections.list.breadcrumb')|trans }}</a>
+    <i class="right chevron icon divider"></i>
+    <a class="section" href="{{ url('sfs_cms_admin_sections_details', {'section':section.id}) }}">{{ ('admin_sections.read.breadcrumb')|trans({'%name%': section.name}) }}</a>
+    <i class="right chevron icon divider"></i>
+    <a class="section active">{{ ('admin_sections.delete.breadcrumb')|trans({'%name%':section.name}) }}</a>
+{% endblock breadcrums_content %}
+
+{% form_theme form
+    '@SfsCms/forms/cms_theme_semantic.html.twig'
+    '@SfsCms/forms/routes_theme_semantic.html.twig'
+    '@SfsCms/forms/types_theme_semantic.html.twig'
+%}
+
+{% block content %}
+    {% include '@SfsCms/admin/section/_section_tabs.html.twig'  with {'current':'delete', 'section':section, 'section_entity':section} %}
+
+    <div class="ui bottom attached active tab segment">
+        <div class="ui icon warning message">
+            <i class="warning icon"></i>
+            <div class="content">
+                <div class="header">{{ ('admin_sections.delete.main_warnings_raw')|trans|raw }}</div>
+            </div>
+        </div>
+
+        {{ form_start(form, {'attr': {'class': 'ui form'}}) }}
+        {{ form_errors(form) }}
+        {{ form_rest(form) }}
+
+        <div class="ui hidden divider"></div>
+        <div class="ui buttons">
+            <a href="{{ url('sfs_cms_admin_sections_details', {'section':section.id}) }}" class="ui button">{{ ('admin_sections.delete.actions.cancel.button')|trans }}</a>
+            <input type="submit" value="{{ ('admin_sections.delete.actions.delete.button')|trans }}" class="ui red button" />
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock content %}

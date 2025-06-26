@@ -1,0 +1,37 @@
+{% trans_default_domain 'sfs_cms_admin' %}
+
+<div class="ui card fluid">
+    <div class="content">
+        <div class="header">
+            {{ 'admin_sections.read.caching.title'|trans }}
+            {% if is_granted('PERMISSION_SFS_CMS_ADMIN_SECTION_UPDATE', section) %}
+                <a class="ui mini basic button right floated"
+                   href="{{ url('sfs_cms_admin_sections_update', {'section':section.id}) }}">
+                    {{ 'admin_sections.read.actions.update.link'|trans }}
+                    <i class="toggle off icon"></i>
+                </a>
+            {% else %}
+                <button class="ui mini basic button right floated disabled">
+                    {{ 'admin_sections.read.actions.update.link'|trans }}
+                    <i class="toggle off icon"></i>
+                </button>
+            {% endif %}
+        </div>
+    </div>
+    <div class="content">
+        <dl class="ui list">
+{#            <dt class="header">{{ ('admin_sections.read.caching.esi')|trans }}</dt>#}
+{#            <dd>#}
+{#                {% if section.extra('esi') %}ESI{% else %}<a target="_blank" href="{{ url('sfs_cms_section_render', {'section': section.id}) }}">Ajax</a>{% endif %}#}
+{#            </dd>#}
+            <dt class="header">{{ 'admin_sections.read.caching.ttl'|trans }}</dt>
+            <dd>
+                {% if section.extra('ttl') %}
+                    <span class="ui blue label">{{ section.extra('ttl') }}</span> {{ 'admin_sections.read.caching.ttl.seconds'|trans }}
+                {% else %}
+                    <span class="ui grey label">{{ 'admin_sections.read.caching.ttl.not_set'|trans }}</span>
+                {% endif %}
+            </dd>
+        </dl>
+    </div>
+</div>

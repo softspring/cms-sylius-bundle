@@ -1,0 +1,15 @@
+{% trans_default_domain 'sfs_cms_admin' %}
+
+<ul class="ui top attached tabular menu" id="myTab" role="tablist">
+    {% block tabs %}
+        {% for item in sfs_cms_admin_section_menu(current, section_entity) %}
+            <li class="{{ item.active|default(false) ? 'active' : '' }} item">
+                {% if not (item.disabled|default(false)) %}
+                    <a href="{{ item.url|default('#') }}">{{ item.text }}</a>
+                {% else %}
+                    <a><em>{{ item.text }}</em></a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    {% endblock tabs %}
+</ul>
