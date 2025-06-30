@@ -125,8 +125,9 @@
                 <a class="ui icon button"
                    href="{{ url('sfs_cms_admin_content_'~content_type~'_delete_version', {'content':entity.id, 'version':version.id, 'back': backSection}) }}">
                     <i class="icon trash alternate"
-                       title="This version will be removed on versions cleanup"></i></a>
-            {% elseif version.deleteOnCleanup %}
+                       title="Manually delete."></i></a>
+            {% endif %}
+            {% if version.deleteOnCleanup %}
                 <a class="ui icon button disabled">
                     <i class="icon trash alternate"
                        title="This version will be removed on versions cleanup"></i></a>

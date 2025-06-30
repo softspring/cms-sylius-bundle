@@ -64,14 +64,14 @@
                             {% endif %}
                         {% endif %}
 
-                        {% if not content_config.admin.version_translations.is_granted or is_granted(content_config.admin.version_translations.is_granted, content_entity) %}
+                        {% if not content_config.admin.version_translations.is_granted or is_granted(content_config.admin.version_translations.is_granted, version) %}
                             <a class="item"
                                href="{{ url('sfs_cms_admin_content_'~content_type~'_translations', {'content':content_entity, 'version': version_entity}) }}">{{ ('admin_'~content_type~'.tabs_menu.translations')|trans }}</a>
                         {% else %}
                             <a class="item disabled">{{ ('admin_'~content_type~'.tabs_menu.translations')|trans }}</a>
                         {% endif %}
                         <hr class="ui divider">
-                        {% if not content_config.admin.version_delete.is_granted or is_granted(content_config.admin.version_delete.is_granted, entity) %}
+                        {% if not content_config.admin.version_delete.is_granted or is_granted(content_config.admin.version_delete.is_granted, version) %}
                             <a class="ui item red header" href="{{ url('sfs_cms_admin_content_'~content_type~'_delete_version', {'content':entity.id, 'version':version.id}) }}">
                                 {{ ('admin_'~content_type~'.tabs_menu.delete')|trans }}
                             </a>
