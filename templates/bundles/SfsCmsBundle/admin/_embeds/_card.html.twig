@@ -1,8 +1,12 @@
-<div>
-    <div class="ui top attached dividing clearing segment">
-    {% block title %}{% if title is not empty %}<div class="ui header">{{ title }}</div>{% endif %}{% endblock %}
+<div class="ui card fluid">
+    <div class="content">
+        <div class="header">
+        {% block title %}{% if title is not empty %}<div class="ui left floated">{{ title }}</div>{% endif %}{% endblock %}
+        </div>
     </div>
-    <div class="ui attached segment bottom">
+    <div class="content">
+        <div class="description">
         {% block content %}{% endblock %}
+        </div>
     </div>
 </div>
