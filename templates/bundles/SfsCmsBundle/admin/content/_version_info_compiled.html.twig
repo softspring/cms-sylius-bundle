@@ -74,7 +74,7 @@
                         {% if compiled is not iterable %}
                             {{ tools.drawEsiCalls(compiled.dataPart('content')) }}
                             <pre class="overflow-auto"
-                                 style="max-height: 600px"><code
+                                 style="max-height: 600px; overflow: auto;"><code
                                         class="text-muted">{{ compiled.dataPart('content') }}</code>
 <code
         class="text-danger">{{ compiled.dataPart('errors')|default(false) }}</code>
@@ -96,7 +96,7 @@
                             <strong>{{ container }}</strong>
                             {{ tools.drawEsiCalls(content) }}
                             <pre class="overflow-auto"
-                                 style="max-height: 300px"><code class="text-muted">{{ content }}</code></pre>
+                                 style="max-height: 300px; overflow: auto;"><code class="text-muted">{{ content }}</code></pre>
                         {% endfor %}
                     </div>
                     {% set first = false %}
