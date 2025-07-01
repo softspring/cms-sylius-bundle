@@ -3,9 +3,11 @@
 {% block table %}
     {% embed '@SfsComponents/paginator/table.html.twig' with {
         'collection': versions,
+        'filter_form': null,
         'pagination_route': 'sfs_cms_admin_sections_versions',
         'pagination_route_attributes': {'section':section.id},
-        'table_class': 'ui celled table'
+        'table_class': 'ui celled table',
+        'sfs_components_theme': sfs_components_theme|default('semantic-ui'),
     } %}
         {% trans_default_domain 'sfs_cms_admin' %}
         {% block ths %}
@@ -15,6 +17,7 @@
             <th>{{ ('admin_sections.versions.fields.creator.header')|trans }}</th>
             <th>{{ ('admin_sections.versions.fields.created.header')|trans }}</th>
             <th>{{ ('admin_sections.versions.fields.publish_status.header')|trans }}</th>
+            <th>&nbsp;</th>
             <th>&nbsp;</th>
             <th>&nbsp;</th>
         {% endblock ths %}
