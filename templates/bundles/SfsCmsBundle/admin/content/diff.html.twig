@@ -1,0 +1,54 @@
+{% trans_default_domain 'sfs_cms_contents' %}
+
+{% extends '@SfsCms/admin_layout_semantic.html.twig' %}
+
+{% block title %}{{ ('admin_'~content_type~'.diff.meta.title')|trans({'%name%':entity.name}) }}{% endblock %}
+
+{% block header_title %}{{ ('admin_'~content_type~'.diff.title')|trans({'%name%':entity.name}) }}{% endblock %}
+{% block header_subtitle %}Manage your page{% endblock %}
+{% block header_buttons %}
+    {% include '@SfsCms/admin/content/_content_header_buttons.html.twig' %}
+{% endblock %}
+
+{% block breadcrums_content %}
+    {{ parent() }}
+    <a class="section"
+       href="{{ url('sfs_cms_admin_content_'~content_type~'_list') }}">{{ ('admin_'~content_type~'.list.breadcrumb')|trans }}</a>
+    <i class="right chevron icon divider"></i>
+    <a class="section"
+       href="{{ url('sfs_cms_admin_content_'~content_type~'_details', {'content':entity.id}) }}">{{ ('admin_'~content_type~'.read.breadcrumb')|trans({'%name%': entity.name}) }}</a>
+    <i class="right chevron icon divider"></i>
+    <a class="section active">{{ ('admin_'~content_type~'.diff.breadcrumb')|trans({'%name%':entity.name}) }}</a>
+{% endblock breadcrums_content %}
+
+{% block content %}
+    {% include ['@content/'~content_type~'/admin/_content_tabs.html.twig', '@SfsCms/admin/content/_content_tabs.html.twig']  with {'current':'versions', 'content_type':content_type, 'content_entity':entity} %}
+
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    {{ form_widget(form) }}
+    {{ form_rest(form) }}
+    <div class="ui hidden divider"></div>
+    <div class="ui buttons">
+        <button class="ui labeled icon primary button" type="submit"><i
+                    class="save icon"></i> {{ ('admin_'~content_type~'.diff.actions.submit.button')|trans }}</button>
+        <a href="{{ url('sfs_cms_admin_content_'~content_type~'_details', {'content':entity.id}) }}"
+           class="ui button">{{ ('admin_'~content_type~'.diff.actions.cancel.button')|trans }}</a>
+    </div>
+    {{ form_end(form) }}
+
+    {% if version1|default(false) and version2|default(false) %}
+        {# two columns in semantic with separated scroll bars #}
+        <div class="ui two column grid">
+            <div class="column" style="overflow-y: auto; max-height: 600px;">
+                <h3 class="ui header">Version 1</h3>
+                <pre>{{ version1.rawData|json_encode(constant('JSON_PRETTY_PRINT')) }}</pre>
+            </div>
+            <div class="column" style="overflow-y: auto; max-height: 600px;">
+                <h3 class="ui header">Version 2</h3>
+                <pre>{{ version2.rawData|json_encode(constant('JSON_PRETTY_PRINT')) }}</pre>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock content %}
