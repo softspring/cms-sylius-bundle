@@ -33,11 +33,12 @@
 
     {% block tds %}
         {% set version = element %}
-        <td>v{{ version.versionNumber }} {% if version.hasCompileErrors %}<i
+        <td class="{{ version.hasCompileErrors ? 'ui negative' : ''}}">v{{ version.versionNumber }} {% if version.hasCompileErrors %}<i
                     class="bi bi-exclamation-triangle text-danger"
-                    title="This version has some compilation error"></i>{% endif %}</td>
-        <td>{{ ('admin_'~content_type~'.versions.origin.'~(version.origin|default('null')))|trans }} {{ version.originDescription ? '('~version.originDescription~')' : '' }}</td>
-        <td>
+                    title="This version has some compilation error"></i>{% endif %}
+        </td>
+        <td class="{{ version.hasCompileErrors ? 'ui negative' : ''}}">{{ ('admin_'~content_type~'.versions.origin.'~(version.origin|default('null')))|trans }} {{ version.originDescription ? '('~version.originDescription~')' : '' }}</td>
+        <td class="{{ version.hasCompileErrors ? 'ui negative' : ''}}">
             {% if version.note %}
                 <a class="ui labeled icon button"
                    href="{{ url('sfs_cms_admin_content_'~content_type~'_version_info', {'content':entity.id, 'version':version.id}) }}"><i
@@ -50,15 +51,15 @@
                 </a>
             {% endif %}
         </td>
-        <td>
+        <td class="{{ version.hasCompileErrors ? 'ui negative' : ''}}">
             {% set creator = version.metaField('creator') %}
             {% if creator %}
                 {{ creator.name|default(creator.id)|default('') }}
             {% endif %}
         </td>
-        <td>{{ version.createdAt|date('H:i:s d-m-Y') }}</td>
-        <td>{{ version.published ? ('admin_'~content_type~'.versions.publish_status.published')|trans : ('admin_'~content_type~'.versions.publish_status.unpublished')|trans }}</td>
-        <td>
+        <td class="{{ version.hasCompileErrors ? 'ui negative' : ''}}">{{ version.createdAt|date('H:i:s d-m-Y') }}</td>
+        <td class="{{ version.hasCompileErrors ? 'ui negative' : ''}}">{{ version.published ? ('admin_'~content_type~'.versions.publish_status.published')|trans : ('admin_'~content_type~'.versions.publish_status.unpublished')|trans }}</td>
+        <td class="{{ version.hasCompileErrors ? 'ui negative' : ''}}">
             <div class="ui buttons">
                 {% if not content_config.admin.version_lock.is_granted or is_granted(content_config.admin.version_lock.is_granted, version) %}
                     {% if version.keep %}
@@ -85,7 +86,7 @@
                 {% endif %}
             </div>
         </td>
-        <td>
+        <td class="{{ version.hasCompileErrors ? 'ui negative' : ''}}">
             <div class="ui buttons">
                 {% if not content_config.admin.version_info.is_granted or is_granted(content_config.admin.version_info.is_granted, version) %}
                     <a href="{{ url('sfs_cms_admin_content_'~content_type~'_version_info', {'content':entity.id, 'version':version.id}) }}"
@@ -120,7 +121,7 @@
                 {% endif %}
             </div>
         </td>
-        <td>
+        <td class="{{ version.hasCompileErrors ? 'ui negative' : ''}}">
             {% if content_config.admin.version_delete.is_granted and is_granted(content_config.admin.version_delete.is_granted, version) %}
                 <a class="ui icon button"
                    href="{{ url('sfs_cms_admin_content_'~content_type~'_delete_version', {'content':entity.id, 'version':version.id, 'back': backSection}) }}">

@@ -54,13 +54,13 @@
                         {% if not content_config.admin.publish_version.is_granted or is_granted(content_config.admin.publish_version.is_granted, version) %}
                             {% if not version.published %}
                                 <a class="item"
-                                       href="{{ url('sfs_cms_admin_content_'~content_type~'_publish_version', {'content':entity.id, 'version':version.id}) }}">{{ ('admin_'~content_type~'.versions.actions.publish.link')|trans }}</a>
+                                       href="{{ url('sfs_cms_admin_content_'~content_type~'_publish_version', {'content':entity.id, 'version':version.id, 'back': 'version_info'}) }}">{{ ('admin_'~content_type~'.versions.actions.publish.link')|trans }}</a>
                             {% endif %}
                         {% endif %}
                         {% if not content_config.admin.unpublish.is_granted or is_granted(content_config.admin.unpublish.is_granted, version) %}
                             {% if version.published %}
                                 <a class="item" onclick="return confirm('Are you sure you want to unpublish this page? It will show a 404 error to the users.');"
-                                       href="{{ url('sfs_cms_admin_content_'~content_type~'_unpublish', {'content':entity.id, 'version':version.id}) }}">{{ ('admin_'~content_type~'.versions.actions.unpublish.link')|trans }}</a>
+                                       href="{{ url('sfs_cms_admin_content_'~content_type~'_unpublish', {'content':entity.id, 'version':version.id, 'back': 'version_info'}) }}">{{ ('admin_'~content_type~'.versions.actions.unpublish.link')|trans }}</a>
                             {% endif %}
                         {% endif %}
 
