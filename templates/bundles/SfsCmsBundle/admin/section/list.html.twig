@@ -73,7 +73,7 @@
         {% endblock tbody %}
 
         {% block empty_message %}
-            {% if filterForm.vars.submitted %}
+            {% if filterForm|default(false) and filterForm.vars.data|default([])|filter(v=>v) is not empty %}
                 <p>
                     {{ 'admin_sections.list.empty.clean_filters'|trans({'%url%': url('sfs_cms_admin_sections_list')})|raw }}
                 </p>
