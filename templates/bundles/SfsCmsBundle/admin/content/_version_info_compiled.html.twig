@@ -39,7 +39,7 @@
                 </div>
             {% elseif version_entity.compiled is empty %}
                 {% if sfs_cms_admin_content_recompile_enabled %}
-                    <div class="ui ignored negative message" role="alert">
+                    <div class="ui ignored warning message" role="alert">
                         {{ ('admin_'~content_type~'.version_info.compiled.pre_compile_content_missing')|trans }}
                     </div>
                 {% else %}
@@ -63,43 +63,61 @@
         {% endif %}
         <div class="ui styled accordion fluid">
                 {% set first = false %}
-                {% for compiled in version_entity.compiled|filter((compiled)=>compiled.dataPart('content')|default(false)) %}
-                    {% set keyCleaned = compiled.key|replace({'/': '', ' ': '', '.' : ''}) %}
-                    <h2 class="title" id="heading{{ keyCleaned }}">
-                        <i class="dropdown icon"></i>
-                        Pre-compiled content {{ compiled.key }}
-                    </h2>
-                    <div id="collapse{{ keyCleaned }}"
-                         class="content {{ first?'active':'' }}">
-                        {% if compiled is not iterable %}
-                            {{ tools.drawEsiCalls(compiled.dataPart('content')) }}
-                            <pre class="overflow-auto"
-                                 style="max-height: 600px; overflow: auto;"><code
-                                        class="text-muted">{{ compiled.dataPart('content') }}</code>
-<code
-        class="text-danger">{{ compiled.dataPart('errors')|default(false) }}</code>
-                                </pre>
-                        {% endif %}
-                    </div>
-                    {% set first = false %}
-                {% endfor %}
+                {% for compiled in version_entity.compiled %}
 
-                {% for compiled in version_entity.compiled|filter((compiled)=>compiled.dataPart('modules')|default(false)) %}
-                    {% set keyCleaned = ('modules'~compiled.key)|replace({'/': '', ' ': '', '.': ''}) %}
-                    <h2 class="title" id="heading{{ keyCleaned }}">
-                        <i class="dropdown icon"></i>
-                        Pre-compiled modules {{ compiled.key }}
-                    </h2>
-                    <div id="collapse{{ keyCleaned }}"
-                         class="content {{ first?'active':'' }}">
-                        {% for container, content in compiled.dataPart('modules') %}
-                            <strong>{{ container }}</strong>
-                            {{ tools.drawEsiCalls(content) }}
-                            <pre class="overflow-auto"
-                                 style="max-height: 300px; overflow: auto;"><code class="text-muted">{{ content }}</code></pre>
-                        {% endfor %}
-                    </div>
-                    {% set first = false %}
+
+
+
+                    {% if compiled.dataPart('content')|default(false) %}
+                        {% set keyCleaned = compiled.key|replace({'/': '', ' ': '', '.' : ''}) %}
+                        <h2 class="title" id="heading{{ keyCleaned }}"  {%- if compiled.dataPart('errors') -%}style="color: #9F3A38"{% endif %}>
+                            <i class="dropdown icon"></i>
+                            Pre-compiled content {{ compiled.key }}
+                        </h2>
+                        <div id="collapse{{ keyCleaned }}"
+                             class="content {{ first?'active':'' }}">
+                            {% if compiled is not iterable %}
+                                {%- if compiled.dataPart('errors') -%}
+                                    <pre class="overflow-auto"
+                                         style="max-height: 300px; overflow: auto;"><code style="color: #9F3A38">{{ compiled.dataPart('errors')|json_encode(128) }}</code></pre>
+                                {%- endif -%}
+                                {{ tools.drawEsiCalls(compiled.dataPart('content')) }}
+                                <pre class="overflow-auto"
+                                     style="max-height: 600px; overflow: auto;"><code class="text-muted">{{ compiled.dataPart('content') }}</code>
+                                </pre>
+                            {% endif %}
+                        </div>
+                        {% set first = false %}
+                    {% endif %}
+
+
+                    {% if compiled.dataPart('containers')|default(false) %}
+                        {% set keyCleaned = compiled.key|replace({'/': '', ' ': '', '.' : ''}) %}
+                        <h2 class="title" id="heading{{ keyCleaned }}"  {%- if compiled.dataPart('containers_errors') -%}style="color: #9F3A38"{% endif %}>
+                            <i class="dropdown icon"></i>
+                            Pre-compiled containers {{ compiled.key }}
+                        </h2>
+                        <div id="collapse{{ keyCleaned }}"
+                             class="content {{ first?'active':'' }}">
+                            {% if compiled is not iterable %}
+                                {%- if compiled.dataPart('containers_errors') -%}
+                                    <pre class="overflow-auto"
+                                         style="max-height: 300px; overflow: auto;"><code style="color: #9F3A38">{{ compiled.dataPart('containers_errors')|json_encode(128) }}</code></pre>
+                                {%- endif -%}
+
+                                {% for container, content in compiled.dataPart('containers') %}
+                                    <strong>{{ container }}</strong>
+                                    {{ tools.drawEsiCalls(content) }}
+                                    <pre class="overflow-auto"
+                                         style="max-height: 300px; overflow: auto;"><code class="text-muted">{{ content }}</code></pre>
+                                {% endfor %}
+
+                            {% endif %}
+                        </div>
+                        {% set first = false %}
+                    {% endif %}
+
+
                 {% endfor %}
             </div>
     {% endblock %}
