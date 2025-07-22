@@ -1,7 +1,7 @@
 {% embed '@SfsCms/admin/_embeds/_card.html.twig' %}
     {% trans_default_domain 'sfs_cms_admin' %}
 
-    {% block title %}<div class="ui header">{{ ('admin_sections.version_info.title')|trans }}</div>{% endblock %}
+    {% block title %}<div class="ui header">{{ ('admin_sections.version_info.title')|trans({'%name%': section_entity.name, '%versionNumber%':version_entity.versionNumber}) }}</div>{% endblock %}
 
     {% block content %}
         {{ form_start(form) }}
