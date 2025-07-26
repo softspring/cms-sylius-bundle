@@ -31,7 +31,7 @@
 
     {% set attr = attr|merge({'class': attr.class|default ~ ' controls collection-widget'}) %}
 
-    {% spaceless %}
+    {% apply spaceless %}
         <div {{ block('widget_container_attributes') }}>
 
             {{ error(form.vars.errors) }}
@@ -56,5 +56,5 @@
                 </a>
             {% endif %}
         </div>
-    {% endspaceless %}
+    {% endapply %}
 {%- endblock menu_item_collection_widget %}
