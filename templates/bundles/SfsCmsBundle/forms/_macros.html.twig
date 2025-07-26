@@ -1,5 +1,5 @@
 {% macro collectionItem(form, allow_delete, button_delete_label, index, allow_up_down = false) %}
-    {% spaceless %}
+    {% apply spaceless %}
         <div data-collection="node"
              data-collection-index="{{ index }}"
              class="collection-item ui segment message">
@@ -32,6 +32,6 @@
                 </div>
             </div>
         </div>
-    {% endspaceless %}
+    {% endapply %}
 {% endmacro %}
 
