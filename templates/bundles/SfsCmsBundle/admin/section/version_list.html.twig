@@ -42,7 +42,7 @@
 
                 {% if is_granted('PERMISSION_SFS_CMS_ADMIN_SECTION_CLEANUP_VERSIONS', section_entity) %}
                     <a class="ui red labeled icon button"
-                       onclick="return confirm('Are you sure you want to cleanup old versions?');"
+                       onclick="return confirm('{{ ('admin_sections.versions.actions.cleanup_versions.confirm')|trans }}');"
                        href="{{ url('sfs_cms_admin_sections_cleanup_versions', {'section':section_entity.id, 'back':'versions'}) }}">
                         <i class="icon eraser"></i>
                         {{ ('admin_sections.versions.actions.cleanup_versions.link')|trans }}
