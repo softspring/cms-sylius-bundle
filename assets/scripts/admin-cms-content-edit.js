@@ -14,10 +14,8 @@ import '@softspring/cms-bundle/scripts/admin/content-edit/preview-id';
 import '@softspring/cms-bundle/scripts/admin/content-edit/preview-media-modal';
 import '@softspring/cms-bundle/scripts/admin/content-edit/preview-tag-type';
 import '@softspring/cms-bundle/scripts/admin/content-edit/preview-toggle';
-import '@softspring/cms-bundle/scripts/admin/content-edit/preview-section';
 import '@softspring/cms-bundle/scripts/types/block-type';
 import '@softspring/cms-bundle/scripts/types/color-type';
-import '@softspring/cms-bundle/scripts/types/section-type';
 import '@softspring/cms-bundle/scripts/types/symfony-route-type';
 
 /* With bootstrap dependencies */

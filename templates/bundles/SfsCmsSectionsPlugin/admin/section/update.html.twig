@@ -24,7 +24,7 @@
 {% endblock breadcrums_content %}
 
 {% block content %}
-    {% include '@SfsCms/admin/section/_section_tabs.html.twig' with {'current':'update', 'section_entity':section} %}
+    {% include '@SfsCmsSectionsPlugin/admin/section/_section_tabs.html.twig' with {'current':'update', 'section_entity':section} %}
 
     <div class="ui bottom attached active tab segment">
         {{ form_start(form, {'attr': {'class': 'ui form'}}) }}

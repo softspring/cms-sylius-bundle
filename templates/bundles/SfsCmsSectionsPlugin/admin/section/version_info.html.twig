@@ -22,7 +22,7 @@
 {% endblock breadcrums_content %}
 
 {% block content %}
-    {% include '@SfsCms/admin/section/_section_tabs.html.twig' with {'current':'versions', 'section_entity':section_entity} %}
+    {% include '@SfsCmsSectionsPlugin/admin/section/_section_tabs.html.twig' with {'current':'versions', 'section_entity':section_entity} %}
     <div class="ui bottom attached active tab segment">
         <div class="ui right aligned grid clearing">
             <div class="ui buttons column">
@@ -88,20 +88,20 @@
 
         <div class="ui grid">
             <div class="five wide column">
-                {% include '@SfsCms/admin/section/_version_info_general.html.twig' %}
+                {% include '@SfsCmsSectionsPlugin/admin/section/_version_info_general.html.twig' %}
                 {# Uncomment if linked routes/medias are implemented
-                {# {% include '@SfsCms/admin/section/_version_info_linked_routes.html.twig' %} #}
-                {# {% include '@SfsCms/admin/section/_version_info_linked_medias.html.twig' %} #}
+                {# {% include '@SfsCmsSectionsPlugin/admin/section/_version_info_linked_routes.html.twig' %} #}
+                {# {% include '@SfsCmsSectionsPlugin/admin/section/_version_info_linked_medias.html.twig' %} #}
             </div>
             <div class="eleven wide column">
-                {% include '@SfsCms/admin/section/_version_info_compiled.html.twig' %}
-                {% include '@SfsCms/admin/section/_version_info_data.html.twig' %}
+                {% include '@SfsCmsSectionsPlugin/admin/section/_version_info_compiled.html.twig' %}
+                {% include '@SfsCmsSectionsPlugin/admin/section/_version_info_data.html.twig' %}
                 {# Uncomment if SEO info is implemented
-                {# {% include '@SfsCms/admin/section/_version_info_seo.html.twig' %} #}
+                {# {% include '@SfsCmsSectionsPlugin/admin/section/_version_info_seo.html.twig' %} #}
             </div>
             <div class="sixteen wide column">
                 {# Uncomment if history is implemented
-                {# {% include '@SfsCms/admin/section/_version_info_history.html.twig' %} #}
+                {# {% include '@SfsCmsSectionsPlugin/admin/section/_version_info_history.html.twig' %} #}
             </div>
         </div>
     </div>
