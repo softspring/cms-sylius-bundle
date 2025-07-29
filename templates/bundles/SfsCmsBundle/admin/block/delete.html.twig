@@ -2,20 +2,42 @@
 {% extends '@SfsCms/admin_layout_semantic.html.twig' %}
 {% block title %}{{ 'admin_blocks.delete.meta.title'|trans }}{% endblock %}
 
-{% block header_title %}{{ 'admin_blocks.delete.meta.title'|trans }}{% endblock %}
-{% block header_icon %}puzzle piece{% endblock %}
+
+{% block header_icon %}vertically linkify{% endblock %}
+{% block header_title %}{{ 'admin_blocks.delete.title'|trans }}{% endblock %}
+{% block header_subtitle %}Manage content block{% endblock %}
+
+{% form_theme form
+    '@SyliusUi/Form/theme.html.twig'
+%}
+
+{% block breadcrums_content %}
+    {{ parent() }}
+    <a class="section" href="{{ url('sfs_cms_admin_blocks_list') }}">{{ 'admin_blocks.list.breadcrumb'|trans }}</a><i
+        class="right chevron icon divider"></i>
+    <span class="section active"
+          aria-current="content">{{ 'admin_blocks.delete.breadcrumb'|trans({'%name%': block.name|default(block.id) }) }}</span>
+{% endblock breadcrums_content %}
 
 {% block content %}
+    {% include '@SfsCms/admin/block/_block_tabs.html.twig' with {'current':'delete', 'block':block} %}
+
     <div class="ui hidden divider"></div>
     <div class="ui segment">
+        {{ ('admin_blocks.delete.main_warnings_raw')|trans|raw }}
+
         {{ form_start(form,{'attr':{'class':'ui form'}}) }}
-            {{ form_widget(form) }}
-            {{ form_rest(form) }}
-            <div class="ui hidden divider"></div>
-            <div class="ui buttons">
-                <input type="submit" value="{{ 'admin_blocks.delete.actions.delete.button'|trans }}" class="ui labeled icon primary button" />
-                <a href="{{ url('sfs_cms_admin_blocks_list') }}" class="ui button">{{ 'admin_blocks.delete.actions.cancel.button'|trans }}</a>
-             </div>
+        {{ form_widget(form) }}
+        {{ form_rest(form) }}
+        <div class="ui hidden divider"></div>
+        <div class="ui buttons">
+            <button class="ui labeled icon red button" type="submit"><i
+                        class="icon trash alternate"></i>{{ 'admin_blocks.delete.actions.delete.button'|trans }}</button>
+            <a href="{{ url('sfs_cms_admin_blocks_list') }}"
+               class="plus icon"></i>{{ 'admin_blocks.delete.actions.delete.button'|trans }}</button>
+                <a href="{{ url('sfs_cms_admin_blocks_update', {'block':block.id}) }}"
+                   class="ui button">{{ 'admin_blocks.delete.actions.cancel.button'|trans }}</a>
+        </div>
         {{ form_end(form) }}
     </div>
 {% endblock content %}

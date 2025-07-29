@@ -1,0 +1,15 @@
+{% trans_default_domain 'sfs_cms_admin' %}
+
+<ul class="ui top attached tabular menu" id="myTab" role="tablist">
+    {% block tabs %}
+{#        <li class="{{ current == 'read' ? 'active' : '' }} item">#}
+{#            <a href="{{ url('sfs_cms_admin_blocks_read', {'block':block.id}) }}" >{{ ('admin_blocks.tabs_menu.details')|trans }}</a>#}
+{#        </li>#}
+        <li class="{{ current == 'update' ? 'active' : '' }} item">
+            <a href="{{ url('sfs_cms_admin_blocks_update', {'block':block.id}) }}" >{{ ('admin_blocks.tabs_menu.update')|trans }}</a>
+        </li>
+        <li class="{{ current == 'delete' ? 'active' : '' }} item">
+            <a href="{{ url('sfs_cms_admin_blocks_delete', {'block':block.id}) }}" >{{ ('admin_blocks.tabs_menu.delete')|trans }}</a>
+        </li>
+    {% endblock %}
+</ul>
