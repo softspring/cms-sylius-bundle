@@ -7,7 +7,7 @@
 {% block header_title %}{{ ('admin_sections.versions.title')|trans({'%name%':section_entity.name}) }}{% endblock %}
 {% block header_subtitle %}Manage your section{% endblock %}
 {% block header_buttons %}
-    {% include '@SfsCms/admin/section/_section_header_buttons.html.twig' %}
+    {% include '@SfsCmsSectionsPlugin/admin/section/_section_header_buttons.html.twig' %}
 {% endblock %}
 
 {% block breadcrums_content %}
@@ -20,7 +20,7 @@
 {% endblock breadcrums_content %}
 
 {% block content %}
-    {% include '@SfsCms/admin/section/_section_tabs.html.twig' with {'current':'versions', 'section_entity':section_entity} %}
+    {% include '@SfsCmsSectionsPlugin/admin/section/_section_tabs.html.twig' with {'current':'versions', 'section_entity':section_entity} %}
 
     <div class="ui bottom attached active tab segment">
         <div class="ui right aligned grid clearing">
@@ -56,6 +56,6 @@
             </div>
         </div>
 
-        {% include '@SfsCms/admin/section/_version_list_table.html.twig' with {'versions': entities, 'section': section_entity} %}
+        {% include '@SfsCmsSectionsPlugin/admin/section/_version_list_table.html.twig' with {'versions': entities, 'section': section_entity} %}
     </div>
 {% endblock content %}

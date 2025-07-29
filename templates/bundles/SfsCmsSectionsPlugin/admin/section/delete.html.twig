@@ -7,7 +7,7 @@
 {% block header_subtitle %}Manage your section{% endblock %}
 {% block header_icon %}th{% endblock %}
 {% block header_buttons %}
-    {% include '@SfsCms/admin/section/_section_header_buttons.html.twig' %}
+    {% include '@SfsCmsSectionsPlugin/admin/section/_section_header_buttons.html.twig' %}
 {% endblock %}
 
 {% block breadcrums_content %}
@@ -26,7 +26,7 @@
 %}
 
 {% block content %}
-    {% include '@SfsCms/admin/section/_section_tabs.html.twig'  with {'current':'delete', 'section':section, 'section_entity':section} %}
+    {% include '@SfsCmsSectionsPlugin/admin/section/_section_tabs.html.twig'  with {'current':'delete', 'section':section, 'section_entity':section} %}
 
     <div class="ui bottom attached active tab segment">
         <div class="ui icon warning message">

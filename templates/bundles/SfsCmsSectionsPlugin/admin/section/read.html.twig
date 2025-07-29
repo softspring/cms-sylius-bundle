@@ -8,7 +8,7 @@
 {% block header_subtitle %}Manage your section{% endblock %}
 {% block header_icon %}th{% endblock %}
 {% block header_buttons %}
-    {% include '@SfsCms/admin/section/_section_header_buttons.html.twig' %}
+    {% include '@SfsCmsSectionsPlugin/admin/section/_section_header_buttons.html.twig' %}
 {% endblock %}
 
 {% set sfs_components_theme = 'semantic-ui' %}
@@ -21,7 +21,7 @@
 {% endblock breadcrums_content %}
 
 {% block content %}
-    {% include '@SfsCms/admin/section/_section_tabs.html.twig' with {'current':'details', 'section_entity':section} %}
+    {% include '@SfsCmsSectionsPlugin/admin/section/_section_tabs.html.twig' with {'current':'details', 'section_entity':section} %}
 
     {% if cache_alert is defined %}
         <div class="ui ignored warning message" role="alert">
@@ -44,19 +44,19 @@
     <div class="ui bottom attached active tab segment">
         <div class="ui grid">
             <div class="four wide column">
-                {% include '@SfsCms/admin/section/_read_general.html.twig' %}
+                {% include '@SfsCmsSectionsPlugin/admin/section/_read_general.html.twig' %}
             </div>
             <div class="four wide column">
-                {% include '@SfsCms/admin/section/_read_caching.html.twig' %}
+                {% include '@SfsCmsSectionsPlugin/admin/section/_read_caching.html.twig' %}
             </div>
             <div class="four wide column">
-                {% include '@SfsCms/admin/section/_read_usages.html.twig' %}
+                {% include '@SfsCmsSectionsPlugin/admin/section/_read_usages.html.twig' %}
             </div>
             <div class="four wide column">
-                {% include '@SfsCms/admin/section/_read_translations.html.twig' %}
+                {% include '@SfsCmsSectionsPlugin/admin/section/_read_translations.html.twig' %}
             </div>
             <div class="sixteen wide column">
-                {% include '@SfsCms/admin/section/_read_versions.html.twig' with {'backSection': 'details'} %}
+                {% include '@SfsCmsSectionsPlugin/admin/section/_read_versions.html.twig' with {'backSection': 'details'} %}
             </div>
         </div>
     </div>
