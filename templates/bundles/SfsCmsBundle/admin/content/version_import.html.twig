@@ -28,7 +28,7 @@
 {% endblock breadcrums_content %}
 
 {% block content %}
-    {% include ['@content/'~content_type~'/admin/_content_tabs.html.twig', '@SfsCms/admin/content/_content_tabs.html.twig']  with {'current':'versions', 'content_entity':content} %}
+    {% include ['@content/'~content_type~'/admin/_content_tabs.html.twig', '@SfsCms/admin/content/_content_tabs.html.twig']  with {'current':'versions', 'content_entity':content_entity} %}
 
     <div class="container-fluid p-3 bg-white">
         <div class="row mt-4">
