@@ -26,7 +26,7 @@
 {#            </dd>#}
                 <div class="header ui left floated">{{ 'admin_sections.read.caching.ttl'|trans }}</div>
                 {% if section.extra('ttl') %}
-                    <span class="ui blue label right floated">{{ section.extra('ttl') }}</span> {{ 'admin_sections.read.caching.ttl.seconds'|trans }}
+                    <span class="ui blue label right floated">{{ section.extra('ttl') }} {{ 'admin_sections.read.caching.ttl.seconds'|trans }}</span>
                 {% else %}
                     <span class="ui grey label right floated">{{ 'admin_sections.read.caching.ttl.not_set'|trans }}</span>
                 {% endif %}
