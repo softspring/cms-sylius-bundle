@@ -14,6 +14,7 @@
             <a class="item" data-tab="{{ video_set_id }}"><i class="film icon"></i> {{ video_set_id }}</a>
         {% endfor %}
     {% endif %}
+    <a class="item" data-tab="alts"><i class="tag icon"></i> Alt</a>
     {% if linked_cms_versions is defined %}
         {% if linked_cms_versions|length %}
             <a class="item" data-tab="linked-cms"><i class="linkify icon"></i> linked CMS contents ({{ linked_cms_versions|length }})</a>
