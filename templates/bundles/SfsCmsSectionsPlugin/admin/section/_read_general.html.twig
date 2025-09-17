@@ -11,10 +11,15 @@
                    data-confirm-modal="{{ ('admin_sections.unpublish.confirm_message_raw')|trans|base64_encode }}"
                    data-confirm-modal-title="{{ ('admin_sections.unpublish.confirm_message_title')|trans }}"
                    data-confirm-modal-confirm-button-type="danger"
-                >{{ ('admin_sections.read.actions.unpublish.link')|trans }} <i class="icon toggle off"></i></a>
+                >
+                    <i class="icon toggle off"></i>
+                    {{ ('admin_sections.read.actions.unpublish.link')|trans }}
+                </a>
             {% else %}
-                <a class="ui mini basic button right floated disabled">{{ ('admin_sections.read.actions.unpublish.link')|trans }}
-                    <i class="icon toggle off"></i></a>
+                <a class="ui mini basic button right floated disabled">
+                    <i class="icon toggle off"></i>
+                    {{ ('admin_sections.read.actions.unpublish.link')|trans }}
+                </a>
             {% endif %}
         {% endif %}
         {{ parent() }}
