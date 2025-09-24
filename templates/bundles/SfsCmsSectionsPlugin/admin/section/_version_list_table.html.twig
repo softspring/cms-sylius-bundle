@@ -50,21 +50,21 @@
             <td>
                 {% if is_granted('PERMISSION_SFS_CMS_ADMIN_SECTION_VERSION_KEEP', version) %}
                     {% if version.keep %}
-                        <a href="{{ url('sfs_cms_admin_sections_unkeep_version', {'section':section.id, 'version':version.id, 'back': backSection, 'page': entities.page|default}) }}"
+                        <a class="ui icon button black" href="{{ url('sfs_cms_admin_sections_unkeep_version', {'section':section.id, 'version':version.id, 'back': backSection, 'page': entities.page|default}) }}"
                            title="{{ ('admin_sections.versions.actions.keep.link')|trans }}"><i
-                                    class="pin icon"></i></a>
+                                    class="icon lock"></i></a>
                     {% else %}
-                        <a href="{{ url('sfs_cms_admin_sections_keep_version', {'section':section.id, 'version':version.id, 'back': backSection, 'page': entities.page|default}) }}"
+                        <a class="ui icon button grey" href="{{ url('sfs_cms_admin_sections_keep_version', {'section':section.id, 'version':version.id, 'back': backSection, 'page': entities.page|default}) }}"
                            title="{{ ('admin_sections.versions.actions.nokeep.link')|trans }}"><i
-                                    class="pin outline icon"></i></a>
+                                    class="icon lock open"></i></a>
                     {% endif %}
                 {% else %}
                     {% if version.keep %}
-                        <span title="{{ ('admin_sections.versions.actions.keep.link')|trans }}"><i
-                                    class="pin icon"></i></span>
+                        <span class="ui black" title="{{ ('admin_sections.versions.actions.keep.link')|trans }}"><i
+                                    class="icon lock"></i></span>
                     {% else %}
-                        <span title="{{ ('admin_sections.versions.actions.nokeep.link')|trans }}"><i
-                                    class="pin outline icon"></i></span>
+                        <span class="ui grey" title="{{ ('admin_sections.versions.actions.nokeep.link')|trans }}"><i
+                                    class="icon lock open"></i></span>
                     {% endif %}
                 {% endif %}
             </td>
