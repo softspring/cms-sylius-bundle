@@ -26,6 +26,13 @@
     {% endfor %}
 {% endif %}
 
+<div class="ui bottom attached tab segment" data-tab="alts">
+    <h3>Alt texts</h3>
+    {% for locale,alt in media.altTexts|default([]) %}
+        <p><strong>{{ locale }}:</strong> {{ media.altTexts.translate(locale) }}</p>
+    {% endfor %}
+</div>
+
 {% if linked_cms_versions is defined and linked_cms_versions|length %}
     <div class="ui bottom attached tab segment" data-tab="linked-cms">
         {#            <h3>Linked CMS contents</h3>#}
