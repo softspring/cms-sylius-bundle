@@ -11,39 +11,45 @@
                    data-confirm-modal="{{ ('admin_sections.unpublish.confirm_message_raw')|trans|base64_encode }}"
                    data-confirm-modal-title="{{ ('admin_sections.unpublish.confirm_message_title')|trans }}"
                    data-confirm-modal-confirm-button-type="danger"
-                >{{ ('admin_sections.read.actions.unpublish.link')|trans }} <i class="icon toggle off"></i></a>
+                >
+                    <i class="icon toggle off"></i>
+                    {{ ('admin_sections.read.actions.unpublish.link')|trans }}
+                </a>
             {% else %}
-                <a class="ui mini basic button right floated disabled">{{ ('admin_sections.read.actions.unpublish.link')|trans }}
-                    <i class="icon toggle off"></i></a>
+                <a class="ui mini basic button right floated disabled">
+                    <i class="icon toggle off"></i>
+                    {{ ('admin_sections.read.actions.unpublish.link')|trans }}
+                </a>
             {% endif %}
         {% endif %}
         {{ parent() }}
     {% endblock %}
 
     {% block content %}
-        <dl class="ui list">
+    <div class="ui list">
             {# <dt class="header">{{ ('admin_sections.read.name')|trans }}</dt> #}
             {# <dd><strong>{{ section.name }}</strong></dd> #}
             {# <dt class="header">{{ ('admin_sections.read.sites')|trans }}</dt> #}
             {# <dd><strong>{{ section.sites|map((site) => site|sfs_cms_site_name)|join(', ') }}</strong></dd> #}
-            <dt class="header">{{ ('admin_sections.read.general.status')|trans }}</dt>
-            <dd>
-                <strong>{{ ('sections.status.'~section.status)|trans }}</strong>
+            <div class="item">
+                {{ ('admin_sections.read.general.status')|trans }}
+
+                <div class="header">{{ ('sections.status.'~section.status)|trans }}
                 {% if section.publishedVersion %}
                     (
                     <a href="{{ url('sfs_cms_admin_sections_version_info', {'section':section.id, 'version':section.publishedVersion.id}) }}">v{{ section.publishedVersion.versionNumber }}</a>)
                 {% endif %}
-            </dd>
+                </div>
+            </div>
             {% if section.publishedVersion %}
-                <dt class="header">{{ ('admin_sections.read.general.publishDate')|trans }}</dt>
-                <dd>
-                    <strong>
+            <div class="item">{{ ('admin_sections.read.general.publishDate')|trans }}</dt>
+                <div class="header">
                         {% if section.lastModified %}
                             {{ section.lastModified|date('H:i d-m-Y') }}
                         {% endif %}
-                    </strong>
-                </dd>
+                </div>
+            </div>
             {% endif %}
-        </dl>
+        </div>
     {% endblock %}
 {% endembed %}

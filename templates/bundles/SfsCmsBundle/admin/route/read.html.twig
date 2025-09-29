@@ -29,7 +29,7 @@
             </div>
             <div class="item">
                 <div class="header">Type</div>
-                <span>{{ ('admin_routes.types.'~route.type~'.name')|trans }}</span>
+                <span>{{ ('admin_routes.types.'~route.type~'.name')|trans({'%redirectType%': route.redirectType}) }}</span>
             </div>
             <div class="item">
                 <div class="header">Content</div>

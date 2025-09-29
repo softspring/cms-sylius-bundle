@@ -3,15 +3,16 @@
         {% for esiCall in sfs_cms_search_content_esi_calls(content) %}
             <p style="border: 1px solid #0e860e; padding: 2px;"><code style="color: #0e860e">ESI:
                     {% if esiCall.processed.type|default(false) == 'block' %}
-                        Block {{ esiCall.processed.block_type }}
+                        <i class="icon puzzle piece"></i> Block {{ esiCall.processed.block_type }}
                         {% if esiCall.processed.block_config.cache_ttl|default(false) %}(TTL: {{ esiCall.processed.block_config.cache_ttl }}){% endif %}
                     {% elseif esiCall.processed.type|default(false) == 'menu' %}
-                        Menu {{ esiCall.processed.menu_type }}
+                        <i class="icon bars"></i> Menu {{ esiCall.processed.menu_type }}
                         {% if esiCall.processed.menu_config.cache_ttl|default(false) %}(TTL: {{ esiCall.processed.menu_config.cache_ttl }}){% endif %}
                     {% elseif esiCall.processed.type|default(false) == 'section' %}
-                        Section {{ esiCall.processed.section_name }}
+                        <i class="icon th"></i> Section {{ esiCall.processed.section_name }}
                         {% if esiCall.processed.section_ttl|default(false) %}(TTL: {{ esiCall.processed.section_ttl }}){% endif %}
                     {% else %}
+                        <i class="icon linkify"></i>
                         {{ esiCall.url }}
                     {% endif %}
                 </code></p>
