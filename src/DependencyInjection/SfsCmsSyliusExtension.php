@@ -12,14 +12,14 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 class SfsCmsSyliusExtension extends Extension implements PrependExtensionInterface
 {
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $processor = new Processor();
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../../config/services'));
         $loader->load('services.yaml');
     }
 
-    public function prepend(ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container): void
     {
         //        $doctrineConfig = [];
         //
