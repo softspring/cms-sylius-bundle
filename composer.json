@@ -6,14 +6,14 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": ">=8.1",
+        "php": ">=8.4",
         "softspring/cms-bundle": "^6.0@dev",
         "sylius/theme-bundle": "^2.1.1 || ^2.3",
         "sylius/ui-bundle": "^1.11"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.89",
-        "phpstan/phpstan": "^1.9",
+        "phpstan/phpstan": "^2.1",
         "rector/rector": "^2.2"
     },
     "autoload": {
