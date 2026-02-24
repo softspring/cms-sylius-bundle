@@ -43,7 +43,7 @@
                         <i class="icon bars"></i> Menu {{ ajaxCall.processed.menu_type }}
                         {% if ajaxCall.processed.menu_config.cache_ttl|default(false) %}(TTL: {{ ajaxCall.processed.menu_config.cache_ttl }}){% endif %}
                     {% elseif ajaxCall.processed.type|default(false) == 'section' %}
-                        <i class="icon th"></i> Section {{ ajaxCall.processed.section_name }}
+                        <i class="icon th"></i> Section {{ ajaxCall.processed.section_name|default('N/A') }}
                         {% if ajaxCall.processed.section_ttl|default(false) %}(TTL: {{ ajaxCall.processed.section_ttl }}){% endif %}
                     {% else %}
                         <i class="icon linkify"></i>
