@@ -1,7 +1,7 @@
 {
     "name": "@softspring/cms-sylius-bundle",
     "license": "MIT",
-    "version": "5.2.0-dev",
+    "version": "6.0.0-dev",
     "peerDependencies": {
       "@softspring/cms-bundle": "*",
       "@softspring/media-bundle": "*",
