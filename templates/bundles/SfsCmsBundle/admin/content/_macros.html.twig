@@ -26,7 +26,7 @@
                             <i class="icon user" title="Request reach session and cookies"></i>
                         {% endif %}
                     {% elseif esiCall.processed.type|default(false) == 'section' %}
-                        <i class="icon th"></i> Section {{ esiCall.processed.section_name }}
+                        <i class="icon th"></i> Section {{ esiCall.processed.section_name|default('N/A') }}
                         {% if esiCall.processed.section_ttl|default(false) %}(TTL: {{ esiCall.processed.section_ttl }}){% endif %}
                     {% else %}
                         <i class="icon linkify"></i>
