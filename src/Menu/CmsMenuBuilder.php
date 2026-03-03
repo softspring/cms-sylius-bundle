@@ -7,7 +7,7 @@ use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 
 final class CmsMenuBuilder
 {
-    protected CmsConfig $cmsConfig;
+    private CmsConfig $cmsConfig;
 
     public function __construct(CmsConfig $cmsConfig)
     {
