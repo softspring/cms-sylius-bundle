@@ -45,6 +45,11 @@
                                 {{ form_row(filter_form.sites, {'attr':{'onchange':'submit()'}}) }}
                             </div>
                         {% endif %}
+                        {% if filterForm.path is defined %}
+                            <div class="field">
+                                {{ form_row(filter_form.path) }}
+                            </div>
+                        {% endif %}
                         {% if filterForm.status is defined %}
                             <div class="field">
                                 {{ form_row(filter_form.status, {'attr':{'onchange':'submit()'}}) }}
