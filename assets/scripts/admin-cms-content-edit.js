@@ -9,6 +9,7 @@ import '@softspring/cms-bundle/scripts/admin/content-edit/preview-background-col
 import '@softspring/cms-bundle/scripts/admin/content-edit/preview-block';
 import '@softspring/cms-bundle/scripts/admin/content-edit/preview-class';
 import '@softspring/cms-bundle/scripts/admin/content-edit/preview-collection-node-class';
+import '@softspring/cms-bundle/scripts/admin/content-edit/preview-color-attribute';
 import '@softspring/cms-bundle/scripts/admin/content-edit/preview-fill';
 import '@softspring/cms-bundle/scripts/admin/content-edit/preview-id';
 import '@softspring/cms-bundle/scripts/admin/content-edit/preview-media-modal';
