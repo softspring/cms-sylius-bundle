@@ -1,0 +1,23 @@
+{
+    "name": "@softspring/cms-sylius-bundle",
+    "license": "MIT",
+    "version": "6.0.0-dev",
+    "peerDependencies": {
+        "@softspring/cms-bundle": "*",
+        "@softspring/media-bundle": "*",
+        "@softspring/polymorphic-form-type": "*"
+    },
+    "symfony": {
+        "importmap": {
+            "@softspring/cms-sylius-bundle/scripts/admin-cms.js": {
+                "path": "assets/dist/scripts/admin-cms.js"
+            },
+            "@softspring/cms-sylius-bundle/scripts/admin-cms-content-edit.js": {
+                "path": "assets/dist/scripts/admin-cms-content-edit.js"
+            }
+        }
+    },
+    "scripts": {
+        "build": "node assets/build-dist.mjs"
+    }
+}

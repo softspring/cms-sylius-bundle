@@ -3,6 +3,7 @@
 namespace Softspring\CmsSyliusBundle\DependencyInjection;
 
 use Composer\InstalledVersions;
+use Symfony\Component\AssetMapper\AssetMapperInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
@@ -19,6 +20,8 @@ class SfsCmsSyliusExtension extends Extension implements PrependExtensionInterfa
 
     public function prepend(ContainerBuilder $container): void
     {
+        $assetsPath = \dirname(__DIR__, 2).'/assets';
+        $assetsDistPath = $assetsPath.'/dist';
         $version = InstalledVersions::getVersion('softspring/cms-sylius-bundle');
         if (str_ends_with($version, '-dev')) {
             $version = InstalledVersions::getPrettyVersion('softspring/cms-sylius-bundle');
@@ -31,5 +34,15 @@ class SfsCmsSyliusExtension extends Extension implements PrependExtensionInterfa
                 ],
             ],
         ]);
+
+        if (interface_exists(AssetMapperInterface::class)) {
+            $container->prependExtensionConfig('framework', [
+                'asset_mapper' => [
+                    'paths' => [
+                        $assetsDistPath => '@softspring/cms-sylius-bundle',
+                    ],
+                ],
+            ]);
+        }
     }
 }

@@ -10,7 +10,7 @@ permissions:
     contents: read
 
 jobs:
-    build:
+    backend:
         runs-on: ubuntu-latest
         strategy:
             matrix:
@@ -18,29 +18,115 @@ jobs:
                 composer-prefer: [ '', '--prefer-lowest' ]
 
         steps:
-            - uses: actions/checkout@v6
+            -   uses: actions/checkout@v6
 
-            - name: Install PHP
-              uses: shivammathur/setup-php@v2
-              with:
-                  php-version: ${{ matrix.php-versions }}
-#                  extensions: intl #optional
-                  ini-values: "post_max_size=256M" #optional
+            -   name: Install PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ matrix.php-versions }}
+                    ini-values: "post_max_size=256M"
 
-            - name: Check PHP Version
-              run: php -v
+            -   name: Check PHP Version
+                run: php -v
 
-            - name: Validate composer.json and composer.lock
-              run: composer validate --strict
+            -   name: Validate composer.json and composer.lock
+                run: composer validate --strict
 
-            - name: Cache Composer packages
-              id: composer-cache
-              uses: actions/cache@v5
-              with:
-                  path: vendor
-                  key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-                  restore-keys: |
-                      ${{ runner.os }}-php-
+            -   name: Cache Composer packages
+                id: composer-cache
+                uses: actions/cache@v5
+                with:
+                    path: vendor
+                    key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+                    restore-keys: |
+                        ${{ runner.os }}-php-
 
-            - name: Install dependencies
-              run: composer update --prefer-dist --no-interaction --no-progress ${{ matrix.composer-prefer }}
+            -   name: Install dependencies
+                run: composer update --prefer-dist --no-interaction --no-progress ${{ matrix.composer-prefer }}
+
+    frontend:
+        needs: backend
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-versions: [ '20' ]
+                npm-versions: [ '10' ]
+        steps:
+            -   uses: actions/checkout@v6
+
+            -   name: Install Node.js
+                uses: actions/setup-node@v6
+                with:
+                    node-version: ${{ matrix.node-versions }}
+
+            -   name: Check Node.js Version
+                run: node -v
+
+            -   name: Check npm Version
+                run: npm -v
+
+            -   name: Cache npm packages
+                id: npm-cache
+                uses: actions/cache@v5
+                with:
+                    path: node_modules
+                    key: ${{ runner.os }}-node-${{ hashFiles('package.json') }}
+                    restore-keys: |
+                        ${{ runner.os }}-node-
+
+            -   name: Install npm dependencies
+                run: npm install --no-package-lock --no-audit --no-fund
+
+            -   name: Build dist
+                run: npm run build
+
+    build-dist:
+        needs: frontend
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+        steps:
+            -   uses: actions/checkout@v6
+                with:
+                    fetch-depth: 0
+
+            -   name: Install Node.js
+                uses: actions/setup-node@v6
+                with:
+                    node-version: '20'
+
+            -   name: Cache npm packages
+                id: npm-cache
+                uses: actions/cache@v5
+                with:
+                    path: node_modules
+                    key: ${{ runner.os }}-node-${{ hashFiles('package.json') }}
+                    restore-keys: |
+                        ${{ runner.os }}-node-
+
+            -   name: Install npm dependencies
+                run: npm install --no-package-lock --no-audit --no-fund
+
+            -   name: Build dist
+                run: npm run build
+
+            -   name: Check dist is clean on pull requests
+                if: github.event_name == 'pull_request'
+                run: |
+                    if [ -n "$(git status --porcelain -- assets/dist)" ]; then
+                        git status --short -- assets/dist
+                        exit 1
+                    fi
+
+            -   name: Commit dist changes
+                if: github.event_name == 'push'
+                run: |
+                    if [ -z "$(git status --porcelain -- assets/dist)" ]; then
+                        exit 0
+                    fi
+
+                    git config user.name "github-actions[bot]"
+                    git config user.email "github-actions[bot]@users.noreply.github.com"
+                    git add assets/dist
+                    git commit -m "chore: build dist [skip ci]"
+                    git push origin HEAD:${{ github.ref_name }}
