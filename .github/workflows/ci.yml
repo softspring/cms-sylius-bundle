@@ -29,8 +29,8 @@ jobs:
             -   name: Check PHP Version
                 run: php -v
 
-            -   name: Validate composer.json and composer.lock
-                run: composer validate --strict
+            -   name: Validate composer.json
+                run: composer validate --strict --no-check-lock
 
             -   name: Cache Composer packages
                 id: composer-cache
@@ -43,6 +43,24 @@ jobs:
 
             -   name: Install dependencies
                 run: composer update --prefer-dist --no-interaction --no-progress ${{ matrix.composer-prefer }}
+
+            -   name: Run Rector
+                run: ./vendor/bin/rector process src tests --dry-run
+
+            -   name: Run phpstan
+                run: ./vendor/bin/phpstan analyse src tests --level 5
+
+            -   name: Code Style check
+                run: ./vendor/bin/php-cs-fixer fix -v --diff --dry-run --sequential
+
+            -   name: Lint YAML in .github
+                run: ./vendor/bin/yaml-lint .github/ -vvv --parse-tags
+
+            -   name: Lint YAML in config
+                run: ./vendor/bin/yaml-lint config/ -vvv --parse-tags
+
+            -   name: Lint YAML in translations
+                run: ./vendor/bin/yaml-lint translations/ -vvv --parse-tags
 
     frontend:
         needs: backend
@@ -75,7 +93,7 @@ jobs:
                         ${{ runner.os }}-node-
 
             -   name: Install npm dependencies
-                run: npm install --no-package-lock --no-audit --no-fund
+                run: npm install --legacy-peer-deps --no-package-lock --no-audit --no-fund
 
             -   name: Build dist
                 run: npm run build
@@ -85,10 +103,17 @@ jobs:
         runs-on: ubuntu-latest
         permissions:
             contents: write
+
+        env:
+            CI_COMMIT_MESSAGE: Continuous Integration Assets Build Artifacts
+            CI_COMMIT_AUTHOR: Continuous Integration
+            BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+
         steps:
             -   uses: actions/checkout@v6
                 with:
-                    fetch-depth: 0
+                    ref: ${{ env.BRANCH_NAME }}
+                    token: ${{ secrets.CI_PUSH_TOKEN || github.token }}
 
             -   name: Install Node.js
                 uses: actions/setup-node@v6
@@ -105,7 +130,7 @@ jobs:
                         ${{ runner.os }}-node-
 
             -   name: Install npm dependencies
-                run: npm install --no-package-lock --no-audit --no-fund
+                run: npm install --legacy-peer-deps --no-package-lock --no-audit --no-fund
 
             -   name: Build dist
                 run: npm run build
@@ -125,8 +150,13 @@ jobs:
                         exit 0
                     fi
 
-                    git config user.name "github-actions[bot]"
-                    git config user.email "github-actions[bot]@users.noreply.github.com"
+                    if [ -z "${{ secrets.CI_PUSH_TOKEN }}" ]; then
+                        echo "::error::CI_PUSH_TOKEN is required to push generated dist files to protected branches."
+                        exit 1
+                    fi
+
+                    git config user.name "${{ env.CI_COMMIT_AUTHOR }}"
+                    git config user.email "username@users.noreply.github.com"
                     git add assets/dist
-                    git commit -m "chore: build dist [skip ci]"
-                    git push origin HEAD:${{ github.ref_name }}
+                    git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
+                    git push https://x-access-token:${{ secrets.CI_PUSH_TOKEN }}@github.com/${{ github.repository }}.git HEAD:${{ env.BRANCH_NAME }}
