@@ -21,7 +21,7 @@ jobs:
                 composer-prefer: [ '', '--prefer-lowest' ]
 
         steps:
-            -   uses: actions/checkout@v6
+            -   uses: actions/checkout@v7
 
             -   name: Install PHP
                 uses: shivammathur/setup-php@v2
@@ -82,7 +82,7 @@ jobs:
                 node-versions: [ '20' ]
                 npm-versions: [ '10' ]
         steps:
-            -   uses: actions/checkout@v6
+            -   uses: actions/checkout@v7
 
             -   name: Install Node.js
                 uses: actions/setup-node@v6
@@ -122,7 +122,7 @@ jobs:
             BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
 
         steps:
-            -   uses: actions/checkout@v6
+            -   uses: actions/checkout@v7
                 with:
                     ref: ${{ env.BRANCH_NAME }}
                     token: ${{ secrets.CI_PUSH_TOKEN || github.token }}
