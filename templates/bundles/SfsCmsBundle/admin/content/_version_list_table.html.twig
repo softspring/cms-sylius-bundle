@@ -1,5 +1,6 @@
 {% set backSection = backSection|default('versions') %}
 {% trans_default_domain 'sfs_cms_contents' %}
+{% set entity = content_entity %}
 
 {% embed '@SfsComponents/paginator/table.html.twig' with {
     'collection':versions,
@@ -106,10 +107,12 @@
                         <i class="icon eye"></i></a>
                 {% endif %}
 
-                {% if not content_config.admin.export_version.is_granted or is_granted(content_config.admin.export_version.is_granted, version) %}
-                    <a href="{{ url('sfs_cms_admin_content_'~content_type~'_export_version', {'content':entity.id, 'version':version.id}) }}"
-                       class="ui labeled icon button">{{ ('admin_'~content_type~'.versions.actions.export.link')|trans }}
-                        <i class="icon download"></i></a>
+                {% if route_defined('sfs_cms_admin_content_'~content_type~'_export_version') %}
+                    {% if not content_config.admin.export_version.is_granted or is_granted(content_config.admin.export_version.is_granted, version) %}
+                        <a href="{{ url('sfs_cms_admin_content_'~content_type~'_export_version', {'content':entity.id, 'version':version.id}) }}"
+                           class="ui labeled icon button">{{ ('admin_'~content_type~'.versions.actions.export.link')|trans }}
+                            <i class="icon download"></i></a>
+                    {% endif %}
                 {% endif %}
 
                 {% if not content_config.admin.publish_version.is_granted or is_granted(content_config.admin.publish_version.is_granted, version) %}

@@ -1,0 +1,12 @@
+{% trans_default_domain 'sfs_cms_admin' %}
+
+<section class="ui basic segment" aria-labelledby="section-configuration-fields-title">
+    <h2 class="ui dividing header" id="section-configuration-fields-title">{{ 'admin_sections.form.sections.configuration.title'|trans }}</h2>
+
+    {% if form.ttl is defined %}
+        {{ form_row(form.ttl) }}
+    {% endif %}
+    {% if form.notes is defined %}
+        {{ form_row(form.notes) }}
+    {% endif %}
+</section>

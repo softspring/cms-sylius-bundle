@@ -1,0 +1,17 @@
+{% trans_default_domain 'sfs_cms_admin' %}
+
+<section class="ui basic segment" aria-labelledby="section-language-fields-title">
+    <h2 class="ui dividing header" id="section-language-fields-title">{{ 'admin_sections.form.sections.languages.title'|trans }}</h2>
+
+    {% if form.defaultLocale is defined and form.locales is defined %}
+        <div class="{{ form.defaultLocale.vars.choices|length < 2 ? 'hidden' : '' }}">
+            {{ form_row(form.defaultLocale, {'attr': {'data-locale-disables-choice': form.locales.vars.id}}) }}
+        </div>
+    {% endif %}
+    {% if form.locales is defined %}
+        <div class="{{ form.locales.vars.choices|length < 2 ? 'hidden' : '' }}">
+            {{ form_row(form.locales) }}
+        </div>
+    {% endif %}
+    {% if form.addLocale is defined %}{{ form_row(form.addLocale) }}{% endif %}
+</section>
