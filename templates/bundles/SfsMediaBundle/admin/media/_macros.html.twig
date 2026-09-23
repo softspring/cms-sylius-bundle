@@ -23,6 +23,7 @@
 {%- endmacro -%}
 
 {%- macro renderVersion(media, version, media_types) -%}
+    {% set versionUrl = version|sfs_media_version_url %}
     <div class="ui grid">
         <div class="eight wide column">
             {% if media_types[media.type].name|default(null) %}<span>{{ media_types[media.type].name }}</span> | {% endif %}
@@ -43,14 +44,16 @@
                     Uploaded at: {{ version.uploadedAt|date_span('H:i:s d-m-Y') }}
                 {% elseif version.generatedAt %}
                     <abbr title="PARAMETERS:
-{% for option,value in version.options %}{{ option }}: {{ value }}
+{% for option,value in version.options %}{{ option }}: {% if value is iterable %}{{ value|json_encode }}
+{% else %}{{ value }}
+{% endif %}
 {% endfor %}">Automatically generated</abbr> at: {{ version.generatedAt|date_span('H:i:s d-m-Y') }}
                 {% endif %}
             </span>
-            {# <a class="btn btn-link btn-sm" href="{{ version.publicUrl }}" download>
+            {# <a class="btn btn-link btn-sm" href="{{ versionUrl }}" download>
                 <i class="bi bi-download"></i>
             </a> #}
-            <a class="btn btn-link btn-sm" href="{{ version.publicUrl }}" target="_blank">
+            <a class="btn btn-link btn-sm" href="{{ versionUrl }}" target="_blank">
                 <i class="share square icon"></i>
             </a>
         </div>
@@ -111,7 +114,7 @@
                 <strong>Directly using the URL</strong>
                 <button class="ui compact icon button teal small" type="button" onclick="navigator.clipboard.writeText(document.querySelector('#media_version_url_{{ version.version }}').textContent); return false" title="Copy to clipboard"><i class="icon copy"></i></button>
                 <br/>
-                <a href="{{ version.publicUrl }}" target="_blank" id="media_version_url_{{ version.version }}">{{ version.publicUrl }}</a>
+                <a href="{{ versionUrl }}" target="_blank" id="media_version_url_{{ version.version }}">{{ versionUrl }}</a>
             </p>
         </div>
     </div>

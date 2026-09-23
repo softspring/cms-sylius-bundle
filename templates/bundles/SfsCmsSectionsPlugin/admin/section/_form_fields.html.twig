@@ -1,0 +1,16 @@
+{% trans_default_domain 'sfs_cms_admin' %}
+
+{{ form_errors(form) }}
+
+<div class="ui stackable grid">
+    <div class="eleven wide column">
+        {% include '@SfsCmsSectionsPlugin/admin/section/_form_fields_identifier.html.twig' with {form: form} only %}
+        {% include '@SfsCmsSectionsPlugin/admin/section/_form_fields_configuration.html.twig' with {form: form} only %}
+    </div>
+
+    <div class="five wide column">
+        {% include '@SfsCmsSectionsPlugin/admin/section/_form_fields_languages.html.twig' with {form: form} only %}
+    </div>
+</div>
+
+{{ form_rest(form) }}

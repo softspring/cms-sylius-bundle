@@ -26,9 +26,7 @@
     <div class="ui hidden divider"></div>
     <div class="ui bottom attached active tab segment">
         {{ form_start(form, {'attr': {'class': 'ui form'}}) }}
-            {{ form_errors(form) }}
-            {{ form_widget(form) }}
-            {{ form_rest(form) }}
+            {% include '@SfsCmsSectionsPlugin/admin/section/_form_fields.html.twig' with {form: form} only %}
             <div class="ui hidden divider"></div>
             <div class="ui buttons">
                 <button class="ui labeled icon primary button" type="submit">

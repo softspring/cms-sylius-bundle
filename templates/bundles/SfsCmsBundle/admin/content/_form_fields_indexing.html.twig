@@ -1,0 +1,49 @@
+{% trans_default_domain 'sfs_cms_contents' %}
+
+<section class="ui basic segment" aria-labelledby="content-indexing-fields-title">
+    <h2 class="ui dividing header" id="content-indexing-fields-title">{{ 'admin_content.form.sections.indexing.title'|trans }}</h2>
+
+    {{ form_errors(form.indexing) }}
+
+    <div class="ui relaxed divided list">
+        <div class="item">
+            <i class="large sitemap middle aligned icon" aria-hidden="true"></i>
+            <div class="content">
+                <div class="header">{{ 'admin_content.form.indexing.sitemap.title'|trans }}</div>
+                <div class="description">{{ 'admin_content.form.indexing.sitemap.description'|trans }}</div>
+            </div>
+
+            <div class="ui hidden divider"></div>
+            {% if form.indexing.sitemap is defined %}
+                {{ form_row(form.indexing.sitemap) }}
+            {% endif %}
+
+            <div class="two fields">
+                {% if form.indexing.sitemapChangefreq is defined %}
+                    {{ form_row(form.indexing.sitemapChangefreq) }}
+                {% endif %}
+                {% if form.indexing.sitemapPriority is defined %}
+                    {{ form_row(form.indexing.sitemapPriority, {'attr': {'placeholder': 'admin_content.form.indexing.default_values.placeholder'}}) }}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="item">
+            <i class="large robot middle aligned icon" aria-hidden="true"></i>
+            <div class="content">
+                <div class="header">{{ 'admin_content.form.indexing.robots.title'|trans }}</div>
+                <div class="description">{{ 'admin_content.form.indexing.robots.description'|trans }}</div>
+            </div>
+
+            <div class="ui hidden divider"></div>
+            {% if form.indexing.noIndex is defined %}
+                {{ form_row(form.indexing.noIndex) }}
+            {% endif %}
+            {% if form.indexing.noFollow is defined %}
+                {{ form_row(form.indexing.noFollow) }}
+            {% endif %}
+        </div>
+    </div>
+
+    {{ form_rest(form.indexing) }}
+</section>

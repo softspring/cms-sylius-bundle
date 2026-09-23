@@ -1,0 +1,9 @@
+{% trans_default_domain 'sfs_cms_contents' %}
+
+{% if form.extraData is defined %}
+    <section class="ui basic segment" aria-labelledby="content-configuration-fields-title">
+        <h2 class="ui dividing header" id="content-configuration-fields-title">{{ 'admin_content.form.sections.content_configuration.title'|trans }}</h2>
+
+        {{ form_widget(form.extraData) }}
+    </section>
+{% endif %}

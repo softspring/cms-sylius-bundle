@@ -1,15 +1,16 @@
 {% trans_default_domain 'sfs_media_admin' %}
 
 {% block media_version_upload_row %}
+    {% set mediaVersionPublicUrl = form.vars.value|sfs_media_version_url|default('') %}
     {{ form_label(form) }}
     <div data-drop-media-zone class="ui message " style="border:3px dashed #ccc;">
         <div class="ui items" style="margin-bottom: 0;">
             <div class="item">
                 <div data-drop-media-zone-preview style="width: 125px; margin-right: 1rem;">
-                    <i class="icon bi bi-image{{ (form.vars.value.publicUrl is empty) ? '' : ' d-none' }}"></i>
-                    <img src="{{ form.vars.value.publicUrl|default('') }}" class="img-thumbnail preview-image{{ (form.vars.value.publicUrl is not empty and form.vars.value.isImageFile) ? '' : ' d-none' }}" alt="Image Preview" style="max-width: 120px; max-height: 120px;">
-                    <video controls class="preview-video{{ (form.vars.value.publicUrl is not empty and form.vars.value.isVideoFile) ? '' : ' d-none' }}" style="max-width: 120px; max-height: 120px;">
-                        <source src="{{ form.vars.value.publicUrl|default('') }}" type="">
+                    <i class="icon bi bi-image{{ (mediaVersionPublicUrl is empty) ? '' : ' d-none' }}"></i>
+                    <img src="{{ mediaVersionPublicUrl }}" class="img-thumbnail preview-image{{ (mediaVersionPublicUrl is not empty and form.vars.value.isImageFile) ? '' : ' d-none' }}" alt="Image Preview" style="max-width: 120px; max-height: 120px;">
+                    <video controls class="preview-video{{ (mediaVersionPublicUrl is not empty and form.vars.value.isVideoFile) ? '' : ' d-none' }}" style="max-width: 120px; max-height: 120px;">
+                        <source src="{{ mediaVersionPublicUrl }}" type="">
                         Your browser does not support the video tag.
                     </video>
                 </div>
@@ -88,15 +89,15 @@
     {% if form.vars.data %}
         {% for version in form.vars.data.versions %}
             {% if form.vars.data.isImage() %}
-                {% set attr = attr|merge({('data-media-image-'~version.version): form.vars.data|sfs_media_render_image([version.version], {'class':'img-fluid'})}) %}
+                {% set attr = attr|merge({('data-media-image-'~version.version): form.vars.data|sfs_media_render_image([version.version], {'class':'img-fluid'}|merge(image_attr|default({})))}) %}
             {% elseif form.vars.data.isVideo() %}
-                {% set attr = attr|merge({('data-media-video-'~version.version): form.vars.data|sfs_media_render_video([version.version], {'class':'img-fluid'})}) %}
+                {% set attr = attr|merge({('data-media-video-'~version.version): form.vars.data|sfs_media_render_video([version.version], {'class':'img-fluid'}|merge(video_attr|default({})))}) %}
             {% endif %}
             {% for picture,config in sfs_media_type_config(form.vars.data)['pictures']|default([]) %}
-                {% set attr = attr|merge({('data-media-picture-'~picture): form.vars.data|sfs_media_render_picture(picture)}) %}
+                {% set attr = attr|merge({('data-media-picture-'~picture): form.vars.data|sfs_media_render_picture(picture, {'class':'img-fluid'}|merge(picture_attr|default({})))}) %}
             {% endfor %}
             {% for video_set,config in sfs_media_type_config(form.vars.data)['video_sets']|default([]) %}
-                {% set attr = attr|merge({('data-media-video-set-'~video_set): form.vars.data|sfs_media_render_video_set(video_set)}) %}
+                {% set attr = attr|merge({('data-media-video-set-'~video_set): form.vars.data|sfs_media_render_video_set(video_set, {'class':'img-fluid'}|merge(video_attr|default({})))}) %}
             {% endfor %}
         {% endfor %}
     {% endif %}
@@ -142,6 +143,9 @@
                     data-media-version-type-widget="{{ form.version.vars.id }}_widget"
                     aria-expanded="false">{{ selectedVersion|split('#', 2)[1]|default(selectedVersion) }}</button>
             <ul class="dropdown-menu">
+                {% if form.media.vars.data.versions|default([])|length %}
+                    <li><h6 class="dropdown-header">Media element</h6></li>
+                {% endif %}
                 {% for mediaVersion in form.media.vars.data.versions|default([]) %}
                     {% if form.media.vars.data.isImage() %}
                         <li><a class="dropdown-item" data-media-version-value="image#{{ mediaVersion.version }}" href="javascript:void(0)">{{ mediaVersion.version }}</a></li>
@@ -150,9 +154,16 @@
                     {% endif %}
                 {% endfor %}
                 {% if form.media.vars.data %}
+                    {% if sfs_media_type_config(form.media.vars.data)['pictures']|default([])|length %}
+                        <li><h6 class="dropdown-header">Picture element</h6></li>
+                    {% endif %}
                     {% for picture,config in sfs_media_type_config(form.media.vars.data)['pictures']|default([]) %}
                         <li><a class="dropdown-item" data-media-version-value="picture#{{ picture }}" href="javascript:void(0)">{{ picture }}</a></li>
                     {% endfor %}
+
+                    {% if sfs_media_type_config(form.media.vars.data)['video_sets']|default([])|length %}
+                        <li><h6 class="dropdown-header">Video sets</h6></li>
+                    {% endif %}
                     {% for video_set,config in sfs_media_type_config(form.media.vars.data)['video_sets']|default([]) %}
                         <li><a class="dropdown-item" data-media-version-value="videoSet#{{ video_set }}" href="javascript:void(0)">{{ video_set }}</a></li>
                     {% endfor %}

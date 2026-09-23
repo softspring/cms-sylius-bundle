@@ -1,5 +1,6 @@
 {% embed '@SfsCms/admin/_embeds/_card.html.twig' %}
-    {% trans_default_domain 'sfs_cms_contents' %}
+{% trans_default_domain 'sfs_cms_contents' %}
+{% set entity = content_entity %}
 
     {% block title %}<div class="ui header">Version information</div>{% endblock %}
 
