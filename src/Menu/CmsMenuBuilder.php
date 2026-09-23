@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Softspring\CmsSyliusBundle\Menu;
 
 use Softspring\CmsBundle\Config\CmsConfig;
