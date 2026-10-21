@@ -1,0 +1,16 @@
+{% trans_default_domain 'sfs_media_admin' %}
+{% if is_granted('PERMISSION_SFS_MEDIA_ADMIN_MEDIAS_CREATE') and create_from_types|default([])|length %}
+    <form id="createFromMediaForm" method="post" action="{{ url('sfs_media_admin_medias_create_from', {'media': media}) }}" style="display: none">
+        <input type="hidden" name="_token" value="{{ csrf_token('sfs_media_create_from_' ~ media.id) }}">
+    </form>
+    <div class="ui floated simple labeled icon dropdown button teal" id="dropdownCreateFromMedia">
+        <i class="copy icon"></i>
+        {{ 'admin_medias.read.actions.create_from.button'|trans }}
+        <div class="menu">
+            {% for key, type in create_from_types %}
+                <button type="submit" class="item" form="createFromMediaForm" name="type" value="{{ key }}"
+                        style="width: 100%; border: 0; text-align: left">{{ type.name }}</button>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

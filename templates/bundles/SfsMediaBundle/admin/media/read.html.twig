@@ -12,6 +12,7 @@
 {% endblock breadcrums_content %}
 
 {% block header_buttons %}
+    {% include '@SfsMedia/admin/media/read_create_from.html.twig' %}
     {% if is_granted('PERMISSION_SFS_MEDIA_ADMIN_MEDIAS_DELETE', media) %}
         <a href="{{ url('sfs_media_admin_medias_delete', {'media': media}) }}"
            class="ui button red"><i class="icon trash"></i> {{ 'admin_medias.read.actions.delete.button'|trans }}</a>
@@ -48,6 +49,6 @@
 {% block javascripts %}
     {{ parent() }}
     <script>
-        $('.menu .item').tab();
+        $('.ui.top.attached.primary.menu > .item').tab();
     </script>
 {% endblock %}
