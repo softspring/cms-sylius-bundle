@@ -1,5 +1,5 @@
 {% trans_default_domain 'sfs_media_admin' %}
-<div class="ui top attached primary menu">
+<div class="ui top attached primary menu sfs-media-read-tabs">
     <a class="item active" data-tab="original"><i class="image icon"></i> Original</a>
     {% for version in media.versions|filter((version) => version.version not in ['_original'])|sort((a, b) => (a.width+a.height) <=> (b.width+b.height))|reverse %}
         <a class="item" data-tab="{{ version.version }}"><i class="image icon"></i>{{ version.version }}</a>
