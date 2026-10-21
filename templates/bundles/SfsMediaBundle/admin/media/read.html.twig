@@ -5,6 +5,21 @@
 {% block header_title %}{{ 'admin_medias.read.title'|trans({'%name%': media.name }) }}{% endblock %}
 {% block header_subtitle %}Manage content media{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .ui.menu.sfs-media-read-tabs {
+            flex-wrap: wrap;
+        }
+
+        .ui.menu.sfs-media-read-tabs > .item {
+            min-width: 0;
+            max-width: 100%;
+            overflow-wrap: anywhere;
+        }
+    </style>
+{% endblock %}
+
 {% block breadcrums_content %}
     {{ parent() }}
     <a class="section" href="{{ url('sfs_media_admin_medias_list') }}">{{ 'admin_medias.list.breadcrumb'|trans }}</a><i class="right chevron icon divider"></i>
