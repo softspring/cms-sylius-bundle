@@ -1,0 +1,9 @@
+{% trans_default_domain 'sfs_media_admin' %}
+{% extends '@SfsMedia/admin_layout_semantic.html.twig' %}
+{% block title %}{{ 'admin_medias.regenerate.title'|trans({'%name%': media.name}) }}{% endblock %}
+{% block header_title %}{{ 'admin_medias.regenerate.title'|trans({'%name%': media.name}) }}{% endblock %}
+{% block content %}
+    <div class="ui segment">
+        {% include '@SfsMedia/admin/media/regenerate_form.html.twig' with {'cancel_class': 'ui button', 'submit_class': 'ui primary button'} %}
+    </div>
+{% endblock %}

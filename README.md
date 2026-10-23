@@ -15,3 +15,14 @@ Open a command console, enter your project directory and execute:
 ```console
 $ composer require softspring/cms-sylius-bundle
 ```
+
+## Media version regeneration
+
+Media detail pages provide a **Regenerate versions** action and a Semantic UI
+confirmation page. Only the media-bundle controller performs processing; these
+templates reuse its permissions, CSRF protection and generated-version plan.
+Originals and configured manual uploads are preserved.
+
+This integration requires the media-bundle 6.0 admin regeneration endpoint and
+shared confirmation form. Merge/install that change before updating this
+bundle, and update both Composer packages together. No new assets are required.
