@@ -3,6 +3,11 @@
 {#{% extends ['@SfsAdmin/layout.html.twig', 'admin/layout.html.twig', 'base.html.twig'] %}#}
 {% extends '@SyliusAdmin/layout.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('admin-entry-cms-content', null, 'admin') }}
+{% endblock %}
+
 {% block footer %}
     {% trans_default_domain 'messages' %}
     Medias managed by Softspring's
