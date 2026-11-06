@@ -8,21 +8,8 @@
 [![CI](https://img.shields.io/github/actions/workflow/status/softspring/cms-sylius-bundle/ci.yml?branch=6.0&style=flat-square&label=CI)](https://github.com/softspring/cms-sylius-bundle/actions/workflows/ci.yml)
 [![Coverage](https://img.shields.io/codecov/c/github/softspring/cms-sylius-bundle?branch=6.0&style=flat-square)](https://app.codecov.io/gh/softspring/cms-sylius-bundle/tree/6.0)
 
-## Installation
+Sylius admin integration for Armonic CMS and Media Bundle.
 
-Open a command console, enter your project directory and execute:
+## Documentation
 
-```console
-$ composer require softspring/cms-sylius-bundle
-```
-
-## Media version regeneration
-
-Media detail pages provide a **Regenerate versions** action and a Semantic UI
-confirmation page. Only the media-bundle controller performs processing; these
-templates reuse its permissions, CSRF protection and generated-version plan.
-Originals and configured manual uploads are preserved.
-
-This integration requires the media-bundle 6.0 admin regeneration endpoint and
-shared confirmation form. Merge/install that change before updating this
-bundle, and update both Composer packages together. No new assets are required.
+Read the [Sylius installation guide](https://armonic.softspring.es/latest/install-sylius-project) and the [media regeneration guide](https://armonic.softspring.es/latest/bundles/media-bundle#regenerate-versions-from-the-admin).
