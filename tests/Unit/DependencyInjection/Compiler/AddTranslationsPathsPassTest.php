@@ -21,12 +21,13 @@ class AddTranslationsPathsPassTest extends TestCase
         self::assertFalse($container->hasDefinition(SymfonyTranslatorResourceProvider::class));
     }
 
-    public function testItAddsCollectionTranslationFiles(): void
+    public function testItAddsCollectionTranslationFilesWithEmptyElementDirectories(): void
     {
         $projectDir = sys_get_temp_dir().'/cms-sylius-translations-'.bin2hex(random_bytes(4));
         $this->createFile($projectDir.'/collections/blog/translations/messages.en.yaml');
         $this->createFile($projectDir.'/collections/blog/blocks/header/translations/block.en.yaml');
         $this->createFile($projectDir.'/collections/blog/sites/main/translations/site.en.yaml');
+        mkdir($projectDir.'/collections/blog/modules');
 
         $definition = new Definition(null, [[]]);
         $container = new ContainerBuilder();
