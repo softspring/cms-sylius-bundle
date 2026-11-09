@@ -5,7 +5,7 @@
     "type": "bundle",
     "require": {
         "php": ">=8.4",
-        "softspring/cms-bundle": "^6.0@dev",
+        "softspring/cms-bundle": "6.1.*@dev",
         "sylius/theme-bundle": "^2.1.1",
         "sylius/ui-bundle": "^1.11 || ^2.0"
     },
@@ -34,7 +34,8 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-6.0": "6.0.x-dev"
+            "dev-6.0": "6.0.x-dev",
+            "dev-6.1": "6.1.x-dev"
         }
     },
     "scripts": {
