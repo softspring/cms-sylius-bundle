@@ -12,4 +12,4 @@ Sylius admin integration for Armonic CMS and Media Bundle.
 
 ## Documentation
 
-Read the [Sylius installation guide](https://armonic.softspring.es/6.1@dev/install-sylius-project) and the [media regeneration guide](https://armonic.softspring.es/6.1@dev/bundles/media-bundle#regenerate-versions-from-the-admin).
+Read the [Sylius installation guide](https://armonic.softspring.es/6.1-dev/install-sylius-project) and the [media regeneration guide](https://armonic.softspring.es/6.1-dev/bundles/media-bundle#regenerate-versions-from-the-admin).
