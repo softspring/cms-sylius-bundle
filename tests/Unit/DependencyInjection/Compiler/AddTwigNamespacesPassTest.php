@@ -25,5 +25,6 @@ class AddTwigNamespacesPassTest extends TestCase
         self::assertContains('SfsCms', $namespaces);
         self::assertContains('SfsMedia', $namespaces);
         self::assertContains('SfsCmsSectionsPlugin', $namespaces);
+        self::assertContains('SfsCmsDataPlugin', $namespaces);
     }
 }
